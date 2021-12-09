@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import LogItems from './LogItems';
+import Preloader from '../layout/Preloader';
 
 const Logs = () => {
   // Local state, later move to redux
@@ -24,7 +26,7 @@ const Logs = () => {
   };
 
   if (loading) {
-    <h4>Loading.......</h4>;
+    <Preloader />;
   }
 
   return (
@@ -32,7 +34,11 @@ const Logs = () => {
       <li className='collection-header'>
         <h4 className='center'>System Logs</h4>
       </li>
-      {!loading && logs.length === 0? (<p className='center'>No Logs to Show...</p>):(logs.map(log => <li>{log.message}</li>))}
+      {!loading && logs.length === 0 ? (
+        <p className='center'>No Logs to Show...</p>
+      ) : (
+        logs.map((log) => <LogItems log={log} key={log.id} />)
+      )}
     </ul>
   );
 };
