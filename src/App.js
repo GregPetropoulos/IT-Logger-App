@@ -12,23 +12,29 @@ import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
 
+//***REDUX STORE WRAPPER****
+import { Provider } from 'react-redux';
+import store from './store';
+
 const App = () => {
   useEffect(() => {
     //* Initialize Materialize JS
     M.AutoInit();
   });
   return (
-    <Fragment>
-      <SearchBar />
-      <div className='container'>
-        <Addbtn />
-        <AddLogModal />
-        <EditLogModal />
-        <AddTechModal />
-        <TechWithModal />
-        <Logs />
-      </div>
-    </Fragment>
+    <Provider store={store}>
+      <Fragment>
+        <SearchBar />
+        <div className='container'>
+          <Addbtn />
+          <AddLogModal />
+          <EditLogModal />
+          <AddTechModal />
+          <TechWithModal />
+          <Logs />
+        </div>
+      </Fragment>
+    </Provider>
   );
 };
 
