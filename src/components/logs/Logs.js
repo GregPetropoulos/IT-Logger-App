@@ -1,32 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import LogItems from './LogItems';
+import React, { useEffect } from 'react';
+import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
+import PropTypes from 'prop-types'
 
-const Logs = () => {
-  // Local state, later move to redux
-  const [logs, setLogs] = useState([]);
 
-  // Local state, later move to redux
-  const [loading, setLoading] = useState(false);
+// ***REDUX***
+import { connect } from 'react-redux'
+// this is importing a function from logActions which is passed into the connect to execute by this component
+import { getLogs } from '../../actions/logActions'
+
+// destructure app level props, getLogs gets passed as prop even though it's a function brought in
+const Logs = ({ log:{ logs, loading}, getLogs }) => {
 
   // Calling the getlogs fetch in the useEffect
   useEffect(() => {
     getLogs();
     // eslint-disable-next-line
   }, []);
-
-  const getLogs = async () => {
-    setLoading(true);
-    const res = await fetch('/logs');
-    // unlike axios will need to format data
-    const data = await res.json();
-
-    setLogs(data);
-    setLoading(false);
-  };
-
-  if (loading) {
-    <Preloader />;
+// eslint-disable-next-line
+  if (loading || logs === null) {
+    return <Preloader />;
   }
 
   return (
@@ -34,13 +27,29 @@ const Logs = () => {
       <li className='collection-header'>
         <h4 className='center'>System Logs</h4>
       </li>
+      {/* *! problem area with reading length */}
       {!loading && logs.length === 0 ? (
         <p className='center'>No Logs to Show...</p>
       ) : (
-        logs.map((log) => <LogItems log={log} key={log.id} />)
+        logs.map((log) => <LogItem log={log} key={log.id} />)
       )}
     </ul>
   );
 };
 
-export default Logs;
+Logs.propTypes ={
+  log:PropTypes.object.isRequired,
+  getLogs: PropTypes.func.isRequired
+}
+
+// *Bring in the whole state
+const mapStateToProps = state => ({
+// *log: is the prop
+// * state.log is from the root reducer index.js
+  log:state.log
+})
+
+// *REDUX -the connect takes in 2 things the state and a function
+// *1) If you want anything from app level state into a component as prop pass in mapStateToProps
+// * 2) The getLogs function from the app level imported from logActions
+export default connect(mapStateToProps, { getLogs })(Logs);

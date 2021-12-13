@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 const today = new Date();
 
-const LogItems = ({ log }) => {
+const LogItem = ({ log }) => {
   return (
     <li className='collection item'>
       <div>
@@ -28,8 +28,8 @@ const LogItems = ({ log }) => {
   );
 };
 
-LogItems.propTypes = {
+LogItem.propTypes = {
   log: PropTypes.object.isRequired
 };
 
-export default LogItems;
+export default LogItem;

@@ -1,6 +1,6 @@
 // *Bring in the types and middleware(thunk) for backend calls
 
-import { GET_LOGS, SET_LOADING, LOGS_ERROR } from './types';
+import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from './types';
 
 // *This a description of how the getLogs works with REDUX
 // *Normally return an object direct to reducer such as type: GET_LOGS
@@ -27,6 +27,7 @@ import { GET_LOGS, SET_LOADING, LOGS_ERROR } from './types';
 // };
 // *!NON-REFACTORED VERSION-------------------
 
+// get the logs from the backend
 // **REFACTORED VERSION**-------------------------
 export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
@@ -46,11 +47,41 @@ export const getLogs = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.data
+      payload: err.response.statusText
     });
   }
 };
 // **REFACTORED VERSION**-------------------------
+
+// Add a new
+export const addLog = (log) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    setLoading();
+
+    // request the data with fetch post 
+    const res = await fetch('/logs', {
+      method:'POST',
+      body: JSON.stringify(log),
+      headers:{
+        'Content-Type':'application/json' 
+      }
+    });
+    // response of data formatted
+    const data = await res.json();
+
+    // dispatch data to the reducer
+    dispatch({
+      type: ADD_LOG,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
 
 //* A CB Sets the loading and will be executed in getLogs to be true until the we get the data back, no thunk in this function, not async
 export const setLoading = () => {

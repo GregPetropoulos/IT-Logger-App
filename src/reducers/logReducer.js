@@ -1,7 +1,7 @@
 // **No State file like in context, set initial state here
 
 // *Actions types see logActions for functions
-import { GET_LOGS, SET_LOADING, LOGS_ERROR } from '../actions/types';
+import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from '../actions/types';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
 const initialState = {
@@ -18,8 +18,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logs: action.payload,
-        loading: false
+        loading: false,
       };
+      case ADD_LOG:
+        return {
+          ...state,
+          logs: [...state.logs, action.payload],
+          loading:false
+        }
     case SET_LOADING:
       return {
         ...state,
