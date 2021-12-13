@@ -20,13 +20,6 @@
       "tech": "John Doe",
       "date": "2021-12-13T21:58:27.936Z",
       "id": 3
-    },
-    {
-      "message": "Node wiring issues on helicopter pad",
-      "attention": false,
-      "tech": "Sam Smith",
-      "date": "2021-12-13T22:00:47.684Z",
-      "id": 4
     }
   ],
   "techs": [

@@ -1,6 +1,12 @@
 // *Bring in the types and middleware(thunk) for backend calls
 
-import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from './types';
+import {
+  GET_LOGS,
+  SET_LOADING,
+  LOGS_ERROR,
+  ADD_LOG,
+  DELETE_LOG
+} from './types';
 
 // *This a description of how the getLogs works with REDUX
 // *Normally return an object direct to reducer such as type: GET_LOGS
@@ -27,7 +33,7 @@ import { GET_LOGS, SET_LOADING, LOGS_ERROR, ADD_LOG } from './types';
 // };
 // *!NON-REFACTORED VERSION-------------------
 
-// get the logs from the backend
+// Get All the Logs From Server
 // **REFACTORED VERSION**-------------------------
 export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
@@ -53,18 +59,18 @@ export const getLogs = () => async (dispatch) => {
 };
 // **REFACTORED VERSION**-------------------------
 
-// Add a new
+// Add A New Log
 export const addLog = (log) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
     setLoading();
 
-    // request the data with fetch post 
+    // request the data with fetch post
     const res = await fetch('/logs', {
-      method:'POST',
+      method: 'POST',
       body: JSON.stringify(log),
-      headers:{
-        'Content-Type':'application/json' 
+      headers: {
+        'Content-Type': 'application/json'
       }
     });
     // response of data formatted
@@ -74,6 +80,30 @@ export const addLog = (log) => async (dispatch) => {
     dispatch({
       type: ADD_LOG,
       payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
+
+// Delete A Log From The Server
+export const deleteLog = (id) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    setLoading();
+
+    // Dont need to store in variable
+    await fetch(`/logs/${id}`, {
+      method: 'DELETE'
+    });
+
+    // dispatch data to the reducer
+    dispatch({
+      type: DELETE_LOG,
+      payload: id
     });
   } catch (err) {
     dispatch({
