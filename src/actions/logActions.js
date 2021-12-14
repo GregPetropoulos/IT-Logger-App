@@ -5,10 +5,11 @@ import {
   SET_LOADING,
   LOGS_ERROR,
   ADD_LOG,
+  DELETE_LOG,
+  UPDATE_LOG,
+  SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
-  UPDATE_LOG,
-  DELETE_LOG
 } from './types';
 
 // *This a description of how the getLogs works with REDUX
@@ -143,6 +144,29 @@ export const updateLog = (log) => async (dispatch) => {
   }
 };
 
+// *SEARCH SERVER FOR LOGS
+export const searchLogs = (text) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    setLoading();
+
+    // request the data
+    const res = await fetch(`/logs?q=${text}`);
+    // response of data formatted
+    const data = await res.json();
+
+    // dispatch data to the reducer
+    dispatch({
+      type: SEARCH_LOGS,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
 //* SET A CURRENT LOG
 export const setCurrent = (log) => {
   return {

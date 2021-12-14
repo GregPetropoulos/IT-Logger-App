@@ -7,9 +7,10 @@ import {
   LOGS_ERROR,
   ADD_LOG,
   DELETE_LOG,
+  UPDATE_LOG,
+  SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
-  UPDATE_LOG
 } from '../actions/types';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
@@ -50,6 +51,11 @@ export default (state = initialState, action) => {
         ),
         loading: false
       };
+      case SEARCH_LOGS:
+        return {
+          ...state,
+          logs: action.payload
+        }
     case SET_CURRENT:
       return {
         ...state,
