@@ -1,18 +1,11 @@
 {
   "logs": [
     {
+      "id": 1,
       "message": "Change Network card 007",
       "attention": false,
-      "tech": "Sam Smith",
-      "date": "2021-12-13T21:56:35.272Z",
-      "id": 1
-    },
-    {
-      "message": "Hard drive failed in workstation #2",
-      "attention": true,
       "tech": "Sara Wilson",
-      "date": "2021-12-13T21:57:45.517Z",
-      "id": 2
+      "date": "2021-12-14T11:11:34.981Z"
     },
     {
       "message": "Network in 110022 wireless down ",
@@ -20,6 +13,13 @@
       "tech": "John Doe",
       "date": "2021-12-13T21:58:27.936Z",
       "id": 3
+    },
+    {
+      "message": "Workstation #5 down again, needs virus protection ",
+      "attention": true,
+      "tech": "Sam Smith",
+      "date": "2021-12-14T11:14:55.370Z",
+      "id": 4
     }
   ],
   "techs": [

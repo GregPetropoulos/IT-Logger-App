@@ -5,6 +5,9 @@ import {
   SET_LOADING,
   LOGS_ERROR,
   ADD_LOG,
+  SET_CURRENT,
+  CLEAR_CURRENT,
+  UPDATE_LOG,
   DELETE_LOG
 } from './types';
 
@@ -33,8 +36,8 @@ import {
 // };
 // *!NON-REFACTORED VERSION-------------------
 
-// Get All the Logs From Server
-// **REFACTORED VERSION**-------------------------
+//*GET ALL LOGS FROM THE SERVER /
+// **-----REFACTORED VERSION**-------------------------
 export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
@@ -57,9 +60,9 @@ export const getLogs = () => async (dispatch) => {
     });
   }
 };
-// **REFACTORED VERSION**-------------------------
+// **------REFACTORED VERSION**-------------------------
 
-// Add A New Log
+//* ADD A NEW LOG
 export const addLog = (log) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
@@ -89,7 +92,7 @@ export const addLog = (log) => async (dispatch) => {
   }
 };
 
-// Delete A Log From The Server
+//* DELETE A LOG FROM THE SERVER
 export const deleteLog = (id) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
@@ -111,6 +114,48 @@ export const deleteLog = (id) => async (dispatch) => {
       payload: err.response.statusText
     });
   }
+};
+
+//* UPDATE A LOG ON THE SERVER
+export const updateLog = (log) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    setLoading();
+
+    const res = await fetch(`/logs/${log.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(log),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    // dispatch data to the reducer
+    dispatch({
+      type: UPDATE_LOG,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
+
+//* SET A CURRENT LOG
+export const setCurrent = (log) => {
+  return {
+    type: SET_CURRENT,
+    payload: log
+  };
+};
+
+//* CLEAR A CURRENT LOG
+export const clearCurrent = () => {
+  return {
+    type: CLEAR_CURRENT
+  };
 };
 
 //* A CB Sets the loading and will be executed in getLogs to be true until the we get the data back, no thunk in this function, not async
