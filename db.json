@@ -44,16 +44,6 @@
       "id": 3,
       "firstName": "Ted",
       "lastName": "Goggins"
-    },
-    {
-      "firstName": "Greg",
-      "lastName": "Harris",
-      "id": 4
-    },
-    {
-      "firstName": "Jill",
-      "lastName": "Smith",
-      "id": 5
     }
   ]
 }

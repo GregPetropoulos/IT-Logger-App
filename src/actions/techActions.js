@@ -58,6 +58,30 @@ export const addTech = (tech) => async (dispatch) => {
   }
 };
 
+// *DELETE A TECH FROM THE SERVER
+export const deleteTech = (id) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    setLoading();
+
+    // request the data no variable needed to store, need id to delete from backend
+    await fetch(`/techs/${id}`, {
+      method: 'DELETE'
+    });
+
+    // dispatch data (id) to the reducer from component
+    dispatch({
+      type: DELETE_TECH,
+      payload: id
+    });
+  } catch (err) {
+    dispatch({
+      type: TECHS_ERROR,
+      payload: err.response.statusText
+    });
+  }
+};
+
 // *SET LOADING TO TRUE
 export const setLoading = () => {
   return {
