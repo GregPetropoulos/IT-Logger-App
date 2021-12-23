@@ -29,6 +29,7 @@ const App = () => {
           <Addbtn />
           <AddLogModal />
           <EditLogModal />
+          <p>hello world</p>
           <AddTechModal />
           <TechWithModal />
           <Logs />
