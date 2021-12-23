@@ -2,6 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
+// bringing the User model
+const Tech = require('../models/Tech');
+
+
 // * @route     GET api/techs
 // * @desc      Get all the techs
 // * access     public
@@ -13,7 +17,7 @@ router.get('/', (req, res) => {
 // * @desc      Add a new tech
 // * access     public
 router.post('/', (req, res) => {
-  res.send('Add a new tech');
+  res.send(req.body);
 });
 
 // * @route     PUT api/techs/:id
