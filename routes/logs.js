@@ -1,4 +1,6 @@
-// *SET UP TO USE router rather than app.use
+// *--LOG ROUTES--
+
+// *set up to use router rather than app.use
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');

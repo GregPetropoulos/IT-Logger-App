@@ -20,6 +20,7 @@ console.log('hit server');
 // *DEFINED API ROUTES TO CALL ROUTE FOLDER
 app.use('/api/techs', require('./routes/techs'));
 app.use('/api/logs', require('./routes/logs'));
+app.use('/api/auth', require('./routes/auth'));
 
 // * STATIC ASSETS FOR THE BUILD
 

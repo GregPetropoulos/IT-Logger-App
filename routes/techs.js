@@ -1,4 +1,4 @@
-// *--REGISTER--EDIT-DELETE--TECH ROUTES-----//
+// *--ADD/REGISTER--EDIT-DELETE--TECH ROUTES-----//
 
 // *SET UP TO USE router rather than app.use
 
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 // * @route     POST api/techs
-// * @desc      Add (register and encrypt) a new tech to db
+// * @desc      Add (register and encrypt) a new tech to db -- auth user and get token
 // * access     public
 router.post(
   '/',
