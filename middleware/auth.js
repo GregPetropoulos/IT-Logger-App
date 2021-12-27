@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
     //* if there is a token, verify the current token
     const decoded = jwt.verify(token, config.get('jwtSecret'));
 
-    // * once verified, the payload placed in decoded and has the tech.id. To gain access to the id inside the route I must assign it to req.user to get the id out of payload 
+    // * once verified, the payload placed in decoded and has the tech.id. To gain access to the id inside the route I must assign it to req.tech to get the id out of payload 
     req.tech = decoded.tech;
 
     next();

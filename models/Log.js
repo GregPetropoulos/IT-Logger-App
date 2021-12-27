@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const LogSchema = mongoose.Schema({
+  // *Specific to a users logs
     tech:{
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'techs' 
@@ -16,3 +17,4 @@ const LogSchema = mongoose.Schema({
     default: Date.now()
   }
 });
+module.exports = mongoose.model('log', LogSchema);
