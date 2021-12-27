@@ -64,15 +64,62 @@ router.post(
 
 // * @route     PUT api/logs/:id
 // * @desc      Edit a log
-// * access     public
-router.put('/:id', (req, res) => {
-  res.send(' Update the log');
+//! @access   Private
+
+router.put('/:id', auth, async (req, res) => {
+  const { message, attention, date } = req.body;
+
+  //*Build a log object, ex: if message true then add to log fields
+  const logFields = {};
+  if (message) logFields.message = message;
+  if (attention) logFields.attention = attention;
+  if (date) logFields.date = date;
+
+  try {
+    //*Find the log id in the params
+    let log = await Log.findById(req.params.id);
+
+    if (!log) return res.status(404).json({ msg: 'Log not found' });
+
+    // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
+    // The log.tech is an object and must be turned into a string to compare to req.tech.id string
+    if (log.tech.toString() !== req.tech.id) {
+      return res.status(401).json({ msg: 'Not Authorized' });
+    }
+
+    // *The actual update after the checks pass
+    log = await Log.findByIdAndUpdate(
+      req.params.id, //this is the log id to update
+      { $set: logFields }, //pass in new object our logFields described above line 73
+      { new: true } //If log doesn't exist then create it?
+    );
+    res.json(log);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 // * @route     DELETE api/logs/:id
 // * @desc      Delete a log
 // * access     public
-router.delete('/:id', (req, res) => {
-  res.send(' Delete the log');
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    //*Find the log id in the params
+    let log = await Log.findById(req.params.id);
+
+    if (!log) return res.status(404).json({ msg: 'Log not found' });
+
+    // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
+    // The log.tech is an object and must be turned into a string to compare to req.tech.id string
+    if (log.tech.toString() !== req.tech.id) {
+      return res.status(401).json({ msg: 'Not Authorized' });
+    }
+    await Log.findByIdAndRemove(req.params.id);
+    res.json({msg:'Contact removed'})
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 module.exports = router;
