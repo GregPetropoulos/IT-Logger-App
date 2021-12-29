@@ -45,7 +45,7 @@ router.post(
       // *Handle a duplicate existing tech
       let tech = await Tech.findOne({ email });
       if (tech) {
-        //*! Also used in AuthState in PAYLOAD on FRONTEND
+        //*! Also used in authActions in PAYLOAD on FRONTEND
         return res.status(400).json({ msg: 'Tech already exist' });
       }
       // * New up a tech from info coming from the destructured req.body ln33
@@ -81,7 +81,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          //*! TOKEN sent as res.data on FRONTEND to AuthState.js
+          //*! TOKEN sent as res.data on FRONTEND to authActions.js
           res.json({ token });
         }
       );

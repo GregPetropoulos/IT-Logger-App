@@ -3,10 +3,12 @@
 import { combineReducers } from "redux";
 import logReducer from "./logReducer";
 import techReducer from "./techReducer";
+import authReducer from './authReducer';
 
 
 // *Set log to the logReducer
 export default combineReducers({
     log:logReducer,
-    tech: techReducer
+    tech: techReducer,
+    auth: authReducer
 });

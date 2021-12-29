@@ -41,3 +41,5 @@ A tech will have an authenticated route to login into after being registered. A 
 The JSON Web Token is used to identify the payload data
 https://jwt.io/
 
+## Challenges
+-Setting token to be checked for all request, adjusting store subscriber and when to loadTech()

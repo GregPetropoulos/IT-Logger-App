@@ -1,31 +1,31 @@
+import axios from 'axios';//migrated
 import {
   GET_TECHS,
   ADD_TECH,
   DELETE_TECH,
   SET_LOADING,
-  TECHS_ERROR
+  TECHS_ERROR,
 } from './types';
 
 // *GET TECHS FROM SERVER
 export const getTechs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('get all the techs', getTechs)
     setLoading();
 
     // request the data
-    const res = await fetch('/techs');
-    // response of data formatted
-    const data = await res.json();
+    const res = await axios.get('/api/techs/');
 
     // dispatch data to the reducer
     dispatch({
       type: GET_TECHS,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: TECHS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
@@ -34,26 +34,24 @@ export const getTechs = () => async (dispatch) => {
 export const addTech = (tech) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('add a tech', addTech);
+
     setLoading();
 
     // post the data to add a tech
-    const res = await fetch('/techs', {
-      method: 'POST',
-      body: JSON.stringify(tech),
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const res = await axios.put('/api/techs/', tech);
     // response of data formatted
-    const data = await res.json();
+    // const data = await res.json();//*!Not sure if I need this here
 
     // dispatch data to the reducer
     dispatch({
       type: ADD_TECH,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: TECHS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
@@ -62,12 +60,12 @@ export const addTech = (tech) => async (dispatch) => {
 export const deleteTech = (id) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('delete a tech', deleteTech, id);
+
     setLoading();
 
     // request the data no variable needed to store, need id to delete from backend
-    await fetch(`/techs/${id}`, {
-      method: 'DELETE'
-    });
+    await axios.delete(`/api/techs/${id}`);
 
     // dispatch data (id) to the reducer from component
     dispatch({
@@ -77,7 +75,7 @@ export const deleteTech = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: TECHS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };

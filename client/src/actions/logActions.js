@@ -1,5 +1,6 @@
-// *Bring in the types and middleware(thunk) for backend calls
+import axios from 'axios'; //migrated
 
+// *Bring in the types and middleware(thunk) for backend calls
 import {
   GET_LOGS,
   SET_LOADING,
@@ -10,6 +11,10 @@ import {
   SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
+  CLEAR_LOGS,
+  CLEAR_FILTER,
+  FILTER_LOGS
+
 } from './types';
 
 // *This a description of how the getLogs works with REDUX
@@ -42,22 +47,21 @@ import {
 export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('getting the logs', getLogs);
     setLoading();
 
-    // request the data
-    const res = await fetch('/logs');
-    // response of data formatted
-    const data = await res.json();
+    // request the data through axios
+    const res = await axios.get('/api/logs');
 
     // dispatch data to the reducer
     dispatch({
       type: GET_LOGS,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
@@ -67,28 +71,22 @@ export const getLogs = () => async (dispatch) => {
 export const addLog = (log) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('add new logs', addLog);
+
     setLoading();
 
-    // request the data with fetch post
-    const res = await fetch('/logs', {
-      method: 'POST',
-      body: JSON.stringify(log),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    // response of data formatted
-    const data = await res.json();
+    // request the data with axios post
+    const res = await axios.post('/api/logs', log);
 
     // dispatch data to the reducer
     dispatch({
       type: ADD_LOG,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
@@ -97,12 +95,12 @@ export const addLog = (log) => async (dispatch) => {
 export const deleteLog = (id) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('Delete logs', deleteLog);
+
     setLoading();
 
     // Dont need to store in variable
-    await fetch(`/logs/${id}`, {
-      method: 'DELETE'
-    });
+    await axios.delete(`/api/logs/${id}`);
 
     // dispatch data to the reducer
     dispatch({
@@ -112,7 +110,7 @@ export const deleteLog = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
@@ -121,25 +119,21 @@ export const deleteLog = (id) => async (dispatch) => {
 export const updateLog = (log) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('update/edit the logs', updateLog);
+
     setLoading();
 
-    const res = await fetch(`/logs/${log.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(log),
-      headers: {
-        'Content-type': 'application/json'
-      }
-    });
-    const data = await res.json();
+    const res = await axios.put(`/api/logs/${log._id}`, log);
+
     // dispatch data to the reducer
     dispatch({
       type: UPDATE_LOG,
-      payload: data
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
@@ -148,25 +142,38 @@ export const updateLog = (log) => async (dispatch) => {
 export const searchLogs = (text) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
+    console.log('Search the logs', searchLogs);
+
     setLoading();
 
     // request the data
-    const res = await fetch(`/logs?q=${text}`);
+    const res = await axios.get(`/api/logs?q=${text}`);
     // response of data formatted
-    const data = await res.json();
+    // const data = await res.json();
 
     // dispatch data to the reducer
     dispatch({
       type: SEARCH_LOGS,
-      payload: data
+      // ! NEED TO EVALUATE THIS AXIOS CALL 
+      payload: res.data
     });
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err.response.msg
     });
   }
 };
+
+// ! ADD, may not need  the CLEAR LOGS
+// * CLEAR LOGS
+export const clearLogs = (log) => {
+  return {
+    type: CLEAR_LOGS,
+    payload: log
+  };
+};
+
 //* SET A CURRENT LOG
 export const setCurrent = (log) => {
   return {
@@ -188,3 +195,16 @@ export const setLoading = () => {
     type: SET_LOADING
   };
 };
+
+// *!ADD IN -----------------
+export const filterContacts = (dispatch, text) => {
+  //* Display will send the action.type, payload data is the text entered by the user for the search of contacts
+  dispatch({ type: FILTER_LOGS, payload: text });
+};
+
+//* CLEAR FILTER
+export const clearFilter = () => {
+ return {
+   type: CLEAR_FILTER 
+  };
+ }

@@ -11,6 +11,8 @@ import {
   SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
+  CLEAR_LOGS,
+  CLEAR_FILTER
 } from '../actions/types';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
@@ -18,6 +20,7 @@ const initialState = {
   logs: null,
   current: null,
   loading: false,
+  filtered:null,
   error: null
 };
 
@@ -51,11 +54,11 @@ export default (state = initialState, action) => {
         ),
         loading: false
       };
-      case SEARCH_LOGS:
-        return {
-          ...state,
-          logs: action.payload
-        }
+    case SEARCH_LOGS:
+      return {
+        ...state,
+        logs: action.payload
+      };
     case SET_CURRENT:
       return {
         ...state,
@@ -77,6 +80,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+      case CLEAR_FILTER:
+        return {
+          ...state,
+          //* return filtered back to null and clears the form
+          filtered: null
+        };
+    case CLEAR_LOGS:
+      return {
+        ...state,
+        logs: null,
+        current: null,
+        filtered: null,
+        loading: false,
+        error: null
       };
     default:
       return state;
