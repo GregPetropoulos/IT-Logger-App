@@ -4,7 +4,7 @@ const Landing = () => {
   return (
     <section className='landing'>
       <div className='landing-inner'>
-          <h1>Welcome to IT Logger</h1>
+          <h2 className='landing-title'>Welcome to IT Logger</h2>
         </div>
     </section>
   );

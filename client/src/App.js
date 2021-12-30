@@ -1,10 +1,14 @@
+//* Author: Greg Petropoulos
+//* IT Logger App w/ React/Redux
+//* Date:12/30/2021
+
 import React, { useEffect, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/layout/Home';
 import Navbar from './components/layout/Navbar';
 // import Alerts from './components/layout/Alerts';
-import Login from './components/layout/Login';
-import Register from './components/layout/Register';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 import About from './components/layout/About';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Landing from './components/layout/Landing'
@@ -52,8 +56,8 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <div className='container'>
             {/* <Alerts /> */}
+          {/* <div className='container'> */}
             <Routes>
             <Route path="/" element={<Landing />} />
             <Route path='about' element={<About />} />
@@ -62,7 +66,6 @@ const App = () => {
             <Route path='home' element={<PrivateRoute component={Home} />} />
             {/* <Route path="/*" element={<NotFound />} /> */}
             </Routes>
-          </div>
         </Fragment>
       </Router>
     </Provider>

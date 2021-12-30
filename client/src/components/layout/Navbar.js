@@ -11,7 +11,10 @@ const Navbar = ({ title, auth: { isAuthenticated }, logout }) => {
         <li>Hello {tech && tech.firstName}</li>
       </h2> */}
       <li>
-        <Link onClick={logout} to='/login' className='waves-effect waves-green btn-large'>
+        <Link
+          onClick={logout}
+          to='/login'
+          className='waves-effect waves-green btn-large'>
           <i className='large material-icons'>Logout</i>
         </Link>
       </li>
@@ -20,15 +23,15 @@ const Navbar = ({ title, auth: { isAuthenticated }, logout }) => {
           <i className='Large material-icons'>Home</i>
         </Link>
         <li>
-        <Link to='/about' className='waves-effect waves-purple btn-large'>
-          About
-        </Link>
-      </li>
-      <li>
-        <Link to='/' className='waves-effect waves-purple btn-large'>
-          IT Logger
-        </Link>
-      </li>
+          <Link to='/about' className='waves-effect waves-purple btn-large'>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to='/' className='waves-effect waves-purple btn-large'>
+            IT Logger
+          </Link>
+        </li>
       </li>
     </Fragment>
   );
@@ -40,7 +43,9 @@ const Navbar = ({ title, auth: { isAuthenticated }, logout }) => {
         </Link>
       </li>
       <li>
-        <Link to='/register' className='waves-effect waves-purple btn-large'>Register</Link>
+        <Link to='/register' className='waves-effect waves-purple btn-large'>
+          Register
+        </Link>
       </li>
       <li>
         <Link to='/about' className='waves-effect waves-purple btn-large'>
@@ -55,18 +60,23 @@ const Navbar = ({ title, auth: { isAuthenticated }, logout }) => {
     </Fragment>
   );
   return (
-    <div className='nav-wrapper'>
-      <h1>
-        <Link to='/' className='brand-logo'>
-          <i className='large material-icons'>bug_report</i>
-          {title}
+    <div className=' nav-wrapper'>
+      <h1 className='center-align'>
+        <Link to='/' className='brand-logo center'>
+          <i className='medium material-icons'>computer</i>
+          {''} {title}
         </Link>
       </h1>
 
       <ul id='slide-out' className='sidenav'>
         {isAuthenticated ? authLinks : guestLinks}
       </ul>
-      <Link to='/' data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></Link>
+      <Link
+        to='/'
+        data-target='slide-out'
+        className='sidenav-trigger show-on-large'>
+        <i className='medium material-icons'>menu</i>
+      </Link>
     </div>
   );
 };
