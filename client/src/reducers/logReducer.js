@@ -12,7 +12,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   CLEAR_LOGS,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  FILTER_LOGS
 } from '../actions/types';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here

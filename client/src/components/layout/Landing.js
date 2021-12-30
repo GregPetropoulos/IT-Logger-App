@@ -1,11 +1,13 @@
-import React, {Fragment} from 'react'
+import React from 'react';
 
 const Landing = () => {
-    return (
-        <Fragment>
-             <img className="responsive-img" src="../../images/land-page.jpg" alt=''/>
-        </Fragment>
-    )
-}
+  return (
+    <section className='landing'>
+      <div className='landing-inner'>
+          <h1>Welcome to IT Logger</h1>
+        </div>
+    </section>
+  );
+};
 
-export default Landing
+export default Landing;
