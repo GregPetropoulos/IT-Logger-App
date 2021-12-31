@@ -15,9 +15,9 @@ const Tech = require('../models/Tech');
 // * @route     GET api/techs
 // * @desc      Get all the techs
 // * access     public
-router.get('/', (req, res) => {
-  res.send('Get all the techs');
-});
+// router.get('/', (req, res) => {
+//   res.send('Get all the techs');
+// });
 
 // * @route     POST api/techs
 // * @desc      Add (register and encrypt) a new tech to db -- auth user and get token
@@ -77,7 +77,7 @@ router.post(
         payload,
         config.get('jwtSecret'),
         {
-          expiresIn: 3600000
+          expiresIn: '5 days'
         },
         (err, token) => {
           if (err) throw err;
@@ -95,13 +95,13 @@ router.post(
 // * @route     PUT api/techs/:id
 // * @desc      Edit a tech
 // * access     public
-router.put('/:id', (req, res) => {
-  res.send('Edit a tech');
-});
+// router.put('/:id', (req, res) => {
+//   res.send('Edit a tech');
+// });
 // * @route     DELETE api/techs/:id
 // * @desc      Delete a tech
 // * access     public
-router.delete('/:id', (req, res) => {
-  res.send('Delete a tech');
-});
+// router.delete('/:id', (req, res) => {
+//   res.send('Delete a tech');
+// });
 module.exports = router;

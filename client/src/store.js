@@ -1,5 +1,10 @@
 // * ONE CENTRALIZED STORE IN APP.JS WITH ACTIONS AND REDUCERS
 
+// !TRACE
+// import * as actionCreators from '../src/actions/authActions'; 
+// !TRACE
+// import invariant from 'redux-immutable-state-invariant';
+
 //* Responsible for creating the store
 import { createStore, applyMiddleware} from'redux';
 
@@ -20,6 +25,12 @@ const initialState = {};
 
 // *Array of middleware
 const middleware = [thunk];
+
+// ! TRACE----Turn this on trace for debugging
+// const composeEnhancers = composeWithDevTools({ actionCreators, trace: true, traceLimit: 25 });
+// const store = createStore(rootReducer, initialState, composeEnhancers(
+//   applyMiddleware(invariant(), thunk)
+// ));
 
 // *Creating the store with reducers, app level state. middleware, 
 const store =createStore(

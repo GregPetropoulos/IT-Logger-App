@@ -1,17 +1,17 @@
 // * BRING IN EXPRESS, BUILD PATH, DB,
 const express = require('express');
 const path = require('path');
-// const connectDB = require('./config/db')
-const app = express();
 // * DB
 const connectDB = require('./config/db');
+const app = express();
 
 // *INITIALIZE AND CONNECT TO DB
 connectDB();
 
 //* MIDDLEWARE
 // replaced body parser for returning and accept json body data
-app.use(express.json({ extended: false }));
+// app.use(express.json({ extended: false }));
+app.use(express.json());
 
 // *TEST ROUTE
 // app.get('/', (req, res) => res.json({ msg: 'Welcome to IT LOGGER world' }));

@@ -16,7 +16,7 @@ import {
     isAuthenticated: null,
     loading: true,
     error: null,
-    user: null
+    tech: null
   };
 
    
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload
+        tech: payload
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -51,7 +51,7 @@ export default (state = initialState, action) => {
         token: null,
         isAuthenticated: false,
         loading: false,
-        user: null,
+        tech: null,
         //* The new payload is error msg, see authActions and routes/tech.js ln 49
         error: payload
       };
