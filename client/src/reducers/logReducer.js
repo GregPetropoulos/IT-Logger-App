@@ -13,7 +13,7 @@ import {
   CLEAR_CURRENT,
   CLEAR_LOGS,
   CLEAR_FILTER,
-  FILTER_LOGS
+  // FILTER_LOGS
 } from '../actions/types';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
@@ -21,49 +21,48 @@ const initialState = {
   logs: null,
   current: null,
   loading: false,
-  filtered:null,
+  filtered: null,
   error: null
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case GET_LOGS:
       return {
         ...state,
-        logs: action.payload,
+        logs: payload,
         loading: false
       };
     case ADD_LOG:
       return {
         ...state,
-        logs: [...state.logs, action.payload],
+        logs: [...state.logs, payload],
         loading: false
       };
 
     case DELETE_LOG:
       return {
         ...state,
-        logs: state.logs.filter((log) => log.id !== action.payload),
+        logs: state.logs.filter((log) => log.id !== payload),
         loading: false
       };
     case UPDATE_LOG:
       return {
         ...state,
-        logs: state.logs.map((log) =>
-          log.id === action.payload.id ? action.payload : log
-        ),
+        logs: state.logs.map((log) => (log.id === payload.id ? payload : log)),
         loading: false
       };
     case SEARCH_LOGS:
       return {
         ...state,
-        logs: action.payload
+        logs: payload
       };
     case SET_CURRENT:
       return {
         ...state,
-        current: action.payload
+        current: payload
       };
 
     case CLEAR_CURRENT:
@@ -77,17 +76,17 @@ export default (state = initialState, action) => {
         loading: true
       };
     case LOGS_ERROR:
-      console.error(action.payload);
+      console.error(payload);
       return {
         ...state,
-        error: action.payload
+        error: payload
       };
-      case CLEAR_FILTER:
-        return {
-          ...state,
-          //* return filtered back to null and clears the form
-          filtered: null
-        };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        //* return filtered back to null and clears the form
+        filtered: null
+      };
     case CLEAR_LOGS:
       return {
         ...state,

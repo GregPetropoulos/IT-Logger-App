@@ -60,9 +60,9 @@ const App = () => {
           {/* <div className='container'> */}
             <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path='about' element={<About />} />
-            <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
+            <Route path='about' element={<About />} />
             <Route path='home' element={<PrivateRoute component={Home} />} />
             {/* <Route path="/*" element={<NotFound />} /> */}
             </Routes>

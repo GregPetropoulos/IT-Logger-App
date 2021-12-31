@@ -2,9 +2,9 @@ import React from 'react'
 
 const Hero = () => {
     return (
-        <div>
-            hero pic here
-        </div>
+       <section className='hero'>
+           {/* <img className="hero" alt='hardware'/> */}
+       </section>
     )
 }
 

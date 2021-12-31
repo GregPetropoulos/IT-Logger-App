@@ -4,63 +4,65 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authActions';
 
-const Navbar = ({ title, auth: { isAuthenticated }, logout }) => {
+const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
   const authLinks = (
     <Fragment>
-      {/* <h2>
-        <li>Hello {tech && tech.firstName}</li>
-      </h2> */}
-      <li>
-        <Link
-          onClick={logout}
-          to='/login'
-          className='waves-effect waves-green btn-large'>
-          <i className='large material-icons'>Logout</i>
-        </Link>
-      </li>
-      <li>
-        <Link to='/home' className='waves-effect waves-purple btn-large'>
-          <i className='Large material-icons'>Home</i>
-        </Link>
+      <h3> Hello {tech && tech.firstName}</h3>
+      <ul>
         <li>
-          <Link to='/about' className='waves-effect waves-purple btn-large'>
+          <Link
+            onClick={logout}
+            to='/login'
+            className=' red accent-3 waves-effect waves-black btn-large'>
+            <i className='large material-icons'>logout</i>Logout
+          </Link>
+        </li>
+        <li>
+          <Link
+            to='/home'
+            className='green darken-2 waves-effect waves-black btn-large'>
+            <i className='Large material-icons'>home</i>Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            to='/about'
+            className='green darken-2 waves-effect waves-black btn-large'>
+            <i className='Large material-icons'>info</i>
             About
           </Link>
         </li>
-        <li>
-          <Link to='/' className='waves-effect waves-purple btn-large'>
-            IT Logger
-          </Link>
-        </li>
-      </li>
+      </ul>
     </Fragment>
   );
   const guestLinks = (
-    <Fragment>
+    <ul>
       <li>
-        <Link to='/login' className='waves-effect waves-purple btn-large'>
+        <Link
+          to='/login'
+          className='indigo darken-3 waves-effect waves-red btn-large'>
           Login
         </Link>
       </li>
       <li>
-        <Link to='/register' className='waves-effect waves-purple btn-large'>
+        <Link to='/register' className='blue waves-effect waves-red btn-large'>
           Register
         </Link>
       </li>
       <li>
-        <Link to='/about' className='waves-effect waves-purple btn-large'>
+        <Link to='/about' className='blue waves-effect waves-red btn-large'>
           About
         </Link>
       </li>
       <li>
-        <Link to='/' className='waves-effect waves-purple btn-large'>
+        <Link to='/' className='blue waves-effect waves-red btn-large'>
           IT Logger
         </Link>
       </li>
-    </Fragment>
+    </ul>
   );
   return (
-    <div className=' nav-wrapper'>
+    <nav className='blue nav-wrapper'>
       <h1 className='center-align'>
         <Link to='/' className='brand-logo center'>
           <i className='medium material-icons'>computer</i>
@@ -68,16 +70,16 @@ const Navbar = ({ title, auth: { isAuthenticated }, logout }) => {
         </Link>
       </h1>
 
-      <ul id='slide-out' className='sidenav'>
+      <div id='slide-out' className='sidenav'>
         {isAuthenticated ? authLinks : guestLinks}
-      </ul>
+      </div>
       <Link
-        to='/'
+        to='#'
         data-target='slide-out'
         className='sidenav-trigger show-on-large'>
         <i className='medium material-icons'>menu</i>
       </Link>
-    </div>
+    </nav>
   );
 };
 Navbar.propTypes = {

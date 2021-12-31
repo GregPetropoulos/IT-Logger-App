@@ -1,8 +1,4 @@
-// import React, {useEffect, useReducer} from 'react'
-import axios from 'axios'; //migrated
-// import setAuthToken from '../utils/setAuthToken';
 import api from '../utils/api';
-
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -10,7 +6,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
+  LOGOUT
   // CLEAR_ERRORS
 } from './types';
 
@@ -78,4 +74,3 @@ export const logout = () => ({ type: LOGOUT });
 
 //*! CLEAR ERRORS
 // *! export const clearErrors = (dispatch) => dispatch({ type: CLEAR_ERRORS });
-

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
 import PropTypes from 'prop-types'
@@ -16,24 +16,34 @@ const Logs = ({ log:{ logs, loading}, getLogs }) => {
   useEffect(() => {
     getLogs();
     // eslint-disable-next-line
-  }, []);
+  }, [getLogs]);
+  // *! may need getLogs in array in useEffect
 // eslint-disable-next-line
   if (loading || logs === null) {
     return <Preloader />;
   }
-
+console.log("logs", logs)
   return (
-    <ul className='collection with-header'>
+    <Fragment>
+
+     {/* <ul className='collection with-header'>
       <li className='collection-header'>
         <h4 className='center'>System Logs</h4>
-      </li>
-      {/* *! problem area with reading length */}
-      {!loading && logs.length === 0 ? (
-        <p className='center'>No Logs to Show...</p>
-      ) : (
-        logs.map((log) => <LogItem log={log} key={log.id} />)
-      )}
-    </ul>
+        </li>
+        {!loading && logs.length === 0 ? (
+          <p className='center'>No Logs to Show...</p>
+          ) : (
+            logs.map((log) => <LogItem log={log} key={log._id} />)
+          )}
+     </ul>
+
+         */}
+        
+        {logs.attention}
+        {logs.message}
+        {logs.tech}
+
+          </Fragment>
   );
 };
 

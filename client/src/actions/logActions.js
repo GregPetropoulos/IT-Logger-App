@@ -1,4 +1,4 @@
-import axios from 'axios'; //migrated
+import api from '../utils/api';
 
 // *Bring in the types and middleware(thunk) for backend calls
 import {
@@ -51,7 +51,7 @@ export const getLogs = () => async (dispatch) => {
     setLoading();
 
     // request the data through axios
-    const res = await axios.get('/api/logs');
+    const res = await api.get('/logs');
 
     // dispatch data to the reducer
     dispatch({
@@ -76,7 +76,7 @@ export const addLog = (log) => async (dispatch) => {
     setLoading();
 
     // request the data with axios post
-    const res = await axios.post('/api/logs', log);
+    const res = await api.post('/logs', log);
 
     // dispatch data to the reducer
     dispatch({
@@ -100,7 +100,7 @@ export const deleteLog = (id) => async (dispatch) => {
     setLoading();
 
     // Dont need to store in variable
-    await axios.delete(`/api/logs/${id}`);
+    await api.delete(`/logs/${id}`);
 
     // dispatch data to the reducer
     dispatch({
@@ -123,7 +123,7 @@ export const updateLog = (log) => async (dispatch) => {
 
     setLoading();
 
-    const res = await axios.put(`/api/logs/${log._id}`, log);
+    const res = await api.put(`/logs/${log._id}`, log);
 
     // dispatch data to the reducer
     dispatch({
@@ -147,14 +147,13 @@ export const searchLogs = (text) => async (dispatch) => {
     setLoading();
 
     // request the data
-    const res = await axios.get(`/api/logs?q=${text}`);
+    const res = await api.get(`/logs?q=${text}`);
     // response of data formatted
     // const data = await res.json();
 
     // dispatch data to the reducer
     dispatch({
       type: SEARCH_LOGS,
-      // ! NEED TO EVALUATE THIS AXIOS CALL 
       payload: res.data
     });
   } catch (err) {
