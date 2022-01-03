@@ -1,28 +1,31 @@
 import React from 'react';
 //!moment deprecated
+import formatDate from '../../utils/formatDate';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { deleteLog, setCurrent } from '../../actions/logActions';
+// import { connect } from 'react-redux';
+// import { deleteLog, setCurrent } from '../../actions/logActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-
-const today = new Date();
-
-
-const LogItem = ({ log, deleteLog, setCurrent, auth}) => {
-
-  // const onDelete =() => {
-  //   deleteLog(log._id);
-  //   M.toast({html:'Log Deleted'});
-  // }
+const LogItem = ({
+  log: {
+    tech: { firstName, lastName }
+  },
+  log
+}) => {
   return (
-    <li className="collection-item">
-
-      {log.message}
-      {log.tech.firstName}
-      {log._id}
-      {log.attention}
+    <li className='collection-item avatar'>
+      <i className='medium material-icons'>account_circle</i>
+      <h5>
+        {firstName} {lastName}
+      </h5>
+      Posted on {formatDate(log.date)}
+      <p className='collection-item'>
+        <span>Message:{log.message}</span> <br/>
+        <span>Log ID # {log._id.slice(18, 24)}</span>
+      </p>
+        <span>Attention {log.attention ? (<a href='#!' className='secondary-content'><i className='material-icons'>grade</i></a>) : 'blue'}</span>
+      <p>Todays Date{formatDate(new Date())}</p>
     </li>
     // <li className='collection item'>
     //   <div>
@@ -50,11 +53,7 @@ const LogItem = ({ log, deleteLog, setCurrent, auth}) => {
 };
 
 LogItem.propTypes = {
-  log: PropTypes.object.isRequired,
-  deleteLog:PropTypes.func.isRequired,
-  setCurrent:PropTypes.func.isRequired,
+  log: PropTypes.object.isRequired
 };
-const mapStateToProps =(state)=> ({
-  auth:state.auth
-})
-export default connect(mapStateToProps, {deleteLog, setCurrent})(LogItem);
+// export default connect(mapStateToProps, { deleteLog, setCurrent })(LogItem);
+export default LogItem;

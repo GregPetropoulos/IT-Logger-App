@@ -14,24 +14,26 @@ const initialState = {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
-  switch (action.type) {
+  const {type, payload}= action
+
+  switch (type) {
     case GET_TECHS:
       return {
         ...state,
-        techs: action.payload,
+        techs: payload,
         loading: false
       };
     //* Spread current state, set array with copy of current techs and add the new tech into the array
     case ADD_TECH:
       return {
         ...state,
-        techs: [...state.techs, action.payload],
+        techs: [...state.techs,payload],
         loading: false
       };
       case DELETE_TECH:
         return {
           ...state,
-          techs:state.techs.filter(tech => tech.id !== action.payload),
+          techs:state.techs.filter(tech => tech.id !== payload),
         loading: false
         }
     case SET_LOADING:
@@ -40,10 +42,10 @@ export default (state = initialState, action) => {
         loading: true
       };
     case TECHS_ERROR:
-      console.error(action.payload);
+      console.error(payload);
       return {
         ...state,
-        error: action.payload,
+        error: payload,
         loading: false
       };
     default:

@@ -61,7 +61,15 @@ export const getLogs = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.msg
+      payload: 
+      
+      // err.response.data.msg
+      
+      // err.response.msg
+      //*! need to check these responses
+      // err.response.statusText
+      
+       { msg: err.response.statusText, status: err.response.status }
     });
   }
 };

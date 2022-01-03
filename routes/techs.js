@@ -8,16 +8,26 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../middleware/auth');
+
 
 //* Bringing in the User model
 const Tech = require('../models/Tech');
 
 // * @route     GET api/techs
-// * @desc      Get all the techs
+// * @desc      Get all the techs 
 // * access     public
-// router.get('/', (req, res) => {
-//   res.send('Get all the techs');
-// });
+router.get('/', auth, async (req, res) => {
+  try {
+    // *!console.log('check this value', req.tech.id)
+    // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header
+    const techs = await Tech.find().select('-password');
+    res.json(techs);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // * @route     POST api/techs
 // * @desc      Add (register and encrypt) a new tech to db -- auth user and get token

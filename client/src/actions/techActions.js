@@ -1,88 +1,89 @@
-// import axios from 'axios';//migrated
-// import {
-//   GET_TECHS,
-//   ADD_TECH,
-//   DELETE_TECH,
-//   SET_LOADING,
-//   TECHS_ERROR,
-// } from './types';
+import api from '../utils/api';
 
-// // *GET TECHS FROM SERVER
-// export const getTechs = () => async (dispatch) => {
-//   // **THIS IS THE ASYNC THUNK FUNCTION
-//   try {
-//     console.log('get all the techs', getTechs)
-//     setLoading();
+import {
+  GET_TECHS,
+  ADD_TECH,
+  DELETE_TECH,
+  SET_LOADING,
+  TECHS_ERROR,
+} from './types';
 
-//     // request the data
-//     const res = await axios.get('/api/techs/');
+// *GET TECHS FROM SERVER
+export const getTechs = () => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    console.log('get all the techs from techActions', getTechs)
+    setLoading();
 
-//     // dispatch data to the reducer
-//     dispatch({
-//       type: GET_TECHS,
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: TECHS_ERROR,
-//       payload: err.response.msg
-//     });
-//   }
-// };
+    // request the data
+    const res = await api.get('/techs');
 
-// // *ADD A TECHNICIAN TO THE SERVER
-// export const addTech = (tech) => async (dispatch) => {
-//   // **THIS IS THE ASYNC THUNK FUNCTION
-//   try {
-//     console.log('add a tech', addTech);
+    // dispatch data to the reducer
+    dispatch({
+      type: GET_TECHS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: TECHS_ERROR,
+      payload: err.response.msg
+    });
+  }
+};
 
-//     setLoading();
+// *ADD A TECHNICIAN TO THE SERVER
+export const addTech = (tech) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    console.log('add a tech', addTech);
 
-//     // post the data to add a tech
-//     const res = await axios.put('/api/techs/', tech);
-//     // response of data formatted
-//     // const data = await res.json();//*!Not sure if I need this here
+    setLoading();
 
-//     // dispatch data to the reducer
-//     dispatch({
-//       type: ADD_TECH,
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: TECHS_ERROR,
-//       payload: err.response.msg
-//     });
-//   }
-// };
+    // post the data to add a tech
+    const res = await api.put('/techs', tech);
+    // response of data formatted
+    // const data = await res.json();//*!Not sure if I need this here
 
-// // *DELETE A TECH FROM THE SERVER
-// export const deleteTech = (id) => async (dispatch) => {
-//   // **THIS IS THE ASYNC THUNK FUNCTION
-//   try {
-//     console.log('delete a tech', deleteTech, id);
+    // dispatch data to the reducer
+    dispatch({
+      type: ADD_TECH,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: TECHS_ERROR,
+      payload: err.response.msg
+    });
+  }
+};
 
-//     setLoading();
+// *DELETE A TECH FROM THE SERVER
+export const deleteTech = (id) => async (dispatch) => {
+  // **THIS IS THE ASYNC THUNK FUNCTION
+  try {
+    console.log('delete a tech', deleteTech, id);
 
-//     // request the data no variable needed to store, need id to delete from backend
-//     await axios.delete(`/api/techs/${id}`);
+    setLoading();
 
-//     // dispatch data (id) to the reducer from component
-//     dispatch({
-//       type: DELETE_TECH,
-//       payload: id
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: TECHS_ERROR,
-//       payload: err.response.msg
-//     });
-//   }
-// };
+    // request the data no variable needed to store, need id to delete from backend
+    await api.delete(`/techs${id}`);
 
-// // *SET LOADING TO TRUE
-// export const setLoading = () => {
-//   return {
-//     type: SET_LOADING
-//   };
-// };
+    // dispatch data (id) to the reducer from component
+    dispatch({
+      type: DELETE_TECH,
+      payload: id
+    });
+  } catch (err) {
+    dispatch({
+      type: TECHS_ERROR,
+      payload: err.response.msg
+    });
+  }
+};
+
+// *SET LOADING TO TRUE
+export const setLoading = () => {
+  return {
+    type: SET_LOADING
+  };
+};

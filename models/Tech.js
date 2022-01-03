@@ -22,4 +22,4 @@ const TechSchema = mongoose.Schema({
     default: Date.now()
   }
 });
-module.exports = mongoose.model('tech', TechSchema);
+module.exports = mongoose.model('techs', TechSchema);

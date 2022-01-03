@@ -11,18 +11,33 @@ const auth = require('../middleware/auth');
 // *BRING IN THE DB FOR LOGS
 const Log = require('../models/Log');
 
+// // * @route     GET api/logs
+// * @desc      Get all the logs for a specific tech id ONLY--AUTH
+// *! access     private
+// router.get('/',auth, async (req, res) => {
+//   try {
+//     // *!console.log('check this value', req.tech.id)
+//     // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header
+//     const logs = await Log.find({ techs: req.tech.id }).sort({ date: -1 });
+//     res.json(logs);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+//   }
+// });
+
 // * @route     GET api/logs
-// * @desc      Get all the logs
+// * @desc      Get all the logs and the tech that wrote a message--NOAUTH
 // * access     public
-router.get('/',auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // *!console.log('check this value', req.tech.id)
     // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header
-    const logs = await Log.find({ tech: req.tech.id }).sort({ date: -1 });
+    const logs = await Log.find().sort({ date: -1 }).populate('tech', ['firstName', 'lastName', '_id', 'date']);
     res.json(logs);
   } catch (err) {
     console.error(err.message);
-    req.status(500).send('Server Error');
+    res.status(500).send('logs route Server Error');
   }
 });
 
@@ -112,7 +127,7 @@ router.delete('/:id', auth, async (req, res) => {
 
     // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
     // The log.tech is an object and must be turned into a string to compare to req.tech.id string
-    if (log.tech.toString() !== req.tech.id) {
+    if (log.techs.toString() !== req.tech.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
     await Log.findByIdAndRemove(req.params.id);
