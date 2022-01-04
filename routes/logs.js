@@ -11,10 +11,10 @@ const auth = require('../middleware/auth');
 // *BRING IN THE DB FOR LOGS
 const Log = require('../models/Log');
 
-// // * @route     GET api/logs
-// * @desc      Get all the logs for a specific tech id ONLY--AUTH
-// *! access     private
-// router.get('/',auth, async (req, res) => {
+// // * @route     GET api/logs/techlogs
+// // * @desc      Get all the logs for a specific tech id ONLY--AUTH
+// // *! access     private
+// router.get('/techlogs',auth, async (req, res) => {
 //   try {
 //     // *!console.log('check this value', req.tech.id)
 //     // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header

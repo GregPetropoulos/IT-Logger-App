@@ -5,18 +5,18 @@ import Logs from '../logs/Logs';
 import SearchBar from './SearchBar';
 import Hero from '../hero/Hero';
 
-// import Dashboard from './Dashboard';
+import Dashboard from './Dashboard';
 
 const Home = () => {
   return (
-    <div className='container'>
+    <div className=''>
       <section className='home-section'>
         <Hero />
         <SearchBar />
         <Logs />
       </section>
       <section className='dashboard-section'>
-        {/* <Dashboard /> */}    
+        <Dashboard />    
       </section>
     </div>
   );

@@ -3,8 +3,6 @@ import React from 'react';
 import formatDate from '../../utils/formatDate';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import { deleteLog, setCurrent } from '../../actions/logActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const LogItem = ({
@@ -21,39 +19,28 @@ const LogItem = ({
       </h5>
       Posted on {formatDate(log.date)}
       <p className='collection-item'>
-        <span>Message:{log.message}</span> <br/>
+        <span>
+          <strong>Message:</strong>
+          {log.message}
+        </span>{' '}
+        <br />
         <span>Log ID # {log._id.slice(18, 24)}</span>
       </p>
-        <span>Attention {log.attention ? (<a href='#!' className='secondary-content'><i className='material-icons'>grade</i></a>) : 'blue'}</span>
+      {log.attention && (
+        <p className=''>
+          <a href='#!' className=' valign-wrapper red secondary-content '>
+            <i className='material-icons md-24 md-dark'>priority_high</i>
+          <div className='black-text'>Attention</div>
+          </a>
+        </p>
+      )}
       <p>Todays Date{formatDate(new Date())}</p>
     </li>
-    // <li className='collection item'>
-    //   <div>
-    //     <a
-    //       href='#edit-log-modal'
-    //       className={`modal-trigger ${
-    //         log.attention ? 'red-text' : 'blue-text'
-    //       }`}
-    //       onClick={()=> setCurrent(log)}
-    //       >
-    //       {log.message}
-    //     </a>
-    //     <br />
-    //     <span className='grey-text'>
-    //       <span className='black-text'>ID #{log._id}</span> Last update by{' '}
-    //       <span className='black-text'>{log.tech.firstName}</span> on{' '}
-    //       {today.toLocaleString()}
-    //     </span>
-    //     <a href='#!' onClick ={onDelete}className='secondary-content'>
-    //       <i className='material-icons grey-text'>delete</i>
-    //     </a>
-    //   </div>
-    // </li>
   );
 };
 
 LogItem.propTypes = {
   log: PropTypes.object.isRequired
 };
-// export default connect(mapStateToProps, { deleteLog, setCurrent })(LogItem);
+
 export default LogItem;

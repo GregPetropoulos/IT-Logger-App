@@ -11,8 +11,9 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import About from './components/layout/About';
 import PrivateRoute from './components/routing/PrivateRoute';
-import Landing from './components/layout/Landing'
-
+import Landing from './components/layout/Landing';
+import NotFound from './components/layout/NotFound';
+import Techs from './components/tech/Techs';
 // Bring in CSS
 import 'materialize-css/dist/css/materialize.min.css';
 // Bring in js for modals etc
@@ -23,9 +24,9 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
 // * Token management
-import {loadTech} from './actions/authActions'
+import { loadTech } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
-import { LOGOUT } from './actions/types'
+import { LOGOUT } from './actions/types';
 
 const App = () => {
   //* Initialize Materialize JS
@@ -37,7 +38,7 @@ const App = () => {
   useEffect(() => {
     //* check for token in LS when app first runs
     if (localStorage.token) {
-    //* if there is a token set axios headers for all requests
+      //* if there is a token set axios headers for all requests
       setAuthToken(localStorage.token);
     }
     //* try to fetch a user, if no token or invalid token we
@@ -50,22 +51,22 @@ const App = () => {
     });
   }, []);
 
-
   return (
     <Provider store={store}>
       <Router>
         <Fragment>
           <Navbar />
-            {/* <Alerts /> */}
+          {/* <Alerts /> */}
           {/* <div className='container'> */}
-            <Routes>
-            <Route path="/" element={<Landing />} />
+          <Routes>
+            <Route path='/' element={<Landing />} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
             <Route path='about' element={<About />} />
+            <Route path='techs' element={<Techs />} />
             <Route path='home' element={<PrivateRoute component={Home} />} />
-            {/* <Route path="/*" element={<NotFound />} /> */}
-            </Routes>
+            <Route path='/*' element={<NotFound />} />
+          </Routes>
         </Fragment>
       </Router>
     </Provider>

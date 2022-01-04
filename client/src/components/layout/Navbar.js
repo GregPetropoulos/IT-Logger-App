@@ -13,21 +13,28 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
           <Link
             onClick={logout}
             to='/login'
-            className=' red accent-3 waves-effect waves-black btn-large'>
+            className=' red accent-2 waves-effect waves-black btn-large'>
             <i className='large material-icons'>logout</i>Logout
           </Link>
         </li>
         <li>
           <Link
             to='/home'
-            className='green darken-2 waves-effect waves-black btn-large'>
+            className='deep-purple darken-1 waves-effect waves-black btn-large'>
             <i className='Large material-icons'>home</i>Home
           </Link>
         </li>
         <li>
           <Link
+            to='/techs'
+            className='deep-purple darken-1 waves-effect waves-black btn-large'>
+            <i className='large material-icons'>people</i>Techs
+          </Link>
+        </li>
+        <li>
+          <Link
             to='/about'
-            className='green darken-2 waves-effect waves-black btn-large'>
+            className='deep-purple darken-1 waves-effect waves-black btn-large'>
             <i className='Large material-icons'>info</i>
             About
           </Link>
@@ -70,15 +77,15 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
         </Link>
       </h1>
 
-      <div id='slide-out' className='sidenav'>
-        {isAuthenticated ? authLinks : guestLinks}
-      </div>
       <Link
         to='#'
         data-target='slide-out'
         className='sidenav-trigger show-on-large'>
-        <i className='medium material-icons'>menu</i>
+        <i className='large material-icons'>menu</i>
       </Link>
+      <div id='slide-out' className='sidenav'>
+        {isAuthenticated ? authLinks : guestLinks}
+      </div>
     </nav>
   );
 };

@@ -16,8 +16,8 @@ const Tech = require('../models/Tech');
 
 // * @route     GET api/techs
 // * @desc      Get all the techs 
-// * access     public
-router.get('/', auth, async (req, res) => {
+// !#* access     public----might need to be private
+router.get('/', async (req, res) => {
   try {
     // *!console.log('check this value', req.tech.id)
     // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header
