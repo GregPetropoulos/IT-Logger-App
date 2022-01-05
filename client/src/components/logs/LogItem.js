@@ -30,7 +30,7 @@ const LogItem = ({
         <p className=''>
           <a href='#!' className=' valign-wrapper red secondary-content '>
             <i className='material-icons md-24 md-dark'>priority_high</i>
-          <div className='black-text'>Attention</div>
+            <span className='black-text'>Attention</span>
           </a>
         </p>
       )}

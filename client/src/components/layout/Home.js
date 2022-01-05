@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Logs from '../logs/Logs';
 import SearchBar from './SearchBar';
 import Hero from '../hero/Hero';
-
+import { Footer } from './Footer';
 import Dashboard from './Dashboard';
 
 const Home = () => {
   return (
-    <div className=''>
-      <section className='home-section'>
-        <Hero />
-        <SearchBar />
-        <Logs />
-      </section>
-      <section className='dashboard-section'>
+<Fragment>
+      <section className='row' >
+        <div className='no-border col s5'> 
         <Dashboard />    
+        </div>
+        <div className='no-border  col s7'>
+        <Hero/>
+        <SearchBar/>
+        <Logs/>
+        </div>
       </section>
-    </div>
+      <Footer/>
+
+</Fragment>
   );
 };
 

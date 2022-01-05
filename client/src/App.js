@@ -13,11 +13,11 @@ import About from './components/layout/About';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Landing from './components/layout/Landing';
 import NotFound from './components/layout/NotFound';
+
 import Techs from './components/tech/Techs';
 // Bring in CSS
 import 'materialize-css/dist/css/materialize.min.css';
-// Bring in js for modals etc
-import M from 'materialize-css/dist/js/materialize.min.js';
+
 import './App.css';
 
 //***REDUX STORE WRAPPER****
@@ -29,11 +29,6 @@ import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
 
 const App = () => {
-  //* Initialize Materialize JS
-  useEffect(() => {
-    M.AutoInit();
-  });
-
   //* Token checking
   useEffect(() => {
     //* check for token in LS when app first runs
@@ -60,11 +55,11 @@ const App = () => {
           {/* <div className='container'> */}
           <Routes>
             <Route path='/' element={<Landing />} />
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
-            <Route path='about' element={<About />} />
-            <Route path='techs' element={<Techs />} />
-            <Route path='home' element={<PrivateRoute component={Home} />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/techs' element={<Techs />} />
+            <Route path='/home' element={<PrivateRoute component={Home} />} />
             <Route path='/*' element={<NotFound />} />
           </Routes>
         </Fragment>

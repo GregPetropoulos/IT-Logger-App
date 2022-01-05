@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import TechSelectOptions from '../tech/TechSelectOptions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLog } from '../../actions/logActions';
 
-const AddLogModal = ({ addLog }) => {
+const AddTechLogModal = ({ addLog, auth: { tech } }) => {
   const [message, setMessage] = useState('');
-  const [tech, setTech] = useState('');
   const [attention, setAttention] = useState(false);
+  // const [tech, setTech] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (message === '' || tech === '') {
-      M.toast({ html: 'Please enter a message and tech' });
+    if (message === '') {
+      M.toast({ html: 'Please enter a message' });
     } else {
       const newLog = {
         message,
@@ -26,7 +25,7 @@ const AddLogModal = ({ addLog }) => {
     }
     // Clear fields
     setMessage('');
-    setTech('');
+    // setTech('');
     setAttention(false);
   };
 
@@ -34,6 +33,14 @@ const AddLogModal = ({ addLog }) => {
     <div id='add-log-modal' className='modal' style={modalStyle}>
       <div className='modal-content'>
         <h4>Enter System Logs</h4>
+        <div className='row'>
+          <div className='input-field'>
+            {/* <input>{tech}</input> */}
+            <label htmlFor='tech' className='active'>
+              Tech Name
+            </label>
+          </div>
+        </div>
         <div className='row'>
           <div className='input-field'>
             <input
@@ -45,20 +52,6 @@ const AddLogModal = ({ addLog }) => {
             <label htmlFor='message' className='active'>
               Log Message
             </label>
-          </div>
-        </div>
-        <div className='row'>
-          <div className='input-field'>
-            <select
-              name='tech'
-              value={tech}
-              className='browser-default'
-              onChange={(e) => setTech(e.target.value)}>
-              <option value='' disabled>
-                Select Technician
-              </option>
-              <TechSelectOptions />
-            </select>
           </div>
         </div>
         <div className='row'>
@@ -88,12 +81,15 @@ const AddLogModal = ({ addLog }) => {
     </div>
   );
 };
-AddLogModal.propTypes = {
-  addLog: PropTypes.func.isRequired
+AddTechLogModal.propTypes = {
+  addLog: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 const modalStyle = {
   width: '75%',
   height: '75%'
 };
-
-export default connect(null, { addLog })(AddLogModal);
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+export default connect(mapStateToProps, { addLog })(AddTechLogModal);

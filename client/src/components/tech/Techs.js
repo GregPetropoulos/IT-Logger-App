@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTechs } from '../../actions/techActions';
 import Preloader from '../layout/Preloader';
+import { Footer } from '../layout/Footer';
 
 const Techs = ({ tech: { techs, loading }, getTechs }) => {
   useEffect(() => {
@@ -13,7 +14,9 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
     return <Preloader />;
   }
   return (
-    <section className='container'>
+    <Fragment>
+
+    <section className='' style={({height:'100vh'})}>
       <h2 className='center-align'>Meet The Techs</h2>
       {techs.map((t) => (
         <div className='collection' key={t._id} t={t}>
@@ -29,6 +32,8 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
         </div>
       ))}
     </section>
+      <Footer/>
+      </Fragment>
   );
 };
 

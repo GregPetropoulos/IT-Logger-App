@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import TechSelectOptions from '../tech/TechSelectOptions';
+import LogSelectOptions from '../techlog/LogSelectOptions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateLog } from '../../actions/logActions';
 
-const EditLogModal = ({ current, updateLog }) => {
+const EditTechLogModal = ({ current, updateLog, auth: { tech } }) => {
   const [message, setMessage] = useState('');
-  const [tech, setTech] = useState('');
+  const [log, setLog] = useState('');
   const [attention, setAttention] = useState(false);
 
   // When click on the log it renders the current info via local state set to backend server info because of connect and mapStateTopProps
@@ -15,13 +15,13 @@ const EditLogModal = ({ current, updateLog }) => {
     if (current) {
       setMessage(current.message);
       setAttention(current.attention);
-      setTech(current.tech);
+      // setTech(current.tech);
     }
   }, [current]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (message === '' || tech === '') {
+    if (message === '') {
       M.toast({ html: 'Please enter a message and tech' });
     } else {
       // * SET UP AN OBJECT
@@ -39,7 +39,7 @@ const EditLogModal = ({ current, updateLog }) => {
 
     // Clear fields
     setMessage('');
-    setTech('');
+    setLog('');
     setAttention(false);
   };
 
@@ -57,20 +57,24 @@ const EditLogModal = ({ current, updateLog }) => {
             />
           </div>
         </div>
-        <div className='row'>
-          <div className='input-field'>
+        {/* <div className='row'>
+          <div name='tech' value={tech} className='browser-default'>
+            {tech}
+          </div>
+          </div> */}
+          <div className='row'>
+            <div className='input-field'></div>
             <select
-              name='tech'
-              value={tech}
+              name='log'
+              value={log}
               className='browser-default'
-              onChange={(e) => setTech(e.target.value)}>
+              onChange={(e) => setLog(e.target.value)}>
               <option value='' disabled>
-                Select Technician
+                Select Log
               </option>
-              <TechSelectOptions />
+              <LogSelectOptions />
             </select>
           </div>
-        </div>
         <div className='row'>
           <div className='input-field'>
             <p>
@@ -102,12 +106,14 @@ const modalStyle = {
   width: '75%',
   height: '75%'
 };
-EditLogModal.propTypes = {
+EditTechLogModal.propTypes = {
   current: PropTypes.object,
-  updateLog: PropTypes.func.isRequired
+  updateLog: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 const mapStateToProps = (state) => ({
-  current: state.log.current
+  current: state.log.current,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { updateLog })(EditLogModal);
+export default connect(mapStateToProps, { updateLog })(EditTechLogModal);

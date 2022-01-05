@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
 import TechLogItems from './TechLogItems';
-// import SearchBar from '../layout/SearchBar';
 import { connect } from 'react-redux';
 import { getLogs } from '../../actions/logActions';
 import PropTypes from 'prop-types';
 import Preloader from '../layout/Preloader';
-
+import SearchBar from '../layout/SearchBar';
 const TechLog = ({ log: { logs, loading }, getLogs }) => {
   useEffect(() => {
     getLogs();
@@ -16,10 +15,13 @@ const TechLog = ({ log: { logs, loading }, getLogs }) => {
   }
   return (
     <Fragment>
-      <ul className='collection-header'>
-        <div className='center-align collection-item deep-purple lighten-2'>
-          User Log
-        </div>
+      <ul className='collection with-header '>
+        <li className=' center-align collection-header no-border'>
+          <h5>User Logs</h5>
+        </li>
+        <li>
+          <SearchBar />
+        </li>
         {logs.map((log) => (
           <TechLogItems key={log._id} log={log} />
         ))}
