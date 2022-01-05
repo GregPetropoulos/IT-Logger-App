@@ -10,12 +10,13 @@ import Dashboard from './Dashboard';
 const Home = () => {
   return (
 <Fragment>
+<Hero/>
+
       <section className='row' >
         <div className='no-border col s5'> 
         <Dashboard />    
         </div>
         <div className='no-border  col s7'>
-        <Hero/>
         <SearchBar/>
         <Logs/>
         </div>

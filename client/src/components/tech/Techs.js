@@ -16,20 +16,21 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
   return (
     <Fragment>
 
-    <section className='' style={({height:'100vh'})}>
+    <section className='container' style={({height:'100vh'})}>
       <h2 className='center-align'>Meet The Techs</h2>
+
       {techs.map((t) => (
-        <div className='collection' key={t._id} t={t}>
-          <div className='collection-item'>
+        <ul className='collection' key={t._id} t={t}>
+          <li className='collection-item'>
             Name: {t.firstName} {t.lastName}{' '}
-            <div>
+            <li>
               Contact:{' '}
               <a href={`mailto:${t.email}`} alt='tech email'>
                 {t.email}
               </a>
-            </div>
-          </div>
-        </div>
+            </li>
+          </li>
+        </ul>
       ))}
     </section>
       <Footer/>

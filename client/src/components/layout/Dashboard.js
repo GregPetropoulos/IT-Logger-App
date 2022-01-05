@@ -1,5 +1,5 @@
 import React, {useEffect}from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import TechLog from '../techlog/TechLog';
 import AddBtn from './AddBtn';
 import EditTechLogModal from '../techlog/EditTechLogModal';
@@ -15,10 +15,10 @@ const Dashboard = () => {
     M.AutoInit();
   });
   return (
-    <div className='no border'>
+    <div className=''>
       <h4 className='no-border center card-panel blue'>User Dashboard</h4>
       <TechLog />
-      <div className='container'>
+      <div className=''>
         <AddBtn />
         <AddTechLogModal />
         <EditTechLogModal />
@@ -27,6 +27,6 @@ const Dashboard = () => {
   );
 };
 
-Dashboard.propTypes = {};
+// Dashboard.propTypes = {};
 
 export default Dashboard;

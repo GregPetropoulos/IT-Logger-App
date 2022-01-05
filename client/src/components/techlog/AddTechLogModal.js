@@ -21,11 +21,10 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
         date: new Date()
       };
       addLog(newLog);
-      M.toast({ html: `log added by ${tech}` });
+      M.toast({ html: `log added by ${tech.firstName}` });
     }
     // Clear fields
     setMessage('');
-    // setTech('');
     setAttention(false);
   };
 
@@ -34,33 +33,35 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
       <div className='modal-content'>
         <h4>Enter System Logs</h4>
         <div className='row'>
-          <div className='input-field'>
-            {/* <input>{tech}</input> */}
-            <label htmlFor='tech' className='active'>
-              Tech Name
-            </label>
+          <label htmlFor='tech' className=''>
+            Tech Name
+          </label>
+          <div>
+            {tech.firstName} {tech.lastName}
           </div>
+          <div className='input-field'></div>
         </div>
         <div className='row'>
-          <div className='input-field'>
-            <input
+          <label htmlFor='message' className='active'>
+            Log Message
+          </label>
+          <div className='white input-field'>
+            <textarea
               type='text'
               name='message'
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <label htmlFor='message' className='active'>
-              Log Message
-            </label>
           </div>
         </div>
         <div className='row'>
           <div className='input-field'>
             <p>
-              <label>
+              <label htmlFor='attention'>
                 <input
+                  id='attention'
                   type='checkbox'
-                  className='filled-in'
+                  className='filled-in red'
                   checked={attention}
                   value={attention}
                   onChange={(e) => setAttention(!attention)}></input>
@@ -70,11 +71,11 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
           </div>
         </div>
       </div>
-      <div className='modal-footer'>
+      <div className='blue lighten-5 modal-footer'>
         <a
           href='#!'
           onClick={onSubmit}
-          className='modal-close waves-effect blue btn'>
+          className='  hoverable modal-close waves-effect blue btn'>
           Enter
         </a>
       </div>
@@ -87,7 +88,8 @@ AddTechLogModal.propTypes = {
 };
 const modalStyle = {
   width: '75%',
-  height: '75%'
+  height: '75%',
+  backgroundColor: '#e3f2fd'
 };
 const mapStateToProps = (state) => ({
   auth: state.auth

@@ -17,6 +17,8 @@ import NotFound from './components/layout/NotFound';
 import Techs from './components/tech/Techs';
 // Bring in CSS
 import 'materialize-css/dist/css/materialize.min.css';
+//*Bring in js for Navbar function
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 import './App.css';
 
@@ -29,6 +31,11 @@ import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
 
 const App = () => {
+
+    //* Initialize Materialize JS for the nav menu button
+    useEffect(() => {
+      M.AutoInit();
+    });
   //* Token checking
   useEffect(() => {
     //* check for token in LS when app first runs

@@ -4,7 +4,7 @@ export const Footer = () => {
   const today = new Date();
   const currentYear = today.getFullYear();
   return (
-      <section className="blue">
+      <section className="indigo lighten-1">
 
     <footer className='footer-copyright'>
       <div className='center-align container'>
