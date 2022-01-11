@@ -20,7 +20,7 @@ import {
 const initialState = {
   logs: null,
   current: null,
-  loading: false,
+  loading: true,
   filtered: null,
   error: null
 };
@@ -51,7 +51,7 @@ export default (state = initialState, action) => {
     case UPDATE_LOG:
       return {
         ...state,
-        logs: state.logs.map((log) => (log.id === payload.id ? payload : log)),
+        logs: state.logs.map((log) => (log._id === payload.id ? payload : log)),
         loading: false
       };
     case SEARCH_LOGS:
@@ -73,7 +73,7 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: false
       };
     case LOGS_ERROR:
       console.error(payload);

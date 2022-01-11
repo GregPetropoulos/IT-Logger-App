@@ -15,26 +15,23 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
   }
   return (
     <Fragment>
-
-    <section className='container' style={({height:'100vh'})}>
-      <h2 className='center-align'>Meet The Techs</h2>
-
-      {techs.map((t) => (
-        <ul className='collection' key={t._id} t={t}>
-          <li className='collection-item'>
-            Name: {t.firstName} {t.lastName}{' '}
-            <li>
-              Contact:{' '}
+      <section className='container' style={{ height: '100vh' }}>
+        <h2 className='center-align'>Meet The Techs</h2>
+        <ul className='collection'>
+          {techs.map((t) => (
+            <li className='collection-item' key={t._id} t={t}>
+              Name: {t.firstName} {t.lastName}
+              <div></div>
+              Contact:
               <a href={`mailto:${t.email}`} alt='tech email'>
                 {t.email}
               </a>
             </li>
-          </li>
+          ))}
         </ul>
-      ))}
-    </section>
-      <Footer/>
-      </Fragment>
+      </section>
+      <Footer />
+    </Fragment>
   );
 };
 

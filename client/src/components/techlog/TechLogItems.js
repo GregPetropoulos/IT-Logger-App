@@ -5,22 +5,25 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { connect } from 'react-redux';
+import Preloader from '../layout/Preloader';
 // auth: {isAuthenticated, tech:{_id,firstName, lastName}},
 // log
 
-const TechLogItems = ({ log, auth: { isAuthenticated, tech } }) => {
+const TechLogItems = ({ log, auth: { isAuthenticated, tech:{firstName, lastName, _id}, loading } }) => {
+  // console.log('checking the auth.tech', tech)
+  console.log('checking the log.tech.id', log.tech)
+  console.log('checking the tech.firstName', firstName)
+
+  if (loading) {
+    return <Preloader />;
+  }
   return (
     <li className='collection-item'>
-      {isAuthenticated && tech._id === log.tech._id && (
+      {isAuthenticated && (_id === log.tech._id) && (
         <Fragment>
-          {/* <h5>{log.tech.firstName} {log.tech.lastName} {log.tech._id}</h5> */}
           <h5>
-            {tech.firstName} {tech.lastName}
+            {firstName} {lastName}
           </h5>
-          {/* <p className='collection-item deep-purple lighten-4'>
-          <strong>Message:{' '}</strong>
-          {log.message}
-        </p> */}
           Posted on {formatDate(log.date)}
           {log.attention && (
             <a
@@ -45,10 +48,10 @@ const TechLogItems = ({ log, auth: { isAuthenticated, tech } }) => {
 TechLogItems.propTypes = {
   log: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(TechLogItems);
+export default connect(mapStateToProps,{})(TechLogItems);

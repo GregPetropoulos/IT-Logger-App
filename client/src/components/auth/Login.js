@@ -71,7 +71,9 @@ const Login = ({ isAuthenticated, login }) => {
             <i className='material-icons right'>send</i>
           </button>
         </div>
-          <p>Don't have an account? <Link to ='/register'>Sign Up</Link></p>
+        <p>
+          Don't have an account? <Link to='/register'>Sign Up</Link>
+        </p>
       </form>
     </section>
   );

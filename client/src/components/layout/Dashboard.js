@@ -10,19 +10,19 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Dashboard = () => {
 
-  //* Initialize Materialize JS for the action button
-  useEffect(() => {
-    M.AutoInit();
-  });
+  // //* Initialize Materialize JS for the action button
+  // useEffect(() => {
+  //   M.AutoInit();
+  // });
   return (
     <div className=''>
       <h4 className='no-border center card-panel blue'>User Dashboard</h4>
       <TechLog />
-      <div className=''>
+      {/* <div className=''>
         <AddBtn />
         <AddTechLogModal />
         <EditTechLogModal />
-      </div>
+      </div> */}
     </div>
   );
 };

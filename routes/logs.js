@@ -98,6 +98,7 @@ router.put('/:id', auth, async (req, res) => {
 
     // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
     // The log.tech is an object and must be turned into a string to compare to req.tech.id string
+    console.log(mongoose.Types.ObjectId.isValid('53cb6b9b4f4ddef1ad47f943'));
     if (log.tech.toString() !== req.tech.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }

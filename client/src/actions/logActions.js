@@ -48,7 +48,7 @@ export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
     console.log('getting the logs', getLogs);
-    setLoading();
+    // setLoading();
 
     // request the data through axios
     const res = await api.get('/logs');
@@ -81,7 +81,7 @@ export const addLog = (log) => async (dispatch) => {
   try {
     console.log('add new logs', addLog);
 
-    setLoading();
+    // setLoading();
 
     // request the data with axios post
     const res = await api.post('/logs', log);
@@ -105,7 +105,7 @@ export const deleteLog = (id) => async (dispatch) => {
   try {
     console.log('Delete logs', deleteLog);
 
-    setLoading();
+    // setLoading();
 
     // Dont need to store in variable
     await api.delete(`/logs/${id}`);
@@ -129,7 +129,7 @@ export const updateLog = (log) => async (dispatch) => {
   try {
     console.log('update/edit the logs', updateLog);
 
-    setLoading();
+    // setLoading();
 
     const res = await api.put(`/logs/${log._id}`, log);
 

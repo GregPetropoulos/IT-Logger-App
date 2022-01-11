@@ -7,7 +7,7 @@ import { addLog } from '../../actions/logActions';
 const AddTechLogModal = ({ addLog, auth: { tech } }) => {
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
-  // const [tech, setTech] = useState('');
+
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +21,7 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
         date: new Date()
       };
       addLog(newLog);
+
       M.toast({ html: `log added by ${tech.firstName}` });
     }
     // Clear fields
@@ -36,9 +37,13 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
           <label htmlFor='tech' className=''>
             Tech Name
           </label>
-          <div>
-            {tech.firstName} {tech.lastName}
-          </div>
+          {tech !== null ? (
+            <div>
+              {tech.firstName} {tech.lastName}
+            </div>
+          ) : (
+            <p>Tech was unable to load</p>
+          )}
           <div className='input-field'></div>
         </div>
         <div className='row'>

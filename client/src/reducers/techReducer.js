@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   techs: null,
-  loading: false,
+  loading: true,
   error: null
 };
 
@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: false
       };
     case TECHS_ERROR:
       console.error(payload);
