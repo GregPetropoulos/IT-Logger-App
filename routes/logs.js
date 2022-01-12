@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-
+const checkObjectId = require ('../middleware/checkObjectId');
 // use to protect routes
 const auth = require('../middleware/auth');
 
@@ -81,7 +81,7 @@ router.post(
 // * @desc      Edit a log
 //! @access   Private
 
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', [auth, checkObjectId('id')], async (req, res) => {
   const { message, attention, date } = req.body;
 
   //*Build a log object, ex: if message true then add to log fields
@@ -97,8 +97,7 @@ router.put('/:id', auth, async (req, res) => {
     if (!log) return res.status(404).json({ msg: 'Log not found' });
 
     // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
-    // The log.tech is an object and must be turned into a string to compare to req.tech.id string
-    console.log(mongoose.Types.ObjectId.isValid('53cb6b9b4f4ddef1ad47f943'));
+     // The log.tech is an object in the db and must be turned into a string to compare to req.tech.id string from jwt in auth
     if (log.tech.toString() !== req.tech.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
@@ -119,7 +118,7 @@ router.put('/:id', auth, async (req, res) => {
 // * @route     DELETE api/logs/:id
 // * @desc      Delete a log
 // * access     public
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', [auth, checkObjectId('id')], async (req, res) => {
   try {
     //*Find the log id in the params
     let log = await Log.findById(req.params.id);
@@ -127,15 +126,16 @@ router.delete('/:id', auth, async (req, res) => {
     if (!log) return res.status(404).json({ msg: 'Log not found' });
 
     // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
-    // The log.tech is an object and must be turned into a string to compare to req.tech.id string
-    if (log.techs.toString() !== req.tech.id) {
+    // The log.tech is an object in the db and must be turned into a string to compare to req.tech.id string from jwt in auth
+   
+    if (log.tech.toString() !== req.tech.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
     await Log.findByIdAndRemove(req.params.id);
     res.json({msg:'Contact removed'})
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send('Server Error at Delete Route');
   }
 });
 module.exports = router;

@@ -105,7 +105,7 @@ export const deleteLog = (id) => async (dispatch) => {
   try {
     console.log('Delete logs', deleteLog);
 
-    // setLoading();
+    setLoading();
 
     // Dont need to store in variable
     await api.delete(`/logs/${id}`);

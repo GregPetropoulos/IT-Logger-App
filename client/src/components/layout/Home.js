@@ -7,6 +7,7 @@ import Hero from '../hero/Hero';
 import { Footer } from './Footer';
 import AddTechLogModal from '../techlog/AddTechLogModal';
 import EditTechLogModal from '../techlog/EditTechLogModal';
+import DeleteTechLogModal from '../techlog/DeleteTechLogModal'
 import AddBtn from './AddBtn';
 
 //*Bring in js for modals etc
@@ -28,7 +29,8 @@ const Home = () => {
           <div className=''>
         <AddBtn />
         <AddTechLogModal />
-        <EditTechLogModal />
+        {/* <EditTechLogModal /> */}
+        <DeleteTechLogModal/>
       </div>
         </div>
         <div className='no-border  col s7'>

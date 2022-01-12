@@ -18,7 +18,7 @@ import {
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
 const initialState = {
-  logs: null,
+  logs: [],
   current: null,
   loading: true,
   filtered: null,
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
     case DELETE_LOG:
       return {
         ...state,
-        logs: state.logs.filter((log) => log.id !== payload),
+        logs: state.logs.filter((log) => log._id !== payload),
         loading: false
       };
     case UPDATE_LOG:
