@@ -29,7 +29,7 @@ const Home = () => {
           <div className=''>
         <AddBtn />
         <AddTechLogModal />
-        {/* <EditTechLogModal /> */}
+        <EditTechLogModal />
         <DeleteTechLogModal/>
       </div>
         </div>

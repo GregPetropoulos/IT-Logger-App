@@ -130,8 +130,8 @@ export const updateLog = (log) => async (dispatch) => {
     console.log('update/edit the logs', updateLog);
 
     // setLoading();
-
-    const res = await api.put(`/logs/${log._id}`, log);
+console.log('updLog passed in id', log.id)
+    const res = await api.put(`/logs/${log.id}`, log);
 
     // dispatch data to the reducer
     dispatch({

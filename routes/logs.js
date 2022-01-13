@@ -4,27 +4,12 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const checkObjectId = require ('../middleware/checkObjectId');
+const checkObjectId = require('../middleware/checkObjectId');
 // use to protect routes
 const auth = require('../middleware/auth');
 
 // *BRING IN THE DB FOR LOGS
 const Log = require('../models/Log');
-
-// // * @route     GET api/logs/techlogs
-// // * @desc      Get all the logs for a specific tech id ONLY--AUTH
-// // *! access     private
-// router.get('/techlogs',auth, async (req, res) => {
-//   try {
-//     // *!console.log('check this value', req.tech.id)
-//     // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header
-//     const logs = await Log.find({ techs: req.tech.id }).sort({ date: -1 });
-//     res.json(logs);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
 
 // * @route     GET api/logs
 // * @desc      Get all the logs and the tech that wrote a message--NOAUTH
@@ -33,7 +18,9 @@ router.get('/', async (req, res) => {
   try {
     // *!console.log('check this value', req.tech.id)
     // In the Log schema a tech field is the objectId, the auth middleware gives access to the req.tech object in payload of decoded....Essentially find the _id in the database that matches the token in header
-    const logs = await Log.find().sort({ date: -1 }).populate('tech', ['firstName', 'lastName', '_id', 'date']);
+    const logs = await Log.find()
+      .sort({ date: -1 })
+      .populate('tech', ['firstName', 'lastName', '_id', 'date']);
     res.json(logs);
   } catch (err) {
     console.error(err.message);
@@ -87,7 +74,7 @@ router.put('/:id', [auth, checkObjectId('id')], async (req, res) => {
   //*Build a log object, ex: if message true then add to log fields
   const logFields = {};
   if (message) logFields.message = message;
-  if (attention) logFields.attention = attention;
+  if (attention == true || attention === false) logFields.attention = attention;
   if (date) logFields.date = date;
 
   try {
@@ -97,7 +84,7 @@ router.put('/:id', [auth, checkObjectId('id')], async (req, res) => {
     if (!log) return res.status(404).json({ msg: 'Log not found' });
 
     // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
-     // The log.tech is an object in the db and must be turned into a string to compare to req.tech.id string from jwt in auth
+    // The log.tech is an object in the db and must be turned into a string to compare to req.tech.id string from jwt in auth
     if (log.tech.toString() !== req.tech.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
@@ -127,12 +114,12 @@ router.delete('/:id', [auth, checkObjectId('id')], async (req, res) => {
 
     // *Make sure the tech owns the log by comparing the log.tech to token id (req.tech.id)
     // The log.tech is an object in the db and must be turned into a string to compare to req.tech.id string from jwt in auth
-   
+
     if (log.tech.toString() !== req.tech.id) {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
     await Log.findByIdAndRemove(req.params.id);
-    res.json({msg:'Contact removed'})
+    res.json({ msg: 'Contact removed' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error at Delete Route');
