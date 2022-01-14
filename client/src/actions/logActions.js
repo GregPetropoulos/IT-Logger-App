@@ -130,7 +130,6 @@ export const updateLog = (log) => async (dispatch) => {
     console.log('update/edit the logs', updateLog);
 
     // setLoading();
-console.log('updLog passed in id', log.id)
     const res = await api.put(`/logs/${log.id}`, log);
 
     // dispatch data to the reducer
@@ -152,7 +151,8 @@ export const searchLogs = (text) => async (dispatch) => {
   try {
     console.log('Search the logs', searchLogs);
 
-    setLoading();
+    // setLoading();
+    console.log('this is the text search bar', `/logs?q=${text}`)
 
     // request the data
     const res = await api.get(`/logs?q=${text}`);

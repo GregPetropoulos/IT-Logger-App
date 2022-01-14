@@ -28,6 +28,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+
+
 // * @route     POST api/logs
 // * @desc      Add a new log
 //! @access   Private

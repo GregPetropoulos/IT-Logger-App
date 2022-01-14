@@ -12,11 +12,11 @@ const DeleteTechLogModal = ({
   auth: { tech }
 }) => {
   const [toasted, setToast] = useState(false);
+
   const toastAlert = () => {
     setToast(!toasted);
     M.toast({ html: 'Log Deleted' });
   };
-
   return (
     <div id='delete-log-modal' className='modal' style={modalStyle}>
       <div className='modal-content'>
@@ -48,12 +48,11 @@ const DeleteTechLogModal = ({
                   {formatDate(log.date)}
                   <a
                     href='#!'
-                    onClick={() => {
-                      toastAlert();
-                      deleteLog(log._id);
-                    }}
-                    // value={toast}
-                    // onChange={(() => setToast(!toast))}
+                    onClick={() =>
+                      tech._id === log.tech._id
+                        ? deleteLog(log._id) && toastAlert()
+                        : 'Not Authorized to Delete'
+                    }
                     className='secondary-content hoverable'>
                     <i className='material-icons grey-text'>delete</i>
                   </a>

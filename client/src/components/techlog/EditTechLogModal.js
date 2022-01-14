@@ -17,6 +17,8 @@ const EditTechLogModal = ({
   const [logged, setLogged] = useState('');
   const [message, setMessage] = useState();
   const [attention, setAttention] = useState(false);
+  // const {_id}=tech
+  // console.log('checking tech._id', _id)
 
   // When click on the log it renders the current info via local state set to backend server info because of connect and mapStateTopProps
 
@@ -37,6 +39,7 @@ const EditTechLogModal = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     if (message === '') {
       M.toast({ html: 'Please enter a message' });
     } else {
@@ -69,7 +72,7 @@ const EditTechLogModal = ({
         <h4>Edit System Logs</h4>
         {tech !== null ? (
           <div className='browser-default'>
-            {tech.firstName} {tech.lastName}
+            {tech.firstName} {tech.lastName} {tech._id}
           </div>
         ) : (
           <p>Tech not Loaded to use edit</p>
@@ -84,15 +87,21 @@ const EditTechLogModal = ({
             <option value='' disabled>
               Select Log
             </option>
-            {logs !== null &&
-              logs.map((optionLog) => (
-                <option
-                  key={optionLog._id}
-                  multiple={true}
-                  value={`${optionLog._id}`}>
-                  Log ID#: {optionLog._id}
-                </option>
-              ))}
+            {logs !== null && tech !== null ? (
+              logs.map(
+                (optionLog) =>
+                  optionLog.tech._id === tech._id && (
+                    <option
+                      key={optionLog._id}
+                      multiple={true}
+                      value={`${optionLog._id}`}>
+                      Log ID#: {optionLog._id}
+                    </option>
+                  )
+              )
+            ) : (
+              <p>Not Authorized</p>
+            )}
           </select>
         </div>
         <div className='row'>
