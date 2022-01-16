@@ -15,6 +15,7 @@ import {
   CLEAR_FILTER,
   FILTER_LOGS
 } from '../actions/types';
+import formatDate from '../utils/formatDate';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
 const initialState = {
@@ -83,7 +84,6 @@ export default (state = initialState, action) => {
       };
     case FILTER_LOGS:
       return {
-  
         ...state,
         filtered: state.logs.filter((log) => {
           const regex = new RegExp(`${payload}`, 'gi');
@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
             log.message.match(regex) ||
             log.tech.firstName.match(regex) ||
             log.tech.lastName.match(regex) ||
-            log.date.match(regex)
+            formatDate(log.date).match(regex)
           );
         })
       };

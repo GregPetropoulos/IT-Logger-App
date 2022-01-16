@@ -10,7 +10,7 @@ const LogFilter = ({ filterLogs, clearFilter, filtered }) => {
     if (filtered === null) {
       text.current.value = '';
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChange = (e) => {

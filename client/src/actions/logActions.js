@@ -223,6 +223,6 @@ export const filterLogs = (text) => (dispatch) => {
 //* CLEAR FILTER
 export const clearFilter = () => {
   return {
-    type: CLEAR_FILTER, 
+    type: CLEAR_FILTER
   };
 };

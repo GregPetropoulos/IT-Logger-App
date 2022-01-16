@@ -21,10 +21,9 @@ const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
     return <Preloader />;
   }
 
-  if(logs.length === 0){
+  if (logs.length === 0) {
     return <p className='center'>No Logs to Show...</p>;
   }
-
 
   return (
     <Fragment>

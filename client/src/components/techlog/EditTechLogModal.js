@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { updateLog } from '../../actions/logActions';
 import { setCurrent } from '../../actions/logActions';
 import Preloader from '../layout/Preloader';
+import formatDate from '../../utils/formatDate';
 
 const EditTechLogModal = ({
   setCurrent,
@@ -87,21 +88,22 @@ const EditTechLogModal = ({
             <option value='' disabled>
               Select Log
             </option>
-            {logs !== null && tech !== null ? (
-              logs.map(
-                (optionLog) =>
-                  optionLog.tech._id === tech._id && (
-                    <option
-                      key={optionLog._id}
-                      multiple={true}
-                      value={`${optionLog._id}`}>
-                      Log ID#: {optionLog._id}
-                    </option>
-                  )
-              )
-            ) : (
-              <p>Not Authorized</p>
-            )}
+            {logs !== null && tech !== null
+              ? logs.map(
+                  (optionLog) =>
+                    optionLog.tech._id === tech._id && (
+                      <option
+                        key={optionLog._id}
+                        multiple={true}
+                        value={`${optionLog._id}`}>
+                        Log ID#: {optionLog._id}
+                        Logged Date: {formatDate(optionLog.date)}
+                      </option>
+                    )
+                )
+              : null
+                // <p>Not Authorized</p>
+            }
           </select>
         </div>
         <div className='row'>
