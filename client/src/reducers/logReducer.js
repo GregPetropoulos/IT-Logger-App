@@ -13,7 +13,7 @@ import {
   CLEAR_CURRENT,
   CLEAR_LOGS,
   CLEAR_FILTER,
-  // FILTER_LOGS
+  FILTER_LOGS
 } from '../actions/types';
 
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
@@ -80,6 +80,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: payload
+      };
+    case FILTER_LOGS:
+      return {
+  
+        ...state,
+        filtered: state.logs.filter((log) => {
+          const regex = new RegExp(`${payload}`, 'gi');
+          return (
+            log.message.match(regex) ||
+            log.tech.firstName.match(regex) ||
+            log.tech.lastName.match(regex) ||
+            log.date.match(regex)
+          );
+        })
       };
     case CLEAR_FILTER:
       return {

@@ -14,7 +14,6 @@ import {
   CLEAR_LOGS,
   CLEAR_FILTER,
   FILTER_LOGS
-
 } from './types';
 
 // *This a description of how the getLogs works with REDUX
@@ -61,15 +60,14 @@ export const getLogs = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: 
-      
-      // err.response.data.msg
-      
-      // err.response.msg
-      //*! need to check these responses
-      // err.response.statusText
-      
-       { msg: err.response.statusText, status: err.response.status }
+      payload:
+        // err.response.data.msg
+
+        // err.response.msg
+        //*! need to check these responses
+        // err.response.statusText
+
+        { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
@@ -145,32 +143,34 @@ export const updateLog = (log) => async (dispatch) => {
   }
 };
 
+// *!REVISING THE SEARCH TO FILTERED
 // *SEARCH SERVER FOR LOGS
-export const searchLogs = (text) => async (dispatch) => {
-  // **THIS IS THE ASYNC THUNK FUNCTION
-  try {
-    console.log('Search the logs', searchLogs);
+// export const searchLogs = (text) => async (dispatch) => {
+//   // **THIS IS THE ASYNC THUNK FUNCTION
+//   try {
+//     console.log('Search the logs', searchLogs);
 
-    // setLoading();
-    console.log('this is the text search bar', `/logs?q=${text}`)
+//     // setLoading();
+//     console.log('this is the text search bar', `/logs?q=${text}`)
 
-    // request the data
-    const res = await api.get(`/logs?q=${text}`);
-    // response of data formatted
-    // const data = await res.json();
+//     // request the data
+//     const res = await api.get(`/logs?q=${text}`);
+//     // response of data formatted
+//     // const data = await res.json();
 
-    // dispatch data to the reducer
-    dispatch({
-      type: SEARCH_LOGS,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: LOGS_ERROR,
-      payload: err.response.msg
-    });
-  }
-};
+//     // dispatch data to the reducer
+//     dispatch({
+//       type: SEARCH_LOGS,
+//       payload: res.data
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: LOGS_ERROR,
+//       payload: err.response.msg
+//     });
+//   }
+// };
+// *!REVISING THE SEARCH TO FILTERED
 
 // ! ADD, may not need  the CLEAR LOGS
 // * CLEAR LOGS
@@ -204,14 +204,25 @@ export const setLoading = () => {
 };
 
 // *!ADD IN -----------------
-export const filterContacts = (dispatch, text) => {
+export const filterLogs = (text) => (dispatch) => {
   //* Display will send the action.type, payload data is the text entered by the user for the search of contacts
-  dispatch({ type: FILTER_LOGS, payload: text });
+  try {
+    console.log('checking the filter actionCreator');
+    dispatch({
+      type: FILTER_LOGS,
+      payload: text
+    });
+  } catch (err) {
+    dispatch({
+      type: LOGS_ERROR,
+      payload: err.response.msg
+    });
+  }
 };
 
 //* CLEAR FILTER
 export const clearFilter = () => {
- return {
-   type: CLEAR_FILTER 
+  return {
+    type: CLEAR_FILTER, 
   };
- }
+};

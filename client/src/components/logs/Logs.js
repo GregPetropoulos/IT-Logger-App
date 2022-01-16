@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { getLogs } from '../../actions/logActions';
 
 // destructure app level props, getLogs gets passed as prop even though it's a function brought in
-const Logs = ({ log: { logs, loading }, getLogs }) => {
+const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
   // Calling the getlogs fetch in the useEffect
   useEffect(() => {
     getLogs();
@@ -20,18 +20,21 @@ const Logs = ({ log: { logs, loading }, getLogs }) => {
   if (loading || logs === null) {
     return <Preloader />;
   }
-  console.log('check Logs COMPONENT', logs);
+
+  if(logs.length === 0){
+    return <p className='center'>No Logs to Show...</p>;
+  }
+
+
   return (
     <Fragment>
       <ul className='collection with-header'>
         <li className='collection-header'>
           <h4 className='center'>System Logs</h4>
         </li>
-        {loading && logs.length === 0 ? (
-          <p className='center'>No Logs to Show...</p>
-        ) : (
-          logs.map((log) => <LogItem log={log} key={log._id} />)
-        )}
+        {filtered !== null
+          ? filtered.map((log) => <LogItem log={log} key={log._id} />)
+          : logs.map((log) => <LogItem log={log} key={log._id} />)}
       </ul>
     </Fragment>
   );

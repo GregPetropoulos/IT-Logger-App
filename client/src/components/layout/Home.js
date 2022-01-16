@@ -2,7 +2,8 @@ import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Logs from '../logs/Logs';
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
+import LogFilter from './LogFilter';
 import Hero from '../hero/Hero';
 import { Footer } from './Footer';
 import AddTechLogModal from '../techlog/AddTechLogModal';
@@ -34,7 +35,7 @@ const Home = () => {
       </div>
         </div>
         <div className='no-border  col s7'>
-          <SearchBar />
+          <LogFilter/>
           <Logs />
         </div>
       </section>
