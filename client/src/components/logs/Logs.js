@@ -28,7 +28,7 @@ const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
   return (
     <Fragment>
       <ul className='collection with-header'>
-        <li className='collection-header'>
+        <li className='collection-header grey darken-3'>
           <h4 className='center'>System Logs</h4>
         </li>
         {filtered !== null

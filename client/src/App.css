@@ -8,6 +8,10 @@ body{
   background: radial-gradient(circle, rgba(63,94,251,1) 9%, rgba(149,117,205,1) 91%);
   font-family: 'Poppins', sans-serif;
 }
+.logbox{
+  background: rgb(66,66,66);
+background: linear-gradient(220deg, rgba(66,66,66,1) 13%, rgba(63,94,251,0.5478036175710594) 93%);
+}
 
   .container {
     max-width: 1100px;

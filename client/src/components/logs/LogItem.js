@@ -12,13 +12,13 @@ const LogItem = ({
   log
 }) => {
   return (
-    <li className='collection-item avatar'>
+    <li className='collection-item avatar logbox'>
       <i className='medium material-icons'>account_circle</i>
       <h5>
         {firstName} {lastName}
       </h5>
       Posted on {formatDate(log.date)}
-      <p className='collection-item'>
+      <p>
         <span>
           <strong>Message:</strong>
           {log.message}
@@ -27,20 +27,18 @@ const LogItem = ({
         <span>Log ID # {log._id.slice(18, 24)}</span>
       </p>
       {log.attention && (
-        <p className=''>
-          <a href='#!' className=' valign-wrapper red secondary-content '>
-            <i className='material-icons md-24 md-dark'>priority_high</i>
-            <span className='black-text'>Attention</span>
-          </a>
-        </p>
+        <a
+          href='#!'
+          className=' btn-small center z-depth-2 valign-wrapper red secondary-content '>
+          <p className=' black-text'>Attention</p>
+        </a>
       )}
-      <p>Todays Date{formatDate(new Date())}</p>
     </li>
   );
 };
 
 LogItem.propTypes = {
-  log: PropTypes.object.isRequired,
+  log: PropTypes.object.isRequired
 };
 
-export default (LogItem);
+export default LogItem;

@@ -6,52 +6,47 @@ import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { connect } from 'react-redux';
 import Preloader from '../layout/Preloader';
-// auth: {isAuthenticated, tech:{_id,firstName, lastName}},
-// log
 
-const TechLogItems = ({ log, auth: { isAuthenticated, tech:{firstName, lastName, _id}, loading } }) => {
-  // console.log('checking the auth.tech', tech)
-  console.log('checking the log.tech.id', log.tech)
-  console.log('checking the tech.firstName', firstName)
-
-  if (loading) {
-    return <Preloader />;
+const TechLogItems = ({
+  logItem,
+  auth: {
+    isAuthenticated,
+    tech: { _id }
   }
+}) => {
   return (
-    <li className='collection-item'>
-      {isAuthenticated && (_id === log.tech._id) && (
-        <Fragment>
-          <h5>
-            {firstName} {lastName}
-          </h5>
-          Posted on {formatDate(log.date)}
-          {log.attention && (
-            <a
-              href='#!'
-              className=' right-align valign-wrapper red secondary-content '>
-              <i className='material-icons md-dark'>priority_high</i>
-              <span className='black-text '>Attention</span>
-            </a>
-          )}
-          <p className='collection-item'>
-            <strong>Message: </strong>
-            {log.message}
-          </p>
-          <span>Log ID # {log._id.slice(18, 24)}</span>
-          <p>Todays Date{formatDate(new Date())}</p>
-        </Fragment>
-      )}
-    </li>
+    <Fragment>
+      <div className='center collection with-header grey darken-2 z-depth-3'>
+        <p>Posted on {formatDate(logItem.date)} </p>
+        </div>
+        {isAuthenticated && _id === logItem.tech._id && logItem.attention && (
+          <a
+            href='#!'
+            className=' right-align valign-wrapper red secondary-content '>
+            <i className='material-icons md-dark'>priority_high</i>
+            <span className='black-text '>Attention</span>
+          </a>
+        )}
+      <div className='collection-item active grey darken-3'>
+        <p className=' '>
+          <strong>Message: </strong>
+          {logItem.message}
+        </p>
+        <span>
+          <strong>Log ID #</strong> {logItem._id.slice(18, 24)}
+        </span>
+      </div>
+    </Fragment>
   );
 };
 
 TechLogItems.propTypes = {
-  log: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
+
 const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps,{})(TechLogItems);
+export default connect(mapStateToProps, {})(TechLogItems);
