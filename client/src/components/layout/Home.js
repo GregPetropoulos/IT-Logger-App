@@ -15,7 +15,7 @@ import StatusCards from './StatusCards';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import Dashboard from './Dashboard';
 
-const Home = ({ log:{logs}}) => {
+const Home = ({ log: { logs } }) => {
   // //* Initialize Materialize JS for the action button
   useEffect(() => {
     M.AutoInit();
@@ -28,7 +28,7 @@ const Home = ({ log:{logs}}) => {
     <Fragment>
       <Hero />
       <LogFilter />
-      <StatusCards/>
+      <StatusCards />
       <section className='row'>
         <div className='no-border col s5 dashboard'>
           <Dashboard />

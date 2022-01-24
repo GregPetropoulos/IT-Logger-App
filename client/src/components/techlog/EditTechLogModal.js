@@ -18,8 +18,6 @@ const EditTechLogModal = ({
   const [logged, setLogged] = useState('');
   const [message, setMessage] = useState();
   const [attention, setAttention] = useState(false);
-  // const {_id}=tech
-  // console.log('checking tech._id', _id)
 
   // When click on the log it renders the current info via local state set to backend server info because of connect and mapStateTopProps
 
@@ -41,7 +39,7 @@ const EditTechLogModal = ({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (message === '') {
+    if (message === ''|| logged==="") {
       M.toast({ html: 'Please enter a message' });
     } else {
       // * SET UP AN OBJECT
@@ -63,17 +61,22 @@ const EditTechLogModal = ({
     setAttention(false);
   };
 
-  if (loading || logs === null) {
-    return <Preloader />;
+  // if (loading || logs === null || tech=== null) {
+  //  ;
+  // }
+  if(logs=== null){
+    console.log('preload')
+    // return <Preloader />
   }
-
+  console.log('whwhwhhwhwhwhhahhahaaaaaaa');
   return (
     <div id='edit-log-modal' className='modal' style={modalStyle}>
       <div className='modal-content'>
         <h4>Edit System Logs</h4>
         {tech !== null ? (
           <div className='browser-default'>
-            {tech.firstName} {tech.lastName} {tech._id}
+            {tech.firstName} {tech.lastName}
+            <p>Tech ID# {tech._id}</p>
           </div>
         ) : (
           <p>Tech not Loaded to use edit</p>
@@ -88,21 +91,23 @@ const EditTechLogModal = ({
             <option value='' disabled>
               Select Log
             </option>
-            {logs !== null && tech !== null
-              ? logs.map(
-                  (optionLog) =>
-                    optionLog.tech._id === tech._id && (
-                      <option
-                        key={optionLog._id}
-                        multiple={true}
-                        value={`${optionLog._id}`}>
-                        Log ID#: {optionLog._id}
-                        Logged Date: {formatDate(optionLog.date)}
-                      </option>
-                    )
-                )
-              : null
-                // <p>Not Authorized</p>
+            {
+              // logs !== null && tech !== null
+                // ? 
+                logs.map(
+                    (optionLog) =>
+                      optionLog.tech._id === tech._id && (
+                        <option
+                          key={optionLog._id}
+                          multiple={true}
+                          value={`${optionLog._id}`}>
+                          Log ID#: {optionLog._id}
+                          Logged Date: {formatDate(optionLog.date)}
+                        </option>
+                      )
+                  )
+                // : null
+              // <p>Not Authorized</p>
             }
           </select>
         </div>

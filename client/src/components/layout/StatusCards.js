@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 
 const StatusCards = () => {
   // * STATE of 3 Servers
+  // May need to add use effect later date
   const [serverState, setServerState] = useState({
     servers: [
       {
@@ -47,11 +48,9 @@ const StatusCards = () => {
   return (
     <Fragment>
       <div className=' row valign-wrapper'>
-        <div className='col s12 m5'>
-          {serverState.servers.map((arr) => (
-            <div
-              key={arr.sid}
-              className=' z-depth-4 hoverable grey darken-4 center card'>
+        {serverState.servers.map((arr) => (
+          <div key={arr.sid} className='col s12 m5'>
+            <div className=' z-depth-4 hoverable grey darken-4 center card'>
               <i
                 className={
                   arr.switcher
@@ -94,8 +93,8 @@ const StatusCards = () => {
                 </label>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </Fragment>
   );

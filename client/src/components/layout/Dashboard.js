@@ -40,9 +40,7 @@ const Dashboard = ({
           <h5 className='center'>
             Hi {firstName} {lastName}
           </h5>
-          <p>Chart Graphic----&gt;</p>
-          {/* </div>
-      )} */}
+
           <ul className='collapsible'>
             <li>
               <div className='collapsible-header no-border grey darken-3'>
@@ -57,8 +55,7 @@ const Dashboard = ({
               </div>
             </li>
           </ul>
-
-          <div>CHART</div>
+          
         </div>
       )}
     </Fragment>

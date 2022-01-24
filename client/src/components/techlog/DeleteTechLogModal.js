@@ -18,22 +18,31 @@ const DeleteTechLogModal = ({
     M.toast({ html: 'Log Deleted' });
   };
   return (
-    <div id='delete-log-modal' className='modal' style={modalStyle}>
+    <div
+      id='delete-log-modal'
+      className='modal grey darken-1 white-text'
+      style={modalStyle}>
       <div className='modal-content'>
         <h4>Delete a Log</h4>
         <div className='collection row'>
           <label htmlFor='logs' className='center collection with-header'>
-            <h5>Logs</h5>
-            <small>**Red means the log is still in attention status</small>
-            <br />
-            <small>Order of logs are most recent posted</small>
+            <h5 className='white-text'>Logs</h5>
+            <p>
+              <small className='white-text'>
+                **Red means the log is still in attention status
+              </small>
+              <br />
+              <small className='white-text'>
+                Order of logs are most recent posted
+              </small>
+            </p>
           </label>
-          <ul className='center collection-item'>
+          <ul className='center collection-item grey black-text'>
             {loading || !logs.length ? (
               <p>No Logs to Show</p>
             ) : (
               logs.map((log) => (
-                <li key={log._id} className='collection-item'>
+                <li key={log._id} className='collection-item grey'>
                   <strong>Log ID # {log._id}</strong>
                   <br />
                   <span>
@@ -41,7 +50,7 @@ const DeleteTechLogModal = ({
                   </span>
                   <br />
                   <span
-                    className={` ${log.attention ? 'red-text' : 'blue-text'}`}>
+                    className={` ${log.attention ? 'red-text' : 'white-text'}`}>
                     {log.message}
                   </span>
                   <br />
@@ -54,7 +63,9 @@ const DeleteTechLogModal = ({
                         : 'Not Authorized to Delete'
                     }
                     className='secondary-content hoverable'>
-                    <i className='material-icons grey-text'>delete</i>
+                    <i className='material-icons z-depth-3 white red-text'>
+                      delete
+                    </i>
                   </a>
                 </li>
               ))

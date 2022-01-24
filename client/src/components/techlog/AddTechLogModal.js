@@ -8,7 +8,6 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
 
-
   const onSubmit = (e) => {
     e.preventDefault();
     if (message === '') {
@@ -30,7 +29,10 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
   };
 
   return (
-    <div id='add-log-modal' className='modal' style={modalStyle}>
+    <div
+      id='add-log-modal'
+      className='modal grey darken-1 white-text'
+      style={modalStyle}>
       <div className='modal-content'>
         <h4>Enter System Logs</h4>
         <div className='row'>
@@ -50,7 +52,7 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
           <label htmlFor='message' className='active'>
             Log Message
           </label>
-          <div className='white input-field'>
+          <div className='grey input-field'>
             <textarea
               type='text'
               name='message'
@@ -66,21 +68,21 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
                 <input
                   id='attention'
                   type='checkbox'
-                  className='filled-in red'
+                  className='filled-in red-text'
                   checked={attention}
                   value={attention}
                   onChange={(e) => setAttention(!attention)}></input>
-                <span>Needs Attention</span>
+                <span className='white-text'>Needs Attention</span>
               </label>
             </p>
           </div>
         </div>
       </div>
-      <div className='blue lighten-5 modal-footer'>
+      <div className='grey darken-2 modal-footer'>
         <a
           href='#!'
           onClick={onSubmit}
-          className='  hoverable modal-close waves-effect blue btn'>
+          className=' z-depth-3 hoverable modal-close waves-effect blue btn'>
           Enter
         </a>
       </div>

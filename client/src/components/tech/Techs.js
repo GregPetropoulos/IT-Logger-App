@@ -15,14 +15,17 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
   }
   return (
     <Fragment>
-      <section className='container' style={{ height: '100vh' }}>
+      <section style={{ height: '100vh' }}>
         <h2 className='center-align'>Meet The Techs</h2>
         <ul className='collection'>
           {techs.map((t) => (
-            <li className='collection-item' key={t._id} t={t}>
+            <li
+              className='white-text collection-item grey darken-3'
+              key={t._id}
+              t={t}>
               Name: {t.firstName} {t.lastName}
               <div></div>
-              Contact:
+              Contact:{" "}
               <a href={`mailto:${t.email}`} alt='tech email'>
                 {t.email}
               </a>
@@ -43,5 +46,4 @@ Techs.propTypes = {
 const mapStateToProps = (state) => ({
   tech: state.tech
 });
-// export default Techs
 export default connect(mapStateToProps, { getTechs })(Techs);

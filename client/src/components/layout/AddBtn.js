@@ -9,11 +9,13 @@ const AddBtn = () => {
         <i className='large material-icons'>post_add</i>
       </a>
       <ul>
-        {/* <li>
-          <a href='#test' className='btn-floating yellow modal-trigger'>
-            <i className='material-icons'>home</i>
+        <li>
+          <a
+            href='#edit-log-modal'
+            className='btn-floating black modal-trigger'>
+            <i className='material-icons'>edit</i>
           </a>
-        </li> */}
+        </li>
         <li>
           <a
             href='#delete-log-modal'
@@ -21,11 +23,7 @@ const AddBtn = () => {
             <i className='material-icons'>delete_forever</i>
           </a>
         </li>
-        <li>
-          <a href='#edit-log-modal' className='btn-floating black modal-trigger'>
-            <i className='material-icons'>edit</i>
-          </a>
-        </li>
+       
       </ul>
     </div>
   );

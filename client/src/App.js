@@ -31,11 +31,10 @@ import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
 
 const App = () => {
-
-    //* Initialize Materialize JS for the nav menu button
-    useEffect(() => {
-      M.AutoInit();
-    });
+  //* Initialize Materialize JS for the nav menu button
+  useEffect(() => {
+    M.AutoInit();
+  });
   //* Token checking
   useEffect(() => {
     //* check for token in LS when app first runs
@@ -57,15 +56,14 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Navbar />
           {/* <Alerts /> */}
-          {/* <div className='container'> */}
+          <Navbar />
           <Routes>
             <Route path='/' element={<Landing />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Route path='/about' element={<About />} />
             <Route path='/techs' element={<Techs />} />
+            <Route path='/about' element={<About />} />
             <Route path='/home' element={<PrivateRoute component={Home} />} />
             <Route path='/*' element={<NotFound />} />
           </Routes>
