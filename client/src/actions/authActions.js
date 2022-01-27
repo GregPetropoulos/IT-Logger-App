@@ -28,7 +28,7 @@ export const loadTech = () => async (dispatch) => {
 //* REGISTER USER to the backend handling token from routes/users.js
 export const register = (formData) => async (dispatch) => {
   try {
-    console.log('register a tech', register);
+    // console.log('register a tech', register);
 
     //* This response takes in url, formData and then returns a promise
     const res = await api.post('/techs', formData);
@@ -52,7 +52,7 @@ export const register = (formData) => async (dispatch) => {
 //* LOGIN USER
 export const login = (email, password) => async (dispatch) => {
   try {
-    console.log('login a tech', login);
+    // console.log('login a tech', login);
     const body = { email, password };
     const res = await api.post('/auth', body);
 

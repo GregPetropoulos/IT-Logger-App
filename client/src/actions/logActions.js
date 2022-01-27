@@ -21,32 +21,14 @@ import {
 // *Thunk (middleware) allows us to return a function and will need it for async call to backend
 // * Thunk function gets passed into dispatch method to reducer at anytime, example-makes request to backend then sends response to thunk>reducer
 
-// *!NON-REFACTORED VERSION-----------------
-// export const getLogs = () => {
-//   // **THIS IS THE ASYNC THUNK FUNCTION
-//   return async (dispatch) => {
-//     setLoading();
 
-//     // request the data
-//     const res = await fetch('/logs');
-//     // format the data response
-//     const data = await res.json();
-
-//     // dispatch it to the reducer
-//     dispatch({
-//         type:GET_LOGS,
-//         payload:data
-//     })
-//   };
-// };
-// *!NON-REFACTORED VERSION-------------------
 
 //*GET ALL LOGS FROM THE SERVER /
 // **-----REFACTORED VERSION**-------------------------
 export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('getting the logs', getLogs);
+
     // setLoading();
 
     // request the data through axios
@@ -77,7 +59,6 @@ export const getLogs = () => async (dispatch) => {
 export const addLog = (log) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('add new logs', addLog);
 
     // setLoading();
 
@@ -101,7 +82,7 @@ export const addLog = (log) => async (dispatch) => {
 export const deleteLog = (id) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('Delete logs', deleteLog);
+
 
     setLoading();
 
@@ -125,7 +106,7 @@ export const deleteLog = (id) => async (dispatch) => {
 export const updateLog = (log) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('update/edit the logs', updateLog);
+
 
     // setLoading();
     const res = await api.put(`/logs/${log.id}`, log);
@@ -143,33 +124,7 @@ export const updateLog = (log) => async (dispatch) => {
   }
 };
 
-// *!REVISING THE SEARCH TO FILTERED
-// *SEARCH SERVER FOR LOGS
-// export const searchLogs = (text) => async (dispatch) => {
-//   // **THIS IS THE ASYNC THUNK FUNCTION
-//   try {
-//     console.log('Search the logs', searchLogs);
 
-//     // setLoading();
-//     console.log('this is the text search bar', `/logs?q=${text}`)
-
-//     // request the data
-//     const res = await api.get(`/logs?q=${text}`);
-//     // response of data formatted
-//     // const data = await res.json();
-
-//     // dispatch data to the reducer
-//     dispatch({
-//       type: SEARCH_LOGS,
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: LOGS_ERROR,
-//       payload: err.response.msg
-//     });
-//   }
-// };
 // *!REVISING THE SEARCH TO FILTERED
 
 // ! ADD, may not need  the CLEAR LOGS
