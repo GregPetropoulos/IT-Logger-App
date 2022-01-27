@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import formatDate from '../../utils/formatDate';
 import TechLogItems from '../techlog/TechLogItems';
-//*Bring in js for modals etc
-import M from 'materialize-css/dist/js/materialize.min.js';
 import Preloader from './Preloader';
 
 const Dashboard = ({
   log: { logs, loading },
   auth: { isAuthenticated, tech }
 }) => {
-  // //* Initialize Materialize JS for the action button
-  // useEffect(() => {
-  //   M.AutoInit();
-  // });
   if (isAuthenticated === false || tech === null || logs === null) {
     return <Preloader />;
   }
@@ -26,15 +20,21 @@ const Dashboard = ({
   const todayDate = new Date();
 
   //* FOR ATTENTION COUNTER
-  const numberOfAttentions = logs.map(
-    (log) => log.tech._id === _id && log.attention === true
-  );
+  const numberOfAttentions = logs
+    .map((log) => log.tech._id === _id && log.attention === true)
+    .filter(Boolean).length;
+
+  //* FOR LOG COUNTER PER TECH
+  const numberOfLogsOfTech = logs
+    .map((log) => log.tech._id === _id)
+    .filter(Boolean).length;
+
   return (
     <Fragment>
       {isAuthenticated && _id && (
         <div className='card-panel blue z-depth-2'>
           <span className='new badge red' data-badge-caption='Attentions'>
-            {numberOfAttentions.filter(Boolean).length}
+            {numberOfAttentions}
           </span>
           <p>Date {formatDate(todayDate)}</p>
           <h5 className='center'>
@@ -43,9 +43,9 @@ const Dashboard = ({
 
           <ul className='collapsible'>
             <li>
-              <div className='collapsible-header no-border grey darken-3'>
+              <div className='center collapsible-header no-border grey darken-3'>
                 <i className='material-icons'>message</i>
-                Your Logs
+                Your Logs to Date {numberOfLogsOfTech}
               </div>
               <div className=' collapsible-body grey darken-3 collection '>
                 {logs !== null &&
@@ -55,7 +55,6 @@ const Dashboard = ({
               </div>
             </li>
           </ul>
-          
         </div>
       )}
     </Fragment>

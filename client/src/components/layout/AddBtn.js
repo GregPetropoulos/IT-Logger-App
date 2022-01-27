@@ -23,7 +23,6 @@ const AddBtn = () => {
             <i className='material-icons'>delete_forever</i>
           </a>
         </li>
-       
       </ul>
     </div>
   );

@@ -20,7 +20,7 @@ import formatDate from '../utils/formatDate';
 // * When we make request to json server it will fill with array of Logs, but initially it's null here
 const initialState = {
   logs: [],
-  current: null,
+  current: '',
   loading: true,
   filtered: null,
   error: null

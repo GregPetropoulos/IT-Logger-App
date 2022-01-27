@@ -86,14 +86,16 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
       <div className='navbar-fixed'>
         <nav>
           <div className='blue nav-wrapper valign-wrapper'>
-            <h1 className='center-align valign-wrapper'>
-              <Link to='/' className='brand-logo center'>
+            <Link to='/' className='brand-logo center'>
+              <div className=' flow-text valign-wrapper center-align'>
                 <i className='medium material-icons'>computer</i>
                 {''} {title}
-              </Link>
-            </h1>
-
-            <Link to='#' data-target='slide-out' className='sidenav-trigger'>
+              </div>
+            </Link>
+            <Link
+              to='#'
+              data-target='slide-out'
+              className='sidenav-trigger show-on-large'>
               <i className='large material-icons'>menu</i>
             </Link>
           </div>

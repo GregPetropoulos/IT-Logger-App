@@ -26,20 +26,20 @@ const Home = ({ log: { logs } }) => {
 
   return (
     <Fragment>
-      <Hero />
-      <LogFilter />
-      <StatusCards />
-      <section className='row'>
-        <div className='no-border col s5 dashboard'>
+      <section className='row '>
+        <Hero />
+        <LogFilter />
+        <StatusCards />
+        <div className='no-border col  m5 s12 dashboard'>
           <Dashboard />
+        </div>
+        <div className='no-border col  m7 s12 '>
+          <Logs />
         </div>
         <AddBtn />
         <AddTechLogModal />
         <EditTechLogModal />
         <DeleteTechLogModal />
-        <div className='no-border  col s7'>
-          <Logs />
-        </div>
       </section>
       <Footer />
     </Fragment>

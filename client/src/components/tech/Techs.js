@@ -17,7 +17,7 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
     <Fragment>
       <section style={{ height: '100vh' }}>
         <h2 className='center-align'>Meet The Techs</h2>
-        <ul className='collection'>
+        <ul className='collection center'>
           {techs.map((t) => (
             <li
               className='white-text collection-item grey darken-3'
@@ -25,7 +25,7 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
               t={t}>
               Name: {t.firstName} {t.lastName}
               <div></div>
-              Contact:{" "}
+              Contact:{' '}
               <a href={`mailto:${t.email}`} alt='tech email'>
                 {t.email}
               </a>

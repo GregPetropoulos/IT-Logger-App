@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 const SearchBar = ({ searchLogs }) => {
   const text = useRef('');
 
-  const onChange = e => {
-searchLogs(text.current.value)
-  }
+  const onChange = (e) => {
+    searchLogs(text.current.value);
+  };
 
   return (
     <nav style={{ marginBottom: '30px' }} className='blue'>
