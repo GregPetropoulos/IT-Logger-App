@@ -10,20 +10,12 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "clientinstall": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GregPetropoulos/IT-Logger-App.git"
-  },
   "author": "Greg Petropoulos",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GregPetropoulos/IT-Logger-App/issues"
-  },
-  "homepage": "https://github.com/GregPetropoulos/IT-Logger-App#readme",
+
   "dependencies": {
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
