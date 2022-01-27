@@ -60,6 +60,7 @@ https://jwt.io/
 - Setting token to be checked for all request, adjusting store subscriber and when to loadTech()
 - Multiple checkboxes with local state
 - Fliter state vs filter DB
+- Edit Functionality
 
 ## Stretch Goals
 
