@@ -29,7 +29,7 @@ const Home = ({ log: { logs } }) => {
       <section className='row '>
         <Hero />
         <LogFilter />
-        {/* <StatusCards /> */}
+        <StatusCards />
         <div className='no-border col  m5 s12 dashboard'>
           <Dashboard />
         </div>
