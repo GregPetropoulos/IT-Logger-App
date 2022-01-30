@@ -42,6 +42,15 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
             About
           </Link>
         </li>
+        <li>
+          <Link
+            to='/faq'
+            target='_parent'
+            className='deep-purple darken-1 waves-effect waves-black btn-large'>
+            <i className='Large material-icons'>help</i>
+            FAQ
+          </Link>
+        </li>
       </ul>
     </Fragment>
   );
@@ -52,6 +61,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
           to='/login'
           target='_parent'
           className='indigo darken-3 waves-effect waves-red btn-large'>
+          <i className='Large material-icons'>login</i>
           Login
         </Link>
       </li>
@@ -60,6 +70,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
           to='/register'
           className='blue waves-effect waves-red btn-large'
           target='_parent'>
+          <i className='Large material-icons'>how_to_reg</i>
           Register
         </Link>
       </li>
@@ -68,6 +79,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
           to='/about'
           target='_parent'
           className='blue waves-effect waves-red btn-large'>
+          <i className='Large material-icons'>info</i>
           About
         </Link>
       </li>
@@ -76,7 +88,18 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
           to='/'
           target='_parent'
           className='blue waves-effect waves-red btn-large'>
+          <i className='Large material-icons'>work</i>
           IT Logger
+        </Link>
+      </li>
+
+      <li>
+        <Link
+          to='/faq'
+          target='_parent'
+          className='blue waves-effect waves-black btn-large'>
+          <i className='Large material-icons'>help</i>
+          FAQ
         </Link>
       </li>
     </ul>

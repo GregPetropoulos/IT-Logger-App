@@ -40,11 +40,18 @@ const EditTechLogModal = ({
   }, []);
 
   useEffect(() => {
-    setCurrent(...logged);
-    // if (current===Object) {setMessage(current.message);
-    // setAttention(current.attention);
-    // }
+    console.log('useEffect for setCurrent in edit tech');
+
+    setCurrent(logged);
   }, [logged]);
+
+  useEffect(() => {
+    console.log('useEffect for setMessage and setAttention in edit tech');
+    if (current) {
+      setMessage(current.message);
+      setAttention(current.attention);
+    }
+  }, [current]);
 
   const onChange = (e) => {
     const idValue = e.target.value;
@@ -53,8 +60,11 @@ const EditTechLogModal = ({
       let isMatch = logs.filter((log) => log._id === idValue);
       console.log('ismATCH type', typeof isMatch);
       console.log('ismATCH', isMatch);
-      setLogged(isMatch);
+      setLogged(...isMatch);
     }
+    //   if (e.target === e.currentTarget) {
+    //     e.stopPropagation();
+    // }
   };
 
   const onSubmit = (e) => {
@@ -88,6 +98,7 @@ const EditTechLogModal = ({
   //   return <Preloader />;
   // }
   console.log('EDIT-LOG-CHECK');
+
   return (
     <div id='edit-log-modal' className='modal' style={modalStyle}>
       <div className='modal-content'>
@@ -101,23 +112,25 @@ const EditTechLogModal = ({
         {logs !== null && (
           <div className='row'>
             <p className='title'>Choose an existing Log</p>
-            <div className='input-field'>
+            <div
+              // onSelect={(e) => e.stopPropagation()}
+
+              className='input-field'>
               <select
-                name='select'
                 className='browser-default wrapper'
                 onChange={onChange}
                 value={logged}>
-                options={}
                 <option value='' disabled>
                   Select Log
                 </option>
+
                 {logs.map(
                   (optionLog) =>
                     optionLog.tech._id === tech._id && (
                       <option
                         key={optionLog._id}
                         multiple={true}
-                        value={optionLog._id}>
+                        value={`${optionLog._id}`}>
                         Log ID#: {optionLog._id}
                         Logged Date: {formatDate(optionLog.date)}
                       </option>

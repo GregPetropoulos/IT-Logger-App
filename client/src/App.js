@@ -13,6 +13,7 @@ import About from './components/layout/About';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Landing from './components/layout/Landing';
 import NotFound from './components/layout/NotFound';
+import Faq from './components/FAQ/Faq';
 
 import Techs from './components/tech/Techs';
 // Bring in CSS
@@ -64,6 +65,7 @@ const App = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/techs' element={<Techs />} />
             <Route path='/about' element={<About />} />
+            <Route path='/faq' element={<Faq />} />
             <Route path='/home' element={<PrivateRoute component={Home} />} />
             <Route path='/*' element={<NotFound />} />
           </Routes>

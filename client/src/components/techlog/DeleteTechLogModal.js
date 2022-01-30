@@ -5,18 +5,14 @@ import PropTypes from 'prop-types';
 import { deleteLog } from '../../actions/logActions';
 import formatDate from '../../utils/formatDate';
 
-const DeleteTechLogModal = ({
-  log: { logs },
-  loading,
-  deleteLog,
-  auth: { tech }
-}) => {
+const DeleteTechLogModal = ({ log: { logs }, deleteLog, auth: { tech } }) => {
   const [toasted, setToast] = useState(false);
 
   const toastAlert = () => {
     setToast(!toasted);
     M.toast({ html: 'Log Deleted' });
   };
+
   return (
     <div
       id='delete-log-modal'
@@ -37,40 +33,50 @@ const DeleteTechLogModal = ({
               </small>
             </p>
           </label>
-          <ul className='center collection-item grey black-text'>
-            {loading || !logs.length ? (
-              <p>No Logs to Show</p>
-            ) : (
-              logs.map((log) => (
-                <li key={log._id} className='collection-item grey'>
-                  <strong>Log ID # {log._id}</strong>
-                  <br />
-                  <span>
-                    {tech !== null && log.tech.firstName && tech.firstName}
-                  </span>
-                  <br />
-                  <span
-                    className={` ${log.attention ? 'red-text' : 'white-text'}`}>
-                    {log.message}
-                  </span>
-                  <br />
-                  {formatDate(log.date)}
-                  <a
-                    href='#!'
-                    onClick={() =>
-                      tech._id === log.tech._id
-                        ? deleteLog(log._id) && toastAlert()
-                        : 'Not Authorized to Delete'
-                    }
-                    className='secondary-content hoverable'>
-                    <i className='material-icons z-depth-3 white red-text'>
-                      delete
-                    </i>
-                  </a>
-                </li>
-              ))
-            )}
-          </ul>
+          {tech !== null && (
+            <ul className='center collection-item grey black-text'>
+              {logs === null ? (
+                <p>No Logs to Show</p>
+              ) : (
+                logs.map(
+                  (log) =>
+                    tech !== null &&
+                    tech._id === log.tech._id && (
+                      <li key={log._id} className='collection-item grey'>
+                        <strong>Log ID # {log._id}</strong>
+                        <br />
+                        <span>
+                          {tech !== null &&
+                            log.tech.firstName &&
+                            tech.firstName}
+                        </span>
+                        <br />
+                        <span
+                          className={` ${
+                            log.attention ? 'red-text' : 'white-text'
+                          }`}>
+                          {log.message}
+                        </span>
+                        <br />
+                        {formatDate(log.date)}
+                        <a
+                          href='#!'
+                          onClick={() =>
+                            tech._id === log.tech._id
+                              ? deleteLog(log._id) && toastAlert()
+                              : 'Not Authorized to Delete'
+                          }
+                          className='secondary-content hoverable'>
+                          <i className='material-icons z-depth-3 white red-text'>
+                            delete
+                          </i>
+                        </a>
+                      </li>
+                    )
+                )
+              )}
+            </ul>
+          )}
         </div>
       </div>
     </div>
@@ -78,7 +84,8 @@ const DeleteTechLogModal = ({
 };
 DeleteTechLogModal.propTypes = {
   deleteLog: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  log: PropTypes.object.isRequired
 };
 const modalStyle = {
   width: '75%',
