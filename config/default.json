@@ -1,5 +1,5 @@
 {
-    "MY_MONGO_URI":"mongodb+srv://gregadmindb:greg1234@clustergp.eb8jf.mongodb.net/ClusterGP?retryWrites=true&w=majority" ,
-   "jwtSecret": "secrets"
- 
- }
+  "MY_MONGO_URI":"123" ,
+ "jwtSecret": "ABC"
+
+}
