@@ -38,7 +38,7 @@ const Register = ({ isAuthenticated, register }) => {
 
   return (
     <section className='container'>
-      <h1 className='center-align'>Sign Up</h1>
+      <h1 className=' sign-up-title center-align'>Sign Up</h1>
       <i className='medium material-icons'>account_circle</i>
       <p> Sign Into Your Account</p>
       <form className='form' onSubmit={onSubmit}>
@@ -50,7 +50,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='firstName'
               value={firstName}
               onChange={onChange}
-              className='validate'
+              className='validate center'
               required
             />
             <label htmlFor='first_name' className='active'>
@@ -64,7 +64,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='lastName'
               value={lastName}
               onChange={onChange}
-              className='validate'
+              className='validate center'
               required
             />
             <label htmlFor='last_name' className='active'>
@@ -78,7 +78,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='email'
               value={email}
               onChange={onChange}
-              className='validate'
+              className='validate center'
               required
             />
             <label htmlFor='email' className='active'>
@@ -92,7 +92,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='password'
               value={password}
               onChange={onChange}
-              className='validate'
+              className='validate center'
               required
             />
             <label htmlFor='password' className='active'>
@@ -114,7 +114,7 @@ const Register = ({ isAuthenticated, register }) => {
             </label>
           </div>
           <button
-            className='btn waves-effect waves-blue btn-large'
+            className='col s12 indigo darken-3 waves-effect waves-red btn-large center'
             type='submit'
             name='action'
             value='Register'>
@@ -123,7 +123,7 @@ const Register = ({ isAuthenticated, register }) => {
           </button>
         </div>
         <p>
-          Already have an account? <Link to='/login'>Sign In</Link>
+          Already have an account? <Link to='/login' className='white-text indigo  btn darken-3 waves-effect waves-red '>Sign In</Link>
         </p>
       </form>
     </section>

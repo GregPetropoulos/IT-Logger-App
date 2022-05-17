@@ -6,7 +6,7 @@ export const Footer = () => {
   return (
     <section className='indigo lighten-1'>
       <footer className='footer-copyright'>
-        <div className='center-align container'>
+        <div className='center-align'>
           IT Logger
           <p>copyright 2021-{currentYear}</p>
         </div>

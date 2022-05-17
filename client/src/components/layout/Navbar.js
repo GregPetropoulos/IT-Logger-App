@@ -46,19 +46,19 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
     </Fragment>
   );
   const guestLinks = (
-    <ul>
+    <ul className='guest-links'>
       <li>
         <Link
           to='/login'
           target='_parent'
-          className='indigo darken-3 waves-effect waves-red btn-large'>
+          className='guest-link indigo darken-3 waves-effect waves-red btn-large'>
           Login
         </Link>
       </li>
       <li>
         <Link
           to='/register'
-          className='blue waves-effect waves-red btn-large'
+          className='guest-link blue waves-effect waves-red btn-large'
           target='_parent'>
           Register
         </Link>
@@ -67,7 +67,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
         <Link
           to='/about'
           target='_parent'
-          className='blue waves-effect waves-red btn-large'>
+          className='guest-link blue waves-effect waves-red btn-large'>
           About
         </Link>
       </li>
@@ -75,7 +75,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
         <Link
           to='/'
           target='_parent'
-          className='blue waves-effect waves-red btn-large'>
+          className=' guest-link blue waves-effect waves-red btn-small'>
           IT Logger
         </Link>
       </li>
@@ -84,12 +84,14 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
   return (
     <Fragment>
       <div className='navbar-fixed'>
-        <nav>
-          <div className='blue nav-wrapper valign-wrapper'>
+        <nav className='row'>
+          <div className='blue nav-wrapper valign-wrapper col s12'>
             <Link to='/' className='brand-logo center'>
-              <div className=' flow-text valign-wrapper center-align'>
+              <div className=' valign-wrapper center-align'>
                 <i className='medium material-icons'>computer</i>
-                {''} {title}
+                <p className='navbar-title flow-text'>
+                  IT Logger
+                  </p> 
               </div>
             </Link>
             <Link

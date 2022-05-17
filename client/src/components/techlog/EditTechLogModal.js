@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
 import { connect } from 'react-redux';
@@ -20,42 +20,33 @@ const EditTechLogModal = ({
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
 
-  // When click on the log it renders the current info via local state set to backend server info because of connect and mapStateTopProps
-  console.log('logged', logged);
-  console.log('logged true', logged === true);
-  console.log('logged null', logged === null);
-  console.log('logged ""', logged === '');
-  console.log('logged typeof', typeof logged);
-  // console.log('log loading', loading);
-  // console.log('tech', tech);
-  console.log('logs', logs);
-  console.log('current', current);
-  console.log('current type of', typeof current);
-  console.log('message', message);
-  console.log('setCurrent', setCurrent);
-
-  console.log(' attention', attention);
+  // console.log(' attention', attention);
   useEffect(() => {
     M.AutoInit();
   }, []);
 
   useEffect(() => {
     setCurrent(...logged);
-    // if (current===Object) {setMessage(current.message);
-    // setAttention(current.attention);
-    // }
+    if (current!==undefined) {
+      setMessage(current.message);
+      setAttention(current.attention);
+    }
   }, [logged]);
 
   const onChange = (e) => {
     const idValue = e.target.value;
     console.log('idvalue', idValue);
-    if (onChange) {
-      let isMatch = logs.filter((log) => log._id === idValue);
-      console.log('ismATCH type', typeof isMatch);
-      console.log('ismATCH', isMatch);
-      setLogged(isMatch);
-    }
+    // const isValueMatch = logs.filter((item) => item._id === idValue);
+    // console.log('isValueMatch', isValueMatch);
+
+    // setLogged(isValueMatch);
+    setLogged(idValue)
   };
+
+  console.log('current', current);
+  console.log('message', message);
+  console.log('attention', attention);
+
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -78,16 +69,16 @@ const EditTechLogModal = ({
     }
 
     // Clear fields
-    setMessage('');
-    setLogged('');
-    setAttention(false);
+    // setMessage('');
+    // setLogged('');
+    // setAttention(false);
   };
-
+  // console.log(logs)
   // if (logs === null) {
   //   console.log('preload');
   //   return <Preloader />;
   // }
-  console.log('EDIT-LOG-CHECK');
+  // console.log('EDIT-LOG-CHECK');
   return (
     <div id='edit-log-modal' className='modal' style={modalStyle}>
       <div className='modal-content'>
@@ -108,21 +99,23 @@ const EditTechLogModal = ({
                 onChange={onChange}
                 value={logged}>
                 options={}
-                <option value='' disabled>
+                {/* <option value='' disabled>
                   Select Log
-                </option>
+                </option> */}
                 {logs.map(
                   (optionLog) =>
                     optionLog.tech._id === tech._id && (
                       <option
                         key={optionLog._id}
                         multiple={true}
-                        value={optionLog._id}>
+                        // value={optionLog._id}
+                        value={`${optionLog._id} ${optionLog.message} ${optionLog.attention} ${optionLog.tech._id}`}
+                        >
                         Log ID#: {optionLog._id}
                         Logged Date: {formatDate(optionLog.date)}
                       </option>
                     )
-                )}
+                    )}
               </select>
             </div>
           </div>
@@ -164,7 +157,8 @@ const EditTechLogModal = ({
         </a>
       </div>
     </div>
-  );
+
+);
 };
 
 const modalStyle = {
