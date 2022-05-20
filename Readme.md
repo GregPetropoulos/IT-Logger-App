@@ -1,4 +1,11 @@
 # IT Logger
+[Deployed](https://it-loggerv1.herokuapp.com/)
+
+
+
+https://user-images.githubusercontent.com/68525155/155793712-7147cef7-02c7-4439-bf4e-e9c87cee094e.mp4
+
+
 
 ## Intro
 
