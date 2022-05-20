@@ -42,18 +42,20 @@ const EditTechLogModal = ({
     }
   }, [logged, current]);
 
-  console.log(openModal);
+  // console.log(openModal);
 
   const selectRef = useRef();
 
   // Updates the the logged and current object
   const onChange = (e) => {
     const idValue = e.target.value;
-    console.log('idvalue', idValue);
+    // console.log('idvalue', idValue);
     const isValueMatch = logs.filter((item) => item._id === idValue);
-    console.log('isValueMatch', isValueMatch);
+    // console.log('isValueMatch', isValueMatch);
     setLogged(isValueMatch);
   };
+
+// console.log('selectRef', selectRef.current);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -79,10 +81,10 @@ const EditTechLogModal = ({
     setAttention(false);
   };
 
-  // if (logs === null) {
-  //   console.log('preload');
-  //   return <Preloader />;
-  // }
+  if (logs === null) {
+    console.log('preload');
+    return <Preloader />;
+  }
 
   return (
     <div
@@ -104,7 +106,7 @@ const EditTechLogModal = ({
               <select
                 ref={selectRef}
                 name='select'
-                className='browser-default'
+                className='select browser-default'
                 onChange={onChange}
                 multiple
                 // onClick={e => e.stopPropagation()}
