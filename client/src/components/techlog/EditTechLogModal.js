@@ -16,41 +16,47 @@ const EditTechLogModal = ({
   auth: { tech }
 }) => {
   // LOCAL STATE UPDATES CURRENT
-  const [logged, setLogged] = useState('');
+  const [openModal, SetOpenModal] = useState(false);
+  const [logged, setLogged] = useState([]);
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
 
-  // console.log(' attention', attention);
   useEffect(() => {
     M.AutoInit();
-  }, []);
 
-  useEffect(() => {
+    //! Need help to keep modal open while an option is selected
+    //! Selected option is closing the whole modal
+
+    //  if an option is selected keep modal open
+    // if(logged.length>0){
+    //   SetOpenModal(true)
+    // }
+
+    // Once local logged state is changed in from the select, then the current in redux state is updated
     setCurrent(...logged);
-    if (current!==undefined) {
+
+    //Once the current is changed and true we up date the local message and attention state
+    if (current) {
       setMessage(current.message);
       setAttention(current.attention);
     }
-  }, [logged]);
+  }, [logged, current]);
 
+  console.log(openModal);
+
+  const selectRef = useRef();
+
+  // Updates the the logged and current object
   const onChange = (e) => {
     const idValue = e.target.value;
     console.log('idvalue', idValue);
-    // const isValueMatch = logs.filter((item) => item._id === idValue);
-    // console.log('isValueMatch', isValueMatch);
-
-    // setLogged(isValueMatch);
-    setLogged(idValue)
+    const isValueMatch = logs.filter((item) => item._id === idValue);
+    console.log('isValueMatch', isValueMatch);
+    setLogged(isValueMatch);
   };
-
-  console.log('current', current);
-  console.log('message', message);
-  console.log('attention', attention);
-
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // logged===null
     if (message === '') {
       M.toast({ html: 'Please enter a message' });
     } else {
@@ -65,22 +71,24 @@ const EditTechLogModal = ({
       // * CALL THE updateLog ACTION/PROP AND PASS IN updLog
       updateLog(updLog);
       M.toast({ html: `Log updated by ${tech.firstName}` });
-      console.log('updloG', updLog);
     }
 
     // Clear fields
-    // setMessage('');
-    // setLogged('');
-    // setAttention(false);
+    setMessage('');
+    setLogged('');
+    setAttention(false);
   };
-  // console.log(logs)
+
   // if (logs === null) {
   //   console.log('preload');
   //   return <Preloader />;
   // }
-  // console.log('EDIT-LOG-CHECK');
+
   return (
-    <div id='edit-log-modal' className='modal' style={modalStyle}>
+    <div
+      id='edit-log-modal'
+      className='modal grey darken-1 white-text'
+      style={modalStyle}>
       <div className='modal-content'>
         <h4>Edit System Logs</h4>
         {tech !== null && (
@@ -89,43 +97,45 @@ const EditTechLogModal = ({
             <p>Tech ID# {tech._id}</p>
           </div>
         )}
-        {logs !== null && (
+        {logs !== null ? (
           <div className='row'>
             <p className='title'>Choose an existing Log</p>
             <div className='input-field'>
               <select
+                ref={selectRef}
                 name='select'
-                className='browser-default wrapper'
+                className='browser-default'
                 onChange={onChange}
+                multiple
+                // onClick={e => e.stopPropagation()}
                 value={logged}>
-                options={}
-                {/* <option value='' disabled>
+                <option value='' disabled>
                   Select Log
-                </option> */}
+                </option>
+
                 {logs.map(
                   (optionLog) =>
                     optionLog.tech._id === tech._id && (
                       <option
                         key={optionLog._id}
                         multiple={true}
-                        // value={optionLog._id}
-                        value={`${optionLog._id} ${optionLog.message} ${optionLog.attention} ${optionLog.tech._id}`}
-                        >
-                        Log ID#: {optionLog._id}
-                        Logged Date: {formatDate(optionLog.date)}
+                        value={optionLog._id}>
+                        Log ID#: {optionLog._id} Logged Date:{' '}
+                        {formatDate(optionLog.date)}
                       </option>
                     )
-                    )}
+                )}
               </select>
             </div>
           </div>
-        )}
+        ) : null}
         <div className='row'>
-          <div className='input-field'>
+          <div className='input-field '>
             Message:
             <textarea
+              className='grey input-field'
               type='textarea'
-              name='message'
+              name='msg'
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -141,24 +151,22 @@ const EditTechLogModal = ({
                   checked={attention}
                   value={attention}
                   onChange={(e) => setAttention(!attention)}></input>
-
-                <span>Needs Attention</span>
+                <span className='white-text'>Needs Attention</span>
               </label>
             </p>
           </div>
         </div>
       </div>
-      <div className='modal-footer'>
+      <div className='modal-footer grey darken-2 modal-footer'>
         <a
           href='#!'
           onClick={onSubmit}
-          className='modal-close waves-effect blue btn'>
-          Enter
+          className='  modal-close z-depth-3 hoverable  waves-effect blue btn '>
+          Submit
         </a>
       </div>
     </div>
-
-);
+  );
 };
 
 const modalStyle = {

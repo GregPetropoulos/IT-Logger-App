@@ -44,7 +44,6 @@ const StatusCards = () => {
 
     setServerState({ ...serverState, servers: updatedList });
   };
-  console.log(serverState.servers);
   return (
     <Fragment>
       <div className=' server-row valign-wrapper'>

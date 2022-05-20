@@ -50,7 +50,7 @@ const DeleteTechLogModal = ({
                   </span>
                   <br />
                   <span
-                    className={` ${log.attention ? 'red-text' : 'white-text'}`}>
+                    className={` ${log.attention ? 'white-text' : 'white-text'}`}>
                     {log.message}
                   </span>
                   <br />
