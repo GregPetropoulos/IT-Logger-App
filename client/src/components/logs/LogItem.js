@@ -12,27 +12,24 @@ const LogItem = ({
   log
 }) => {
   return (
-    <li className='collection-item avatar logbox'>
-      <i className='medium material-icons'>account_circle</i>
-      <h5>
-        {firstName} {lastName}
-      </h5>
-      Posted on {formatDate(log.date)}
-      <p>
-        <span>
-          <strong>Message:</strong>
-          {log.message}
-        </span>{' '}
-        <br />
-        <span>Log ID # {log._id.slice(18, 24)}</span>
-      </p>
-      {log.attention && (
+    <li className='collection-item avatar logbox '>
+        {log.attention && (
         <a
           href='#!'
-          className=' btn-small center z-depth-2 valign-wrapper red secondary-content '>
-          <p className=' black-text'>Attention</p>
+          className=' attention btn-small center z-depth-2  red secondary-content '>
+          <p className=' truncate black-text'>Attention</p>
         </a>
       )}
+      <i className='medium material-icons hide-on-small-only '>
+        account_circle
+      </i>
+      <h5 className='name-on-log'>
+        {firstName} {lastName}
+      </h5>
+      <p>Posted on {formatDate(log.date)}</p>
+      <p>Message: {log.message}</p>
+      <br />
+      <p>Log ID # {log._id.slice(18, 24)}</p>
     </li>
   );
 };

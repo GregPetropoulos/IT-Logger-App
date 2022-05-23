@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
 import { connect } from 'react-redux';
@@ -16,60 +16,49 @@ const EditTechLogModal = ({
   auth: { tech }
 }) => {
   // LOCAL STATE UPDATES CURRENT
-  const [logged, setLogged] = useState('');
+  const [openModal, SetOpenModal] = useState(false);
+  const [logged, setLogged] = useState([]);
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
 
-  // When click on the log it renders the current info via local state set to backend server info because of connect and mapStateTopProps
-  console.log('logged', logged);
-  console.log('logged true', logged === true);
-  console.log('logged null', logged === null);
-  console.log('logged ""', logged === '');
-  console.log('logged typeof', typeof logged);
-  // console.log('log loading', loading);
-  // console.log('tech', tech);
-  console.log('logs', logs);
-  console.log('current', current);
-  console.log('current type of', typeof current);
-  console.log('message', message);
-  console.log('setCurrent', setCurrent);
-
-  console.log(' attention', attention);
   useEffect(() => {
     M.AutoInit();
-  }, []);
 
-  useEffect(() => {
-    console.log('useEffect for setCurrent in edit tech');
+    //! Need help to keep modal open while an option is selected
+    //! Selected option is closing the whole modal
 
-    setCurrent(logged);
-  }, [logged]);
+    //  if an option is selected keep modal open
+    // if(logged.length>0){
+    //   SetOpenModal(true)
+    // }
 
-  useEffect(() => {
-    console.log('useEffect for setMessage and setAttention in edit tech');
+    // Once local logged state is changed in from the select, then the current in redux state is updated
+    setCurrent(...logged);
+
+    //Once the current is changed and true we up date the local message and attention state
     if (current) {
       setMessage(current.message);
       setAttention(current.attention);
     }
-  }, [current]);
+  }, [logged, current]);
 
+  // console.log(openModal);
+
+  const selectRef = useRef();
+
+  // Updates the the logged and current object
   const onChange = (e) => {
     const idValue = e.target.value;
-    console.log('idvalue', idValue);
-    if (onChange) {
-      let isMatch = logs.filter((log) => log._id === idValue);
-      console.log('ismATCH type', typeof isMatch);
-      console.log('ismATCH', isMatch);
-      setLogged(...isMatch);
-    }
-    //   if (e.target === e.currentTarget) {
-    //     e.stopPropagation();
-    // }
+    // console.log('idvalue', idValue);
+    const isValueMatch = logs.filter((item) => item._id === idValue);
+    // console.log('isValueMatch', isValueMatch);
+    setLogged(isValueMatch);
   };
+
+// console.log('selectRef', selectRef.current);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // logged===null
     if (message === '') {
       M.toast({ html: 'Please enter a message' });
     } else {
@@ -84,7 +73,6 @@ const EditTechLogModal = ({
       // * CALL THE updateLog ACTION/PROP AND PASS IN updLog
       updateLog(updLog);
       M.toast({ html: `Log updated by ${tech.firstName}` });
-      console.log('updloG', updLog);
     }
 
     // Clear fields
@@ -93,14 +81,16 @@ const EditTechLogModal = ({
     setAttention(false);
   };
 
-  // if (logs === null) {
-  //   console.log('preload');
-  //   return <Preloader />;
-  // }
-  console.log('EDIT-LOG-CHECK');
+  if (logs === null) {
+    console.log('preload');
+    return <Preloader />;
+  }
 
   return (
-    <div id='edit-log-modal' className='modal' style={modalStyle}>
+    <div
+      id='edit-log-modal'
+      className='modal grey darken-1 white-text'
+      style={modalStyle}>
       <div className='modal-content'>
         <h4>Edit System Logs</h4>
         {tech !== null && (
@@ -109,7 +99,7 @@ const EditTechLogModal = ({
             <p>Tech ID# {tech._id}</p>
           </div>
         )}
-        {logs !== null && (
+        {logs !== null ? (
           <div className='row'>
             <p className='title'>Choose an existing Log</p>
             <div
@@ -117,8 +107,12 @@ const EditTechLogModal = ({
 
               className='input-field'>
               <select
-                className='browser-default wrapper'
+                ref={selectRef}
+                name='select'
+                className='select browser-default'
                 onChange={onChange}
+                multiple
+                // onClick={e => e.stopPropagation()}
                 value={logged}>
                 <option value='' disabled>
                   Select Log
@@ -130,22 +124,23 @@ const EditTechLogModal = ({
                       <option
                         key={optionLog._id}
                         multiple={true}
-                        value={`${optionLog._id}`}>
-                        Log ID#: {optionLog._id}
-                        Logged Date: {formatDate(optionLog.date)}
+                        value={optionLog._id}>
+                        Log ID#: {optionLog._id} Logged Date:{' '}
+                        {formatDate(optionLog.date)}
                       </option>
                     )
                 )}
               </select>
             </div>
           </div>
-        )}
+        ) : null}
         <div className='row'>
-          <div className='input-field'>
+          <div className='input-field '>
             Message:
             <textarea
+              className='grey input-field'
               type='textarea'
-              name='message'
+              name='msg'
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -161,19 +156,18 @@ const EditTechLogModal = ({
                   checked={attention}
                   value={attention}
                   onChange={(e) => setAttention(!attention)}></input>
-
-                <span>Needs Attention</span>
+                <span className='white-text'>Needs Attention</span>
               </label>
             </p>
           </div>
         </div>
       </div>
-      <div className='modal-footer'>
+      <div className='modal-footer grey darken-2 modal-footer'>
         <a
           href='#!'
           onClick={onSubmit}
-          className='modal-close waves-effect blue btn'>
-          Enter
+          className='  modal-close z-depth-3 hoverable  waves-effect blue btn '>
+          Submit
         </a>
       </div>
     </div>

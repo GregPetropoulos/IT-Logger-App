@@ -16,7 +16,7 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
   return (
     <Fragment>
       <section style={{ height: '100vh' }}>
-        <h2 className='center-align'>Meet The Techs</h2>
+        <h2 className='meet-techs center-align'>Meet The Techs</h2>
         <ul className='collection center'>
           {techs.map((t) => (
             <li

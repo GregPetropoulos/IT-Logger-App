@@ -82,8 +82,8 @@ const AddTechLogModal = ({ addLog, auth: { tech } }) => {
         <a
           href='#!'
           onClick={onSubmit}
-          className=' z-depth-3 hoverable modal-close waves-effect blue btn'>
-          Enter
+          className=' modal-close z-depth-3 hoverable modal-close waves-effect blue btn'>
+          Submit
         </a>
       </div>
     </div>

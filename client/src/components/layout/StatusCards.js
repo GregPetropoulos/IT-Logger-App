@@ -44,12 +44,11 @@ const StatusCards = () => {
 
     setServerState({ ...serverState, servers: updatedList });
   };
-  console.log(serverState.servers);
   return (
     <Fragment>
-      <div className=' row valign-wrapper'>
+      <div className=' server-row valign-wrapper'>
         {serverState.servers.map((arr) => (
-          <div key={arr.sid} className='col s12 m5'>
+          <div key={arr.sid} className='row'>
             <div className=' z-depth-4 hoverable grey darken-4 center card'>
               <i
                 className={

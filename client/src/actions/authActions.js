@@ -13,7 +13,7 @@ import {
 //* LOAD TECH get tech data from back end and put in the state to validate authentication to access home page etc
 export const loadTech = () => async (dispatch) => {
   try {
-    console.log('loadTech', loadTech);
+    // console.log('loadTech', loadTech);
 
     //* route checking token for valid tech
     const res = await api.get('/auth');
