@@ -1,5 +1,5 @@
 {
-  "MY_MONGO_URI":"123" ,
+  "MY_MONGO_URI":"Enter your monguURI here or app wont run" ,
  "jwtSecret": "ABC",
- "someSecret": "cba"
+ "testSecret": "cba"
 }
