@@ -32,7 +32,7 @@ const Login = ({ isAuthenticated, login }) => {
       <h1 className='sign-in-title center-align'>Sign In</h1>
       <i className='medium material-icons'>login</i>
       <p> Sign Into Your Account</p>
-      <form className='form' onSubmit={onSubmit}>
+      <form className='form signInForm white-text' onSubmit={onSubmit}>
         <div className='row'>
           <div className='input-field col s12'>
             <input
@@ -62,18 +62,25 @@ const Login = ({ isAuthenticated, login }) => {
               Password
             </label>
           </div>
-          <button
-            className=' col s12 indigo darken-3 waves-effect waves-red btn-large center'
-            type='submit'
-            name='action'
-            value='Login'>
-            Submit
-            <i className='material-icons right '>send</i>
-          </button>
+          <div className='btnSignInGroup center'>
+            <button
+              className=' col s12 indigo darken-3 waves-effect waves-red btn-large center'
+              type='submit'
+              name='action'
+              value='Login'>
+              Submit
+              <i className='material-icons right '>send</i>
+            </button>
+            <div className='regAcc'>
+              <p>Don't have an account?</p>
+              <Link
+                to='/register'
+                className='white-text indigo  btn darken-3 waves-effect waves-red'>
+                Sign Up
+              </Link>
+            </div>
+          </div>
         </div>
-        <p>
-          Don't have an account? <Link to='/register' className='white-text indigo  btn darken-3 waves-effect waves-red'>Sign Up</Link>
-        </p>
       </form>
     </section>
   );

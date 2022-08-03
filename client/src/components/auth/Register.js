@@ -25,11 +25,11 @@ const Register = ({ isAuthenticated, register }) => {
   //* and these values get saved to the database because of the routing in state to the back end.
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     if (password !== password2) {
-          setFormData('')
-      } else {
-      register({firstName, lastName, email, password});
+      setFormData('');
+    } else {
+      register({ firstName, lastName, email, password });
     }
   };
 
@@ -40,10 +40,10 @@ const Register = ({ isAuthenticated, register }) => {
     <section className='container'>
       <h1 className=' sign-up-title center-align'>Sign Up</h1>
       <i className='medium material-icons'>account_circle</i>
-      <p> Sign Into Your Account</p>
-      <form className='form' onSubmit={onSubmit}>
+      <p> Register an Account to Login</p>
+      <form className='form regForm' onSubmit={onSubmit}>
         <div className='row'>
-        <div className='input-field col s12'>
+          <div className='input-field col s12'>
             <input
               id='first_name'
               type='text'
@@ -106,25 +106,30 @@ const Register = ({ isAuthenticated, register }) => {
               name='password2'
               value={password2}
               onChange={onChange}
-              className='validate'
+              className='validate white-text '
               required
             />
             <label htmlFor='password2' className='active'>
               Password2
             </label>
           </div>
-          <button
-            className='col s12 indigo darken-3 waves-effect waves-red btn-large center'
-            type='submit'
-            name='action'
-            value='Register'>
-            Submit
-            <i className='material-icons right'>send</i>
-          </button>
+          <div className='btnRegistrationGroup center'>
+            <button
+              className='col s12 indigo darken-3 waves-effect waves-white btn-large center'
+              type='submit'
+              name='action'
+              value='Register'>
+              Submit
+              <i className='material-icons right'>send</i>
+            </button>
+            <p className='haveAcc white-text'>Already have an account? </p>
+            <Link
+              to='/login'
+              className='signIn white-text center indigo  btn darken-3 waves-effect waves-red '>
+              Sign In
+            </Link>
+          </div>
         </div>
-        <p>
-          Already have an account? <Link to='/login' className='white-text indigo  btn darken-3 waves-effect waves-red '>Sign In</Link>
-        </p>
       </form>
     </section>
   );

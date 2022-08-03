@@ -64,17 +64,34 @@ body {
   text-align: center;
 }
 .demoBtn {
-/* display:block; */
-border-radius:10px;
-
+  /* display:block; */
+  border-radius: 10px;
 }
 .landing-title {
   color: rgba(66, 218, 66, 0.993);
   text-align: center;
-
-  /* width:100%; */
-  /* display:block; */
 }
+.regForm.form, .signInForm {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4382978723404255) 0%,
+    rgba(0, 0, 0, 0.5042553191489362) 100%
+  );
+}
+
+
+.btnRegistrationGroup, .btnSignInGroup{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: column;
+  text-align: center;
+}
+.haveAcc,.regAcc{
+  margin: 10px;
+}
+
 
 /* Overlay */
 /* .dark-overlay {
@@ -121,7 +138,7 @@ textarea {
   .landing-title {
     font-size: 18px;
   }
-  .demoBtn{
+  .demoBtn {
   }
   .navbar-title {
     font-size: 14px;

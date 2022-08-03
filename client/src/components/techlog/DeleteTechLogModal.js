@@ -17,6 +17,11 @@ const DeleteTechLogModal = ({
     setToast(!toasted);
     M.toast({ html: 'Log Deleted' });
   };
+
+  const toastNotAuthorized = () => {
+    setToast(toasted);
+    M.toast({ html: 'Not Authorized to Delete Other User Logs' });
+  };
   return (
     <div
       id='delete-log-modal'
@@ -41,26 +46,26 @@ const DeleteTechLogModal = ({
             {loading || !logs.length ? (
               <p>No Logs to Show</p>
             ) : (
-              logs.map((log) => (
-                <li key={log._id} className='collection-item grey'>
-                  <strong>Log ID # {log._id}</strong>
+              logs.map((logItem) => (
+                <li key={logItem._id} className='collection-item grey'>
+                  <strong>Log ID # {logItem._id}</strong>
                   <br />
                   <span>
-                    {tech !== null && log.tech.firstName && tech.firstName}
+                    {tech !== null &&logItem.tech.firstName}
                   </span>
                   <br />
                   <span
-                    className={` ${log.attention ? 'white-text' : 'white-text'}`}>
-                    {log.message}
+                    className={` ${logItem.attention ? 'white-text' : 'white-text'}`}>
+                    {logItem.message}
                   </span>
                   <br />
-                  {formatDate(log.date)}
+                  {formatDate(logItem.date)}
                   <a
                     href='#!'
                     onClick={() =>
-                      tech._id === log.tech._id
-                        ? deleteLog(log._id) && toastAlert()
-                        : 'Not Authorized to Delete'
+                      tech._id === logItem.tech._id
+                        ? deleteLog(logItem._id) && toastAlert()
+                        : toastNotAuthorized()
                     }
                     className='secondary-content hoverable'>
                     <i className='material-icons z-depth-3 white red-text'>
