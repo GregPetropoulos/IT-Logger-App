@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authActions';
 
-const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
+const Navbar = ({ title, auth: { isAuthenticated, tech },  logout }) => {
+  
   const authLinks = (
     <Fragment>
       <ul>
@@ -89,9 +90,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
             <Link to='/' className='brand-logo center'>
               <div className=' valign-wrapper center-align'>
                 <i className='medium material-icons'>computer</i>
-                <p className='navbar-title flow-text'>
-                  IT Logger
-                  </p> 
+                <p className='navbar-title flow-text'>IT Logger</p>
               </div>
             </Link>
             <Link

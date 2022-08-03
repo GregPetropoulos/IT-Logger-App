@@ -16,8 +16,9 @@ const EditTechLogModal = ({
   auth: { tech }
 }) => {
   // LOCAL STATE UPDATES CURRENT
-  const [openModal, SetOpenModal] = useState(false);
-  const [logged, setLogged] = useState([]);
+  const [text, setText] = useState('');
+  const [isMatch, setIsMatch] = useState(false);
+  console.log('text', text);
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
 
@@ -33,29 +34,43 @@ const EditTechLogModal = ({
     // }
 
     // Once local logged state is changed in from the select, then the current in redux state is updated
-    setCurrent(...logged);
+    // setCurrent(...logged);
+    // copy state
+    // const logIdInput = text;
+    // const isValueMatch = () => {
+    //   const logMatchObj = logs.filter((item) => item._id === logIdInput);
+    //   console.log('logmatchobj', logMatchObj);
+    //   setCurrent(logMatchObj);
+    // };
 
+    // console.log('isValueMatch', isValueMatch());
     //Once the current is changed and true we up date the local message and attention state
     if (current) {
       setMessage(current.message);
       setAttention(current.attention);
     }
-  }, [logged, current]);
+  }, []);
 
   // console.log(openModal);
 
-  const selectRef = useRef();
+  const inputRef = useRef();
 
   // Updates the the logged and current object
-  const onChange = (e) => {
-    const idValue = e.target.value;
-    // console.log('idvalue', idValue);
-    const isValueMatch = logs.filter((item) => item._id === idValue);
-    // console.log('isValueMatch', isValueMatch);
-    setLogged(isValueMatch);
-  };
 
-// console.log('selectRef', selectRef.current);
+  
+  const onChange = (e) => {
+    // e.preventDefault()
+     setText(e.target.value)
+//      const copyText = text
+//  const match = logs.filter(item=> item._id === copyText)
+// setCurrent("hello")
+// console.log('match',match)
+  // const isValueMatch =
+  //    return logs.filter((item) => item._id === idValue);
+  // console.log('isValueMatch', isValueMatch);
+  // setText(isValueMatch[0]._id);
+  // setCurrent(...isValueMatch)
+   };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -77,7 +92,7 @@ const EditTechLogModal = ({
 
     // Clear fields
     setMessage('');
-    setLogged('');
+    setText('');
     setAttention(false);
   };
 
@@ -100,37 +115,28 @@ const EditTechLogModal = ({
           </div>
         )}
         {logs !== null ? (
+          <>
           <div className='row'>
-            <p className='title'>Choose an existing Log</p>
-            <div className='input-field'>
-              <select
-                ref={selectRef}
-                name='select'
-                className='select browser-default'
-                onChange={onChange}
-                multiple
-                // onClick={e => e.stopPropagation()}
-                value={logged}>
-                <option value='' disabled>
-                  Select Log
-                </option>
-
-                {logs.map(
-                  (optionLog) =>
-                    optionLog.tech._id === tech._id && (
-                      <option
-                        key={optionLog._id}
-                        multiple={true}
-                        value={optionLog._id}>
-                        Log ID#: {optionLog._id} Logged Date:{' '}
-                        {formatDate(optionLog.date)}
-                      </option>
-                    )
-                )}
-              </select>
-            </div>
+              <div className='input-field'>
+                <label htmlFor='search' />
+                Enter the Log ID
+                <input
+                  id='text'
+                  name='text'
+                  type='search'
+                  required
+                  placeholder='Must be 24 characters example: 21f2b...'
+                  ref={inputRef}
+                  value={text}
+                  onChange={onChange}
+                />
+              </div>
+            <ul>
+              {logs.map((log) => log._id=== inputRef.current.value? setIsMatch(true) &&(
+                <li key={log._id}>{`Log ID Match ${log._id}`}</li>
+              ):null)}
+            </ul>
           </div>
-        ) : null}
         <div className='row'>
           <div className='input-field '>
             Message:
@@ -158,15 +164,29 @@ const EditTechLogModal = ({
             </p>
           </div>
         </div>
+
+</>
+) : null}
+        
       </div>
+
+      
       <div className='modal-footer grey darken-2 modal-footer'>
         <a
           href='#!'
           onClick={onSubmit}
-          className='  modal-close z-depth-3 hoverable  waves-effect blue btn '>
+          className=' modal-close z-depth-3 hoverable modal-close  waves-effect blue btn '>
           Submit
         </a>
+        {/* <a
+          href='edit-log-modal'
+          onClick={onSubmit}
+          className=' modal-close z-depth-3 hoverable modal-close  waves-effect blue btn '>
+          Submit
+        </a> */}
+
       </div>
+      
     </div>
   );
 };

@@ -54,17 +54,26 @@ body {
 
 .landing-inner {
   /* color: rgba(66, 218, 66, 0.993); */
-  height: 100%;
+  height: 40%;
   width: 80%;
   margin: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: start;
   justify-content: center;
   text-align: center;
 }
+.demoBtn {
+/* display:block; */
+border-radius:10px;
+
+}
 .landing-title {
   color: rgba(66, 218, 66, 0.993);
+  text-align: center;
+
+  /* width:100%; */
+  /* display:block; */
 }
 
 /* Overlay */
@@ -111,6 +120,8 @@ textarea {
 @media only screen and (max-width: 600px) {
   .landing-title {
     font-size: 18px;
+  }
+  .demoBtn{
   }
   .navbar-title {
     font-size: 14px;
