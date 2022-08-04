@@ -12,7 +12,7 @@ import {
 export const getTechs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('get all the techs from techActions', getTechs)
+    // console.log('get all the techs from techActions', getTechs)
     setLoading();
 
     // request the data

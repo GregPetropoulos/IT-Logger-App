@@ -2,10 +2,7 @@ import React, { Fragment } from 'react';
 //!moment deprecated
 import formatDate from '../../utils/formatDate';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import M from 'materialize-css/dist/js/materialize.min.js';
 import { connect } from 'react-redux';
-import Preloader from '../layout/Preloader';
 
 const TechLogItems = ({
   logItem,

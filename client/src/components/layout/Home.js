@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Logs from '../logs/Logs';
@@ -11,15 +11,9 @@ import DeleteTechLogModal from '../techlog/DeleteTechLogModal';
 import AddBtn from './AddBtn';
 import Preloader from './Preloader';
 import StatusCards from './StatusCards';
-//*Bring in js for modals etc
-import M from 'materialize-css/dist/js/materialize.min.js';
 import Dashboard from './Dashboard';
 
 const Home = ({ log: { logs } }) => {
-  // //* Initialize Materialize JS for the action button
-  useEffect(() => {
-    M.AutoInit();
-  });
   if (logs === null) {
     return <Preloader />;
   }

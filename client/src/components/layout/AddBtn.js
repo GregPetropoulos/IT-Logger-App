@@ -1,6 +1,12 @@
-import React from 'react';
+import { useEffect } from 'react';
+//*Bring in js for modals etc
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const AddBtn = () => {
+  // //* Initialize Materialize JS for the action button
+  useEffect(() => {
+    M.AutoInit();
+  });
   return (
     <div className='fixed-action-btn'>
       <a
@@ -8,6 +14,7 @@ const AddBtn = () => {
         className='btn-floating btn-large blue darken-2 modal-trigger'>
         <i className='large material-icons'>post_add</i>
       </a>
+
       <ul>
         <li>
           <a

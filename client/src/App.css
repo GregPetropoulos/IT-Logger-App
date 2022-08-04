@@ -80,7 +80,9 @@ body {
   );
 }
 
-
+editmodalStyle{
+  color: yellow;
+}
 .btnRegistrationGroup, .btnSignInGroup{
   display: flex;
   width: 100%;

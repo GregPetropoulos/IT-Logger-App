@@ -50,12 +50,12 @@ const DeleteTechLogModal = ({
                 <li key={logItem._id} className='collection-item grey'>
                   <strong>Log ID # {logItem._id}</strong>
                   <br />
-                  <span>
-                    {tech !== null &&logItem.tech.firstName}
-                  </span>
+                  <span>{tech !== null && logItem.tech.firstName}</span>
                   <br />
                   <span
-                    className={` ${logItem.attention ? 'white-text' : 'white-text'}`}>
+                    className={` ${
+                      logItem.attention ? 'white-text' : 'white-text'
+                    }`}>
                     {logItem.message}
                   </span>
                   <br />
