@@ -9,7 +9,7 @@
 import { createStore, applyMiddleware} from'redux';
 
 //*Extension implemented
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 // * middleware
 import thunk from 'redux-thunk';
