@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURI');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(db);
-    console.log('MongoDB Connected....');
+    const conn = await mongoose.connect(process.env.MY_MONGODB_URI);
+    console.log(`MongoDB Connected...`.underline.magenta);
+
   } catch (err) {
     console.error(err.message);
+    console.log('CHECK ENV VARS');
     process.exit(1);
   }
 };

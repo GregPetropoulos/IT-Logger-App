@@ -1,5 +1,0 @@
-{
-    "mongoURI":"mongodb+srv://gregadmindb:greg1234@clustergp.eb8jf.mongodb.net/ClusterGP?retryWrites=true&w=majority" ,
-   "jwtSecret": "secret"
- 
- }

@@ -1,6 +1,7 @@
 // * Middelware Checking to see if token is correct and in the header
 const jwt = require('jsonwebtoken');
-const config = require('config');
+
+const secret = process.env.MY_JWT_SECRET;
 
 module.exports = function (req, res, next) {
   //* Checking for token in header after tech made a login attempt
@@ -12,13 +13,13 @@ module.exports = function (req, res, next) {
   }
   try {
     //* if there is a token, verify the current token
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
+    const decoded = jwt.verify(token, secret);
 
-    // * once verified, the payload placed in decoded and has the tech.id. To gain access to the id inside the route I must assign it to req.tech to get the id out of payload 
+    // * once verified, the payload placed in decoded and has the tech.id. To gain access to the id inside the route I must assign it to req.tech to get the id out of payload
     req.tech = decoded.tech;
 
     next();
   } catch (err) {
-      res.status(401).json({msg:'Token not valid'})
+    res.status(401).json({ msg: 'Token not valid' });
   }
 };

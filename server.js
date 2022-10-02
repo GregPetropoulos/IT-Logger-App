@@ -1,11 +1,15 @@
 // * BRING IN EXPRESS, BUILD PATH, DB,
 const express = require('express');
 const path = require('path');
-// * DB
-const connectDB = require('./config/db');
+const colors = require('colors')
+
+// * ENV VARS RO ACCESS PROCESS.ENV
+const dotenv = require('dotenv').config();
+
 const app = express();
 
 // *INITIALIZE AND CONNECT TO DB
+const connectDB = require('./config/db');
 connectDB();
 
 //* MIDDLEWARE
@@ -23,14 +27,14 @@ app.use('/api/logs', require('./routes/logs'));
 app.use('/api/auth', require('./routes/auth'));
 
 // * STATIC ASSETS FOR THE BUILD
-if (process.env.NODE_ENV === 'production') {
-    // Set the static folder
-    app.use(express.static('client/build'));
+// if (process.env.NODE_ENV === 'production') {
+//     // Set the static folder
+//     app.use(express.static('client/build'));
   
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-  }
+//     app.get('*', (req, res) => {
+//       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//     });
+//   }
 
 const PORT = process.env.PORT || 5000;
 

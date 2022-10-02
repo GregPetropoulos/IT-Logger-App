@@ -8,6 +8,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const secret = process.env.MY_JWT_SECRET;
 const auth = require('../middleware/auth');
 
 //* Bringing in the User model
@@ -17,10 +18,10 @@ const Tech = require('../models/Tech');
 // * @desc      Get logged in tech
 // *! access     private cause of auth middleware
 router.get('/', auth, async (req, res) => {
-    // * IF AUTH SEES LOGGED IN USER, THEN GET USER FROM DB BY ID, DONT RETURN PW
+  // * IF AUTH SEES LOGGED IN USER, THEN GET USER FROM DB BY ID, DONT RETURN PW
   try {
-const tech =await Tech.findById(req.tech.id).select('-password');
-res.json(tech);
+    const tech = await Tech.findById(req.tech.id).select('-password');
+    res.json(tech);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -68,7 +69,7 @@ router.post(
       //* signing the token and passing parameters(payload, jwt secret, option for expiration, callback)
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        secret,
         {
           expiresIn: 3600000
         },

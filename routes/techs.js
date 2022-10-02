@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../middleware/auth');
-
+const  secret=process.env.MY_JWT_SECRET
 
 //* Bringing in the User model
 const Tech = require('../models/Tech');
@@ -85,7 +85,8 @@ router.post(
       //* signing the token and passing parameters(payload, jwt secret, option for expiration, callback)
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        // config.get('jwtSecret'),
+        secret,
         {
           expiresIn: '5 days'
         },
