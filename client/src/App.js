@@ -66,7 +66,7 @@ const App = () => {
             <Route path='/techs' element={<Techs />} />
             <Route path='/about' element={<About />} />
             <Route path='/home' element={<PrivateRoute component={Home} />} />
-            {/* <Route path='/*' element={<NotFound />} /> */}
+            <Route path='/*' element={<NotFound />} />
           </Routes>
         </Fragment>
       </Router>
