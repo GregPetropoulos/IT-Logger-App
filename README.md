@@ -1,6 +1,6 @@
 # IT-Logger
 
-[Deployed](it-support.onrender.com/)
+[Deployed](https://it-support.onrender.com/)
 
 ## Intro
 A full stack react app with redux for state management. This is an Internal app for IT Department's to trouble-shoot and communicate with a system log. Each Log entry can be set the priority of the issue to high alert. All Logs are read only all authenticated users and the authenticated user has a personal dashboard of their own logs that are capable of create.read.update.delete. A search filter is used to filter through all logs
