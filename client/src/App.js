@@ -1,40 +1,28 @@
 //* Author: Greg Petropoulos
 //* IT Logger App w/ React/Redux
 //* Date:12/30/2021
+//* Refactored Date:9/28/23
 
-import React, { useEffect, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/layout/Home';
-import Navbar from './components/layout/Navbar';
-// import Alerts from './components/layout/Alerts';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import About from './components/layout/About';
-import PrivateRoute from './components/routing/PrivateRoute';
-import Landing from './components/layout/Landing';
-import NotFound from './components/layout/NotFound';
-
-import Techs from './components/tech/Techs';
-// Bring in CSS
+import React,{useEffect} from 'react';
+import { Outlet } from 'react-router-dom';
+import Navbar from '../src/components/layout/Navbar'
+import Footer from './components/layout/Footer';
 import 'materialize-css/dist/css/materialize.min.css';
-//*Bring in js for Navbar function
+// //*Bring in js for Navbar function
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-import './App.css';
-
-//***REDUX STORE WRAPPER****
-import { Provider } from 'react-redux';
-import store from './store';
 // * Token management
 import { loadTech } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
+import store from './store'
 
 const App = () => {
-  //* Initialize Materialize JS for the nav menu button
+   //* Initialize Materialize JS for the nav menu button
   useEffect(() => {
     M.AutoInit();
   });
+  
   //* Token checking
   useEffect(() => {
     //* check for token in LS when app first runs
@@ -52,25 +40,13 @@ const App = () => {
     });
   }, []);
 
-
   return (
-    <Provider store={store}>
-      <Router>
-        <Fragment>
-          {/* <Alerts /> */}
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Landing />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/techs' element={<Techs />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/home' element={<PrivateRoute component={Home} />} />
-            <Route path='/*' element={<NotFound />} />
-          </Routes>
-        </Fragment>
-      </Router>
-    </Provider>
+    <>
+      {/* <Alerts /> */}
+      <Navbar />
+      <Outlet />
+      <Footer/>
+    </>
   );
 };
 

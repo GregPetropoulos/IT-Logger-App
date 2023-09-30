@@ -1,6 +1,6 @@
 // import React from 'react'
 
-export const Footer = () => {
+const Footer = () => {
   const today = new Date();
   const currentYear = today.getFullYear();
   return (
@@ -14,3 +14,4 @@ export const Footer = () => {
     </section>
   );
 };
+export default Footer

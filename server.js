@@ -19,7 +19,7 @@ app.use(express.json());
 
 // *TEST ROUTE
 // app.get('/', (req, res) => res.json({ msg: 'Welcome to IT LOGGER world' }));
-console.log('hit server');
+// console.log('hit server');
 
 // *DEFINED API ROUTES TO CALL ROUTE FOLDER
 app.use('/api/techs', require('./routes/techs'));

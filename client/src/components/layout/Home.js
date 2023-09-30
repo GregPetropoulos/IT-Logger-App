@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Logs from '../logs/Logs';
 import LogFilter from './LogFilter';
 import Hero from '../hero/Hero';
-import { Footer } from './Footer';
 import AddTechLogModal from '../techlog/AddTechLogModal';
 import EditTechLogModal from '../techlog/EditTechLogModal';
 import DeleteTechLogModal from '../techlog/DeleteTechLogModal';
@@ -19,7 +17,7 @@ const Home = ({ log: { logs } }) => {
   }
 
   return (
-    <Fragment>
+    <>
       <section className='row '>
         <Hero />
         <LogFilter />
@@ -35,8 +33,7 @@ const Home = ({ log: { logs } }) => {
         <EditTechLogModal />
         <DeleteTechLogModal />
       </section>
-      <Footer />
-    </Fragment>
+    </>
   );
 };
 

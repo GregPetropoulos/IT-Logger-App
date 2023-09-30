@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 
 const StatusCards = () => {
   // * STATE of 3 Servers
-  // May need to add use effect later date
   const [serverState, setServerState] = useState({
     servers: [
       {
@@ -45,11 +44,11 @@ const StatusCards = () => {
     setServerState({ ...serverState, servers: updatedList });
   };
   return (
-    <Fragment>
-      <div className=' server-row valign-wrapper'>
+    <>
+      <div className='row'>
         {serverState.servers.map((arr) => (
-          <div key={arr.sid} className='row'>
-            <div className=' z-depth-4 hoverable grey darken-4 center card'>
+          <div key={arr.sid} className=' col s12 m4 '>
+            <div className='card-switch z-depth-4 hoverable grey darken-4 center card card-small'>
               <i
                 className={
                   arr.switcher
@@ -95,7 +94,7 @@ const StatusCards = () => {
           </div>
         ))}
       </div>
-    </Fragment>
+    </>
   );
 };
 

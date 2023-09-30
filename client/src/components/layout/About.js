@@ -1,10 +1,8 @@
-import React, {Fragment} from 'react'
-import { Footer } from './Footer'
+
 const About = () => {
     return (
-        <Fragment>
-
-        <section style={({height:'100vh'})}>
+        <>
+        <section>
             <div className='about-content-wrapper' style={({margin:'20px'})}>
             <h4>Why We Succeed</h4>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt totam ipsa possimus voluptatibus modi labore eligendi. Perferendis natus delectus, qui ullam iusto, obcaecati quaerat facere autem itaque, sunt ipsum ea.</p>
@@ -18,9 +16,8 @@ const About = () => {
             <h4>Community</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed culpa rerum est nisi veritatis voluptatem ipsam officia explicabo omnis facilis dolorem delectus ea perspiciatis, nesciunt rem tenetur odit? Fugiat, vel.</p>
             </div>
-            <Footer/>
         </section>
-        </Fragment>
+        </>
     )
 }
 

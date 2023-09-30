@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* *CSS DEBUGGER */
+  /* * {
+    background: #000 !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important;
+  }   */
+  
+  body {
+    background: rgb(63, 94, 251);
+    background: radial-gradient(
+      circle,
+      rgba(63, 94, 251, 1) 9%,
+      rgba(149, 117, 205, 1) 91%
+    );
+    font-family: 'Poppins', sans-serif;
+  }
+  .logbox {
+    background: rgb(66, 66, 66);
+    background: linear-gradient(
+      220deg,
+      rgba(66, 66, 66, 1) 13%,
+      rgba(63, 94, 251, 0.5478036175710594) 93%
+    );
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 2rem;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+  }
+  
+  /* Hero */
+  .hero {
+    position: relative;
+    background: url('../image/hero.jpg') no-repeat center center/cover;
+    height: 50vh;
+  }
+  
+  /* Landing Page */
+  .landing {
+    position: relative;
+    background: url('../image/land_page.jpg') no-repeat center center/cover;
+    height: 100vh;
+  }
+  
+  .landing-inner {
+    /* color: rgba(66, 218, 66, 0.993); */
+    height: 40%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    text-align: center;
+  }
+  .demoBtn {
+    /* display:block; */
+    border-radius: 10px;
+  }
+  .card-switch{
+    padding:10px;
+  }
+  .landing-title {
+    color: rgba(66, 218, 66, 0.993);
+    text-align: center;
+  }
+  .regForm.form, .signInForm {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.4382978723404255) 0%,
+      rgba(0, 0, 0, 0.5042553191489362) 100%
+    );
+  }
+  
+  editmodalStyle{
+    color: yellow;
+  }
+  .btnRegistrationGroup, .btnSignInGroup{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+  }
+  .haveAcc,.regAcc{
+    margin: 10px;
+  }
+  
+  
+  /* Overlay */
+  /* .dark-overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    } */
+  
+  /* icon sizes */
+  .material-icons.md-18 {
+    font-size: 18px;
+  }
+  .material-icons.md-24 {
+    font-size: 24px;
+  }
+  .material-icons.md-36 {
+    font-size: 36px;
+  }
+  .material-icons.md-48 {
+    font-size: 48px;
+  }
+  
+  /* Icon colors */
+  .material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .material-icons.md-dark.md-inactive {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  textarea {
+    resize: vertical;
+  }
+  
+  .collection.with-header .collection-item.avatar {
+    padding: 15px;
+  }
+  
+  /* MEDIA QUERYS */
+  
+  @media only screen and (max-width: 600px) {
+    .landing-title {
+      font-size: 18px;
+    }
+    .demoBtn {
+    }
+    .navbar-title {
+      font-size: 14px;
+    }
+    /* .guest-link {
+    } */
+    .sign-in-title,
+    .sign-up-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  
+   
+    .about-content-wrapper {
+      text-align: center;
+    }
+    .about-content-wrapper > h4 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .meet-techs {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .collection-item .attention {
+      width: 81px;
+    }
+    .name-on-log {
+      margin-top: 50px;
+    }
+  }
+  
