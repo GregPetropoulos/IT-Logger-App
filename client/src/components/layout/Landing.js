@@ -16,15 +16,12 @@ const Landing = ({ isAuthenticated, login }) => {
   if (isAuthenticated) return <Navigate to='/home' />;
 
   return (
-    <section className='landing'>
-      <div className='landing-inner '>
-        <h2 className='landing-title'>Welcome to IT Logger</h2>
-        <button
-          className='demoBtn hoverable blue waves-effect waves-red  btn'
+    <section className='landing  center-align'>
+      <button
+          className='  demoBtn btn-floating btn-large bottom hoverable blue waves-effect waves-red  btn cyan pulse'
           onClick={onDemo}>
           Demo
         </button>
-      </div>
     </section>
   );
 };
