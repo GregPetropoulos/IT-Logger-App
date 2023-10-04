@@ -3,9 +3,9 @@
 //* Date:12/30/2021
 //* Refactored Date:9/28/23
 
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../src/components/layout/Navbar'
+import Navbar from '../src/components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import 'materialize-css/dist/css/materialize.min.css';
 // //*Bring in js for Navbar function
@@ -15,14 +15,14 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import { loadTech } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
-import store from './store'
+import store from './store';
 
 const App = () => {
-   //* Initialize Materialize JS for the nav menu button
+  //* Initialize Materialize JS for the nav menu button
   useEffect(() => {
     M.AutoInit();
   });
-  
+
   //* Token checking
   useEffect(() => {
     //* check for token in LS when app first runs
@@ -44,8 +44,10 @@ const App = () => {
     <>
       {/* <Alerts /> */}
       <Navbar />
-      <Outlet />
-      <Footer/>
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </>
   );
 };

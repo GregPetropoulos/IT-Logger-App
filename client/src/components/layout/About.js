@@ -3,7 +3,7 @@ const About = () => {
     return (
         <>
         <section>
-            <div className='about-content-wrapper' style={({margin:'20px'})}>
+            <div className='about-content-wrapper'>
             <h4>Why We Succeed</h4>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt totam ipsa possimus voluptatibus modi labore eligendi. Perferendis natus delectus, qui ullam iusto, obcaecati quaerat facere autem itaque, sunt ipsum ea.</p>
             <h4>Mission</h4>

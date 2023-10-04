@@ -27,7 +27,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
                 onClick={item.link === '/login' ? logout : undefined}
                 to={item.link}
                 target='_parent'
-                className=' white-text deep-purple darken-1 waves-effect waves-black btn-medium btn hoverable'>
+                className=' white-text indigo darken-3 waves-effect waves-black btn-medium btn hoverable'>
                 {item.link === '/login'
                   ? 'Logout'
                   : item.link.slice(1, 2).toUpperCase() + item.link.slice(2)}
@@ -46,7 +46,7 @@ const Navbar = ({ title, auth: { isAuthenticated, tech }, logout }) => {
             <Link
               to={item.link}
               target='_parent'
-              className='  white-text deep-purple darken-1 waves-effect waves-black  btn btn-medium hoverable'>
+              className='  white-text indigo darken-3 waves-effect waves-black  btn btn-medium hoverable'>
               {item.link === '/'
                 ? 'IT Logger'
                 : item.link.slice(1, 2).toUpperCase() + item.link.slice(2)}

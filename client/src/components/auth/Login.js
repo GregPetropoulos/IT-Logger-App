@@ -31,7 +31,7 @@ const Login = ({ isAuthenticated, login }) => {
     <section className='container'>
       <h1 className='sign-in-title center-align'>Sign In</h1>
       <i className='medium material-icons'>login</i>
-      <p> Sign Into Your Account</p>
+      <p className='white-text'> Sign Into Your Account</p>
       <form className='form signInForm white-text' onSubmit={onSubmit}>
         <div className='row'>
           <div className='input-field col s12'>
