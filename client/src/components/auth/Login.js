@@ -41,7 +41,7 @@ const Login = ({ isAuthenticated, login }) => {
               name='email'
               value={email}
               onChange={onChange}
-              className='validate center'
+              className='validate center white-text'
               required
             />
             <label htmlFor='email' className='active'>

@@ -81,7 +81,6 @@ const EditTechLogModal = ({
   };
 
   if (logs === null) {
-    console.log('preload');
     return <Preloader />;
   }
 

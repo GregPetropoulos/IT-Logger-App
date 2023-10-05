@@ -37,11 +37,11 @@ const Register = ({ isAuthenticated, register }) => {
   if (isAuthenticated) return <Navigate to='/home' />;
 
   return (
-    <section className='container'>
+    <section className='container mb-1'>
       <h1 className=' sign-up-title center-align'>Sign Up</h1>
       <i className='medium material-icons'>account_circle</i>
-      <p> Register an Account to Login</p>
-      <form className='form regForm' onSubmit={onSubmit}>
+      <p className='white-text'> Register an Account to Login</p>
+      <form className='form regForm'  onSubmit={onSubmit}>
         <div className='row'>
           <div className='input-field col s12'>
             <input
@@ -50,7 +50,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='firstName'
               value={firstName}
               onChange={onChange}
-              className='validate center'
+              className='validate center white-text'
               required
             />
             <label htmlFor='first_name' className='active'>
@@ -64,7 +64,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='lastName'
               value={lastName}
               onChange={onChange}
-              className='validate center'
+              className='validate center white-text'
               required
             />
             <label htmlFor='last_name' className='active'>
@@ -78,7 +78,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='email'
               value={email}
               onChange={onChange}
-              className='validate center'
+              className='validate center white-text'
               required
             />
             <label htmlFor='email' className='active'>
@@ -92,7 +92,7 @@ const Register = ({ isAuthenticated, register }) => {
               name='password'
               value={password}
               onChange={onChange}
-              className='validate center'
+              className='validate center white-text'
               required
             />
             <label htmlFor='password' className='active'>
@@ -115,7 +115,7 @@ const Register = ({ isAuthenticated, register }) => {
           </div>
           <div className='btnRegistrationGroup center'>
             <button
-              className='col s12 indigo darken-3 waves-effect waves-white btn-large center'
+              className='col s12 indigo darken-3 waves-effect waves-white btn btn-large center'
               type='submit'
               name='action'
               value='Register'>

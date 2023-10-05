@@ -16,7 +16,7 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
     <>
       <section >
         <h2 className='meet-techs center-align'>Meet The Techs</h2>
-        <ul className='collection center'>
+        <ul className='collection '>
           {techs.map((t) => (
             <li
               className='white-text collection-item grey darken-3'
