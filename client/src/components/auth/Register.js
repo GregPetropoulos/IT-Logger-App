@@ -38,10 +38,10 @@ const Register = ({ isAuthenticated, register }) => {
 
   return (
     <section className='container mb-1'>
-      <h1 className=' sign-up-title center-align'>Sign Up</h1>
+      <h4 className='  center-align'>Sign Up</h4>
       <i className='medium material-icons'>account_circle</i>
       <p className='white-text'> Register an Account to Login</p>
-      <form className='form regForm'  onSubmit={onSubmit}>
+      <form className='form regForm' onSubmit={onSubmit}>
         <div className='row'>
           <div className='input-field col s12'>
             <input

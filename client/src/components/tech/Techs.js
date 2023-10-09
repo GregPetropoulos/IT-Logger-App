@@ -13,26 +13,24 @@ const Techs = ({ tech: { techs, loading }, getTechs }) => {
     return <Preloader />;
   }
   return (
-    <>
-      <section >
-        <h2 className='meet-techs center-align'>Meet The Techs</h2>
-        <ul className='collection '>
-          {techs.map((t) => (
-            <li
-              className='white-text collection-item grey darken-3'
-              key={t._id}
-              t={t}>
-              Name: {t.firstName} {t.lastName}
-              <div></div>
-              Contact:{' '}
-              <a href={`mailto:${t.email}`} alt='tech email'>
-                {t.email}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </>
+    <section className='container collection-bottom-margin'>
+      <h3 className='center'>Meet The Techs</h3>
+      <ul className='collection '>
+        {techs.map((t) => (
+          <li
+            className='white-text collection-item grey darken-3'
+            key={t._id}
+            t={t}>
+            Name: {t.firstName} {t.lastName}
+            <div></div>
+            Contact:{' '}
+            <a href={`mailto:${t.email}`} alt='tech email'>
+              {t.email}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };
 

@@ -44,10 +44,10 @@ const App = () => {
     <>
       {/* <Alerts /> */}
       <Navbar />
-      <main>
+      <main className='main-container'>
         <Outlet />
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 };

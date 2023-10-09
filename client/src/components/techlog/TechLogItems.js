@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 //!moment deprecated
 import formatDate from '../../utils/formatDate';
 import PropTypes from 'prop-types';
@@ -12,21 +11,22 @@ const TechLogItems = ({
   }
 }) => {
   return (
-    <Fragment>
+    <>
       {isAuthenticated && _id === logItem.tech._id && (
         <div>
-          <div className='center collection with-header grey darken-2 z-depth-3'>
+          <div className='center collection with-header grey darken-2 z-depth-3 p-1'>
             <p>Posted on {formatDate(logItem.date)} </p>
           </div>
           {logItem.attention}
-          <a
-            href='#!'
-            className=' right-align valign-wrapper red secondary-content '>
-            <i className='material-icons md-dark'>priority_high</i>
-            <span className='black-text '>Attention</span>
-          </a>
-
-          <div className='collection-item active grey darken-3'>
+          <div className='p-1'>
+            <a
+              href='#!'
+              className=' right-align valign-wrapper red secondary-content'>
+              <i className='material-icons md-dark'>priority_high</i>
+              <span className='black-text p-5'>Attention</span>
+            </a>
+          </div>
+          <div className='collection-item active grey darken-3 white-text'>
             <p className=' '>
               <strong>Message: </strong>
               {logItem.message}
@@ -37,7 +37,7 @@ const TechLogItems = ({
           </div>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };
 

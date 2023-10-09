@@ -24,6 +24,7 @@ const EditTechLogModal = ({
   // *useEffect handling the edit modal remaining open due to double renders
   // *useEffect handling the the state of current as it's being watched for changes to rerender
   useEffect(() => {
+    let unmount = true;
     M.AutoInit();
 
     const elem = document.getElementById('edit-log-modal');
@@ -32,10 +33,11 @@ const EditTechLogModal = ({
     instance.open();
 
     //*Once the current is changed and true we up date the local message and attention state
-    if (current) {
+    if (current && unmount) {
       setMessage(current.message);
       setAttention(current.attention);
     }
+    return () => (unmount = false);
   }, [current]);
 
   // *MATCH LOG ID SET STATE FOR ISMATCH,CURRENT,AND TEXT
@@ -112,7 +114,7 @@ const EditTechLogModal = ({
                     placeholder='Last 6 digits ex: 644bd3'
                     // ref={inputRef}
                     value={text}
-                    onChange={onChange}
+                    onChange={(e) => onChange(e)}
                   />
                 </div>
                 {isMatch === true &&

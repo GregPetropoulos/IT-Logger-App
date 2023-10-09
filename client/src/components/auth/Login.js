@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 
 const Login = ({ isAuthenticated, login }) => {
+  const navigate = useNavigate();
   //*local state for login from
   const [formData, setFormData] = useState({
     email: '',
@@ -25,11 +26,13 @@ const Login = ({ isAuthenticated, login }) => {
   };
 
   //* If login successful return home page
-  if (isAuthenticated) return <Navigate to='/home' />;
+  if (isAuthenticated) {
+    navigate('/home');
+  }
 
   return (
     <section className='container'>
-      <h1 className='sign-in-title center-align'>Sign In</h1>
+      <h4 className='center'>Sign In</h4>
       <i className='medium material-icons'>login</i>
       <p className='white-text'> Sign Into Your Account</p>
       <form className='form signInForm white-text' onSubmit={onSubmit}>

@@ -1,4 +1,3 @@
-import React, {Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import formatDate from '../../utils/formatDate';
@@ -30,9 +29,9 @@ const Dashboard = ({
     .filter(Boolean).length;
 
   return (
-    <Fragment>
+    <>
       {isAuthenticated && _id && (
-        <div className='card-panel blue z-depth-2'>
+        <div className='card-panel blue z-depth-2 white-text borderRad10'>
           <span className='new badge red' data-badge-caption='Attentions'>
             {numberOfAttentions}
           </span>
@@ -43,7 +42,7 @@ const Dashboard = ({
 
           <ul className='collapsible'>
             <li>
-              <div className='center collapsible-header no-border grey darken-3'>
+              <div className='center collapsible-header  grey darken-3'>
                 <i className='material-icons'>message</i>
                 Your Logs to Date {numberOfLogsOfTech}
               </div>
@@ -57,7 +56,7 @@ const Dashboard = ({
           </ul>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };
 

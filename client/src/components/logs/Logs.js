@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
 import PropTypes from 'prop-types';
@@ -26,16 +26,16 @@ const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
   }
 
   return (
-    <Fragment>
-      <ul className='collection with-header'>
+    <>
+      <ul className='collection with-header borderRad10 white-text'>
         <li className='collection-header grey darken-3'>
-          <h4 className='center'>System Logs</h4>
+          <h4 className='center white-text'>System Logs</h4>
         </li>
         {filtered !== null
           ? filtered.map((log) => <LogItem log={log} key={log._id} />)
           : logs.map((log) => <LogItem log={log} key={log._id} />)}
       </ul>
-    </Fragment>
+    </>
   );
 };
 
