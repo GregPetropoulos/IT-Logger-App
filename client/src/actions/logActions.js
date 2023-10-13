@@ -24,7 +24,6 @@ import {
 
 
 //*GET ALL LOGS FROM THE SERVER /
-// **-----REFACTORED VERSION**-------------------------
 export const getLogs = () => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
@@ -53,7 +52,6 @@ export const getLogs = () => async (dispatch) => {
     });
   }
 };
-// **------REFACTORED VERSION**-------------------------
 
 //* ADD A NEW LOG
 export const addLog = (log) => async (dispatch) => {
@@ -162,7 +160,6 @@ export const setLoading = () => {
 export const filterLogs = (text) => (dispatch) => {
   //* Display will send the action.type, payload data is the text entered by the user for the search of contacts
   try {
-    console.log('checking the filter actionCreator');
     dispatch({
       type: FILTER_LOGS,
       payload: text

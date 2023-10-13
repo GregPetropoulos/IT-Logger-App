@@ -16,7 +16,7 @@ const TechLogItems = ({
           <div className='center collection with-header grey darken-2 z-depth-3 p-1'>
             <p>Posted on {formatDate(logItem.date)} </p>
           </div>
-          {logItem.attention}
+          {logItem.attention&&
           <div className='p-1'>
             <a
               href='#!'
@@ -24,7 +24,7 @@ const TechLogItems = ({
               <i className='material-icons md-dark'>priority_high</i>
               <span className='black-text p-5'>Attention</span>
             </a>
-          </div>
+          </div>}
           <div className='collection-item active grey darken-3 white-text'>
             <p className=' '>
               <strong>Message: </strong>

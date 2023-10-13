@@ -40,9 +40,9 @@ const Dashboard = ({
             Hi {firstName} {lastName}
           </h5>
 
-          <ul className='collapsible'>
+          <ul className='collapsible btn-user-logs'>
             <li>
-              <div className='center collapsible-header  grey darken-3'>
+              <div className='center collapsible-header  grey darken-3 btn-user-logs'>
                 <i className='material-icons'>message</i>
                 Your Logs to Date {numberOfLogsOfTech}
               </div>

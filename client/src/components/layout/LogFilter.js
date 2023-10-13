@@ -4,20 +4,21 @@ import { filterLogs, clearFilter } from '../../actions/logActions';
 import PropTypes from 'prop-types';
 
 const LogFilter = ({ filterLogs, clearFilter, filtered }) => {
-  const text = useRef('');
+  const textRef = useRef(null);
 
   useEffect(() => {
     if (filtered === null) {
-      text.current.value = '';
+      textRef.current = '';
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChange = (e) => {
-    if (text.current.value !== '') {
-      filterLogs(e.target.value);
-    } else {
+    textRef.current = e.target.value;
+    if (textRef.current === '') {
       clearFilter();
+    } else {
+      filterLogs(textRef.current);
     }
   };
 
@@ -30,8 +31,8 @@ const LogFilter = ({ filterLogs, clearFilter, filtered }) => {
               id='search'
               type='search'
               required
-              placeholder='Search Logs...'
-              ref={text}
+              placeholder='Search Logs by message,date,first or last name...'
+              ref={textRef}
               onChange={onChange}
             />
             <label className='label-icon' htmlFor='search'>

@@ -157,6 +157,13 @@ textarea {
 .edit-submit-btn{
   width:100%;
 }
+.btn-user-logs{
+border-radius: 24px;
+transition: all .2s ease-in-out;
+}
+.btn-user-logs:hover{
+  transform: scale(1.02);
+}
 .collection.with-header .collection-item.avatar {
   padding: 15px;
 }

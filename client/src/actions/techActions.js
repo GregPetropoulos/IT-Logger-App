@@ -36,7 +36,6 @@ export const getTechs = () => async (dispatch) => {
 export const addTech = (tech) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('add a tech', addTech);
 
     setLoading();
 
@@ -62,8 +61,6 @@ export const addTech = (tech) => async (dispatch) => {
 export const deleteTech = (id) => async (dispatch) => {
   // **THIS IS THE ASYNC THUNK FUNCTION
   try {
-    console.log('delete a tech', deleteTech, id);
-
     setLoading();
 
     // request the data no variable needed to store, need id to delete from backend
