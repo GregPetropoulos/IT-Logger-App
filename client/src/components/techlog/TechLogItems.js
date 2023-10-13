@@ -6,13 +6,12 @@ import { connect } from 'react-redux';
 const TechLogItems = ({
   logItem,
   auth: {
-    isAuthenticated,
     tech: { _id }
   }
 }) => {
   return (
     <>
-      {isAuthenticated && _id === logItem.tech._id && (
+      { _id === logItem.tech._id && (
         <div>
           <div className='center collection with-header grey darken-2 z-depth-3 p-1'>
             <p>Posted on {formatDate(logItem.date)} </p>

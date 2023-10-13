@@ -2,12 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateLog } from '../../actions/logActions';
 import { setCurrent } from '../../actions/logActions';
 import Preloader from '../layout/Preloader';
-import formatDate from '../../utils/formatDate';
+// import formatDate from '../../utils/formatDate';
 
 const EditTechLogModal = ({
   setCurrent,
@@ -17,7 +21,6 @@ const EditTechLogModal = ({
 }) => {
   // LOCAL STATE UPDATES CURRENT
   const [text, setText] = useState('');
-  const [isMatch, setIsMatch] = useState(false);
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
 
@@ -29,38 +32,30 @@ const EditTechLogModal = ({
 
     const elem = document.getElementById('edit-log-modal');
     const instance = M.Modal.init(elem);
-    // console.log('M.Modal.isOpen', M.Modal);
-    instance.open();
 
     //*Once the current is changed and true we up date the local message and attention state
     if (current && unmount) {
-      setMessage(current.message);
+      instance.open();
+      setMessage(current.message || '');
       setAttention(current.attention);
     }
+
     return () => (unmount = false);
   }, [current]);
 
   // *MATCH LOG ID SET STATE FOR ISMATCH,CURRENT,AND TEXT
-  const onChange = (e) => {
-    const textInput = e.target.value;
-    setText(textInput);
-
-    const textInputMatchId = logs.filter(
-      (logItem) => logItem._id.slice(18) === textInput
-    );
-
-    if (textInputMatchId.length > 0) {
-      setIsMatch(true);
-      setCurrent(...textInputMatchId);
-    } else {
-      setIsMatch(false);
+  const selectOnChange = (e) => {
+    if (e.target.value === '') {
+      setCurrent('');
+      setMessage('');
     }
+    setText(e.target.value);
+    setCurrent(logs.find((item) => item._id === e.target.value));
   };
 
   const onSubmit = (e) => {
-    console.log('onsubmit');
     e.preventDefault();
-    if (message === '') {
+    if (message === '' || text === '') {
       M.toast({ html: 'Please enter a message' });
     } else {
       // * SET UP AN OBJECT
@@ -90,45 +85,44 @@ const EditTechLogModal = ({
     <div>
       <div
         id='edit-log-modal'
-        className='modal grey darken-1 white-text'
+        className='modal grey darken white-text'
         style={modalStyle}>
         <div className='modal-content'>
-          <h4>Edit System Logs</h4>
+          <h4 className='p-1'>Edit System Logs</h4>
           {tech !== null && (
-            <div className=''>
+            <div className='p-1'>
               {tech.firstName} {tech.lastName}
               <p>Tech ID# {tech._id}</p>
             </div>
           )}
           {logs !== null && (
-            <>
-              <div className='row'>
-                <div className='input-field'>
-                  <label htmlFor='search' />
-                  Enter the Log ID
-                  <input
-                    id='text'
-                    name='text'
-                    type='search'
-                    required
-                    placeholder='Last 6 digits ex: 644bd3'
-                    // ref={inputRef}
-                    value={text}
-                    onChange={(e) => onChange(e)}
-                  />
-                </div>
-                {isMatch === true &&
-                  logs.map((log) =>
-                    log._id.slice(18) === text ? (
-                      <div key={log._id}>{`Log ID Match ${log._id}`}</div>
-                    ) : (
-                      ''
+            <FormControl fullWidth>
+              <InputLabel id='edit-log' className='white-text'>
+                Your Logs
+              </InputLabel>
+              <Select
+                MenuProps={{ disablePortal: true }} //MUI BUG
+                labelId='edit-log'
+                id='edit-log'
+                value={text}
+                label='Log'
+                className='white-text'
+                onChange={selectOnChange}>
+                <MenuItem value=''>
+                  <em>None</em>
+                </MenuItem>
+                {logs.map(
+                  (item) =>
+                    tech._id === item.tech._id && (
+                      <MenuItem className='' key={item._id} value={item._id}>
+                        {item._id}
+                      </MenuItem>
                     )
-                  )}
-              </div>
-              <div className='row'>
+                )}
+              </Select>
+              <div className='row input-row'>
                 <div className='input-field '>
-                  Message:
+                  Edit Message:
                   <textarea
                     className='grey input-field'
                     type='textarea'
@@ -154,21 +148,15 @@ const EditTechLogModal = ({
                 </div>
               </div>
 
-              <div className='modal-footer grey darken-2 modal-footer'>
+              <div className='modal-footer grey darken'>
                 <a
                   href='#!'
                   onClick={onSubmit}
-                  className=' modal-close z-depth-3 hoverable modal-close  waves-effect blue btn '>
+                  className=' modal-close z-depth-3 hoverable modal-close  waves-effect blue btn  edit-submit-btn'>
                   Submit
                 </a>
-                {/* <a
-          href='edit-log-modal'
-          onClick={onSubmit}
-          className=' modal-close z-depth-3 hoverable modal-close  waves-effect blue btn '>
-          Submit
-        </a> */}
               </div>
-            </>
+            </FormControl>
           )}
         </div>
       </div>
@@ -177,8 +165,8 @@ const EditTechLogModal = ({
 };
 
 const modalStyle = {
-  width: '75%',
-  height: '75%'
+  width: '100%',
+  height: '100%'
 };
 
 EditTechLogModal.propTypes = {

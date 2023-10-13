@@ -11,28 +11,32 @@ import Preloader from './Preloader';
 import StatusCards from './StatusCards';
 import Dashboard from './Dashboard';
 
-const Home = ({ log: { logs } }) => {
+const Home = ({ log: { logs }, auth: { isAuthenticated } }) => {
+  // console.log('HOME COMPONENT');
   if (logs === null) {
     return <Preloader />;
   }
-
   return (
     <>
-      <section className='row '>
-        <Hero />
-        <LogFilter />
-        <StatusCards />
-        <div className='no-border col  m5 s12 dashboard'>
-          <Dashboard />
-        </div>
-        <div className='no-border col  m7 s12 '>
-          <Logs />
-        </div>
-        <AddBtn />
-        <AddTechLogModal />
-        <EditTechLogModal />
-        <DeleteTechLogModal />
-      </section>
+      {isAuthenticated ? (
+        <section className='row '>
+          <Hero />
+          <LogFilter />
+          <StatusCards />
+          <div className='no-border col  m5 s12 dashboard'>
+            <Dashboard />
+          </div>
+          <div className='no-border col  m7 s12 '>
+            <Logs />
+          </div>
+          <AddBtn />
+          <AddTechLogModal />
+          <EditTechLogModal />
+          <DeleteTechLogModal />
+        </section>
+      ) : (
+        <Preloader />
+      )}
     </>
   );
 };
@@ -42,7 +46,8 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  log: state.log
+  log: state.log,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps)(Home);

@@ -151,6 +151,12 @@ textarea {
   resize: vertical;
 }
 
+.input-row{
+  width:100%;
+}
+.edit-submit-btn{
+  width:100%;
+}
 .collection.with-header .collection-item.avatar {
   padding: 15px;
 }

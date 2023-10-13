@@ -10,11 +10,13 @@ import { getLogs } from '../../actions/logActions';
 
 // destructure app level props, getLogs gets passed as prop even though it's a function brought in
 const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
-  // Calling the getlogs fetch in the useEffect
   useEffect(() => {
-    getLogs();
-    // eslint-disable-next-line
-  }, [getLogs]);
+    let unmount = true;
+    if (unmount) {
+      getLogs();
+    }
+    return () => (unmount = false);
+  }, [loading]);
   // *! may need getLogs in array in useEffect
   // eslint-disable-next-line
   if (loading || logs === null) {

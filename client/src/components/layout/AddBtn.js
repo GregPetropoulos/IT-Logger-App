@@ -4,9 +4,14 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 const AddBtn = () => {
   // //* Initialize Materialize JS for the action button
-  useEffect(() => {
-    M.AutoInit();
-  });
+  // useEffect(() => {
+  //   let unmount = true;
+  //   if (unmount) {
+  //     M.AutoInit();
+  //   }
+  //   return () => (unmount = false);
+  // });
+  
   return (
     <div className='fixed-action-btn'>
       <a

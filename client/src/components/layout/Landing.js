@@ -9,7 +9,6 @@ const Landing = ({ isAuthenticated, login }) => {
   const email = 'demo@yahoo.com';
   const password = 'password';
   const onDemo = () => {
-    console.log('hit');
     login(email, password);
   };
   //* If login successful return home page
