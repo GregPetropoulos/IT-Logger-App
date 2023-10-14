@@ -21,8 +21,8 @@ const Home = ({ log: { logs }, auth: { isAuthenticated } }) => {
       {isAuthenticated ? (
         <section className='row '>
           <Hero />
-          <LogFilter />
           <StatusCards />
+          <LogFilter />
           <div className='no-border col  m5 s12 dashboard'>
             <Dashboard />
           </div>

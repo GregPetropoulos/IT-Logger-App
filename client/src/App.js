@@ -3,10 +3,11 @@
 //* Date:12/30/2021
 //* Refactored Date:9/28/23
 
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../src/components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import Preloader from './components/layout/Preloader';
 import 'materialize-css/dist/css/materialize.min.css';
 // //*Bring in js for Navbar function
 import M from 'materialize-css/dist/js/materialize.min.js';
@@ -43,11 +44,13 @@ const App = () => {
   return (
     <>
       {/* <Alerts /> */}
-      <Navbar />
-      <main className='main-container'>
-        <Outlet />
-        <Footer />
-      </main>
+      <Suspense fallback={<Preloader />}>
+        <Navbar />
+        <main className='main-container'>
+          <Outlet />
+          <Footer />
+        </main>
+      </Suspense>
     </>
   );
 };

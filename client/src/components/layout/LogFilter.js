@@ -1,17 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
+import Input from '@mui/material/Input';
 import { filterLogs, clearFilter } from '../../actions/logActions';
 import PropTypes from 'prop-types';
 
 const LogFilter = ({ filterLogs, clearFilter, filtered }) => {
   const textRef = useRef(null);
-
   useEffect(() => {
     if (filtered === null) {
-      textRef.current = '';
+      textRef.current = null;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filtered]);
 
   const onChange = (e) => {
     textRef.current = e.target.value;
@@ -23,26 +22,30 @@ const LogFilter = ({ filterLogs, clearFilter, filtered }) => {
   };
 
   return (
-    <nav style={{ marginBottom: '30px' }} className='blue'>
-      <div className='nav-wrapper'>
         <form>
-          <div className='input-field'>
-            <input
+            <Input
               id='search'
               type='search'
               required
+              fullWidth
+              disableUnderline
+              className='white-text'
               placeholder='Search Logs by message,date,first or last name...'
-              ref={textRef}
+              inputRef={textRef}
               onChange={onChange}
-            />
-            <label className='label-icon' htmlFor='search'>
+              startAdornment={
               <i className='material-icons'>search</i>
-            </label>
-            <i className='material-icons'>close</i>
-          </div>
+
+              }
+              // endAdornment={
+              // <i onClick={()=>{
+              //   clearFilter()
+              //   textRef.current=null
+              // }} className='material-icons'>close</i>
+
+              // }
+            />
         </form>
-      </div>
-    </nav>
   );
 };
 LogFilter.propTypes = {
@@ -50,6 +53,7 @@ LogFilter.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  log: state.log
+  log: state.log,
+  filtered:state.log.filtered
 });
 export default connect(mapStateToProps, { filterLogs, clearFilter })(LogFilter);

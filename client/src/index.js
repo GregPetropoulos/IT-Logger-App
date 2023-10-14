@@ -1,4 +1,7 @@
-import React from 'react';
+//*STYLES
+import '../src/assets/styles.css';
+import 'materialize-css/dist/css/materialize.min.css';
+import  React,{ lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -9,26 +12,23 @@ import {
 import { Provider } from 'react-redux';
 import store from './store';
 
-// * COMPONENTS
 import App from './App';
-import Landing from '../src/components/layout/Landing';
-import Home from '../src/components/layout/Home';
-
-// import Alerts from './components/layout/Alerts';
-import Login from '../src/components/auth/Login';
-import Register from '../src/components/auth/Register';
-import About from '../src/components/layout/About';
-import PrivateRoute from '../src/components/routing/PrivateRoute';
-import NotFound from '../src/components/layout/NotFound';
-import Techs from './components/tech/Techs';
-
-//*STYLES
-import '../src/assets/styles.css';
-import 'materialize-css/dist/css/materialize.min.css';
 
 //For render deployment,disables devtools in prod mode
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
+
+// * COMPONENTS LAZY LOADED
+const Landing = lazy(() => import('../src/components/layout/Landing'));
+const Home = lazy(() => import('../src/components/layout/Home'));
+
+// import Alerts from './components/layout/Alerts';
+const Login = lazy(() => import('../src/components/auth/Login'));
+const Register = lazy(() => import('../src/components/auth/Register'));
+const About = lazy(() => import('../src/components/layout/About'));
+const PrivateRoute = lazy(() => import('../src/components/routing/PrivateRoute'));
+const NotFound = lazy(() => import('../src/components/layout/NotFound'));
+const Techs = lazy(() => import('./components/tech/Techs'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
