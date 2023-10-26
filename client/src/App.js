@@ -31,7 +31,6 @@ const App = ({ log }) => {
  //TODO Refactor
   useEffect(() => {
     let unmount = true;
-    console.log('token useeffect -in APP');
     //* check for token in LS when app first runs
     if (localStorage.token && unmount) {
       //* if there is a token set axios headers for all requests
