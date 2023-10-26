@@ -1,4 +1,3 @@
-//!moment deprecated
 import formatDate from '../../utils/formatDate';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,21 +10,22 @@ const TechLogItems = ({
 }) => {
   return (
     <>
-      { _id === logItem.tech._id && (
-        <div>
+      {_id === logItem.tech._id && (
+        <div className=' grey darken-3 white-text p-1 m-1 borderRad10'>
           <div className='center collection with-header grey darken-2 z-depth-3 p-1'>
             <p>Posted on {formatDate(logItem.date)} </p>
           </div>
-          {logItem.attention&&
-          <div className='p-1'>
-            <a
-              href='#!'
-              className=' right-align valign-wrapper red secondary-content'>
-              <i className='material-icons md-dark'>priority_high</i>
-              <span className='black-text p-5'>Attention</span>
-            </a>
-          </div>}
-          <div className='collection-item active grey darken-3 white-text'>
+          {logItem.attention && (
+            <div className='p-1'>
+              <a
+                href='#!'
+                className=' right-align valign-wrapper red secondary-content'>
+                <i className='material-icons md-dark'>priority_high</i>
+                <span className='black-text p-5'>Attention</span>
+              </a>
+            </div>
+          )}
+          <div className='collection-item active p-1'>
             <p className=' '>
               <strong>Message: </strong>
               {logItem.message}

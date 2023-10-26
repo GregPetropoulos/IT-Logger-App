@@ -1,24 +1,12 @@
-import React, { useEffect } from 'react';
 import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
 import PropTypes from 'prop-types';
 
 // ***REDUX***
 import { connect } from 'react-redux';
-// this is importing a function from logActions which is passed into the connect to execute by this component
-import { getLogs } from '../../actions/logActions';
 
 // destructure app level props, getLogs gets passed as prop even though it's a function brought in
-const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
-  useEffect(() => {
-    let unmount = true;
-    if (unmount) {
-      getLogs();
-    }
-    return () => (unmount = false);
-  }, [loading]);
-  // *! may need getLogs in array in useEffect
-  // eslint-disable-next-line
+const Logs = ({ log: { logs, loading, filtered } }) => {
   if (loading || logs === null) {
     return <Preloader />;
   }
@@ -42,8 +30,7 @@ const Logs = ({ log: { logs, loading, filtered }, getLogs }) => {
 };
 
 Logs.propTypes = {
-  log: PropTypes.object.isRequired,
-  getLogs: PropTypes.func.isRequired
+  log: PropTypes.object.isRequired
 };
 
 // *Bring in the whole state
@@ -56,4 +43,4 @@ const mapStateToProps = (state) => ({
 // *REDUX -the connect takes in 2 things the state and a function
 // *1) If you want anything from app level state into a component as prop pass in mapStateToProps
 // * 2) The getLogs function from the app level imported from logActions
-export default connect(mapStateToProps, { getLogs })(Logs);
+export default connect(mapStateToProps)(Logs);

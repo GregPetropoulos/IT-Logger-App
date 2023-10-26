@@ -1,4 +1,4 @@
-// *--ADD/REGISTER--EDIT-DELETE--TECH ROUTES-----//
+// *--ADD/REGISTER--EDIT--TECH ROUTES-----//
 
 // *SET UP TO USE router rather than app.use
 
@@ -9,13 +9,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../middleware/auth');
-const  secret=process.env.MY_JWT_SECRET
+const secret = process.env.MY_JWT_SECRET;
 
 //* Bringing in the User model
 const Tech = require('../models/Tech');
+const Log = require('../models/Log')
 
 // * @route     GET api/techs
-// * @desc      Get all the techs 
+// * @desc      Get all the techs
 // !#* access     public----might need to be private
 router.get('/', async (req, res) => {
   try {
@@ -106,13 +107,38 @@ router.post(
 // * @route     PUT api/techs/:id
 // * @desc      Edit a tech
 // * access     public
-// router.put('/:id', (req, res) => {
-//   res.send('Edit a tech');
-// });
+router.put('/:id', async(req, res) => {
+  const tech = await Tech.findById(req.params.id)
+  if (tech){
+    tech.firstName= req.body.firstName ||tech.firstName
+    tech.lastName= req.body.lastName ||tech.lastName
+    tech.email= req.body.email ||tech.email
+    const updateTech = await tech.save()
+    res.status(200).json({
+      _id:updateTech._id,
+      firstName:updateTech.firstName,
+      lastName:updateTech.lastName,
+      email:updateTech.email
+    })
+  } else {
+    res.status(404);
+    throw new Error('Tech not found');
+  }
+});
 // * @route     DELETE api/techs/:id
 // * @desc      Delete a tech
 // * access     public
-// router.delete('/:id', (req, res) => {
-//   res.send('Delete a tech');
-// });
+router.delete('/:id', async (req, res) => {
+  const tech = await Tech.findById(req.params.id);
+  if (tech) {
+    await Promise.all(
+      Tech.deleteOne({ _id: tech.params.id }),
+      Log.deleteMany({tech:tech})
+      );
+    res.status(200).json({ message: 'Tech and associated logs deleted' });
+  } else {
+    res.status(404);
+    throw new Error('Tech not found');
+  }
+});
 module.exports = router;

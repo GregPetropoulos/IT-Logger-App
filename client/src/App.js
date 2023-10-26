@@ -17,17 +17,23 @@ import { loadTech } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './actions/types';
 import store from './store';
+import { connect } from 'react-redux';
+import { getLogs } from './actions/logActions';
 
-const App = () => {
+const App = ({ log }) => {
+
   //* Initialize Materialize JS for the nav menu button
   useEffect(() => {
     M.AutoInit();
   });
 
-  //* Token checking
+ //* Token checking
+ //TODO Refactor
   useEffect(() => {
+    let unmount = true;
+    console.log('token useeffect -in APP');
     //* check for token in LS when app first runs
-    if (localStorage.token) {
+    if (localStorage.token && unmount) {
       //* if there is a token set axios headers for all requests
       setAuthToken(localStorage.token);
     }
@@ -39,7 +45,20 @@ const App = () => {
     window.addEventListener('storage', () => {
       if (!localStorage.token) store.dispatch({ type: LOGOUT });
     });
+
+    return () => (unmount = false);
   }, []);
+
+  useEffect(() => {
+    let unmount = true;
+    if (unmount) {
+      const loadLogs = async () => {
+        await store.dispatch(getLogs());
+      };
+      loadLogs();
+    }
+    return () => (unmount = false);
+  }, [log.logs.length]);
 
   return (
     <>
@@ -54,5 +73,7 @@ const App = () => {
     </>
   );
 };
-
-export default App;
+const mapStateToProps = (state) => ({
+  log: state.log
+});
+export default connect(mapStateToProps, {})(App);

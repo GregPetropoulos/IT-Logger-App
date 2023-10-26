@@ -1,7 +1,10 @@
+// Updated 10/13/23
+//Author:Greg Petropoulos
+
 //*STYLES
 import '../src/assets/styles.css';
 import 'materialize-css/dist/css/materialize.min.css';
-import  React,{ lazy } from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -26,10 +29,13 @@ const Home = lazy(() => import('../src/components/layout/Home'));
 const Login = lazy(() => import('../src/components/auth/Login'));
 const Register = lazy(() => import('../src/components/auth/Register'));
 const About = lazy(() => import('../src/components/layout/About'));
-const PrivateRoute = lazy(() => import('../src/components/routing/PrivateRoute'));
+const PrivateRoute = lazy(() =>
+  import('../src/components/routing/PrivateRoute')
+);
 const NotFound = lazy(() => import('../src/components/layout/NotFound'));
 const Techs = lazy(() => import('./components/tech/Techs'));
 
+// TODO WORK OUT PRIVATE ROUTE
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -38,7 +44,8 @@ const router = createBrowserRouter(
       <Route path='/register' element={<Register />} />
       <Route path='/techs' element={<Techs />} />
       <Route path='/about' element={<About />} />
-      <Route path='/home' element={<PrivateRoute component={Home} />} />
+      {/* <Route path='/home' element={<PrivateRoute component={Home} />} /> */}
+      <Route path='/home' element={<Home />} />
       <Route path='/*' element={<NotFound />} />
     </Route>
   )

@@ -8,10 +8,8 @@ import {
   ADD_LOG,
   DELETE_LOG,
   UPDATE_LOG,
-  SEARCH_LOGS,
   SET_CURRENT,
   CLEAR_CURRENT,
-  CLEAR_LOGS,
   CLEAR_FILTER,
   FILTER_LOGS
 } from './types';
@@ -120,18 +118,6 @@ export const updateLog = (log) => async (dispatch) => {
       payload: err.response.msg
     });
   }
-};
-
-
-// *!REVISING THE SEARCH TO FILTERED
-
-// ! ADD, may not need  the CLEAR LOGS
-// * CLEAR LOGS
-export const clearLogs = (log) => {
-  return {
-    type: CLEAR_LOGS,
-    payload: log
-  };
 };
 
 //* SET A CURRENT LOG

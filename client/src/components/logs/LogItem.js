@@ -1,9 +1,5 @@
-import React from 'react';
-//!moment deprecated
 import formatDate from '../../utils/formatDate';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import M from 'materialize-css/dist/js/materialize.min.js';
 
 const LogItem = ({
   log: {
@@ -13,7 +9,7 @@ const LogItem = ({
 }) => {
   return (
     <li className='collection-item avatar logbox '>
-        {log.attention && (
+      {log.attention && (
         <a
           href='#!'
           className=' attention btn-small center z-depth-2  red secondary-content '>

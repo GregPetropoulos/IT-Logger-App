@@ -19,7 +19,8 @@ const EditTechLogModal = ({
   updateLog,
   auth: { tech }
 }) => {
-  // LOCAL STATE UPDATES CURRENT
+
+  
   const [text, setText] = useState('');
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
@@ -95,7 +96,7 @@ const EditTechLogModal = ({
               <p>Tech ID# {tech._id}</p>
             </div>
           )}
-          {logs !== null && (
+          {logs !== null && logs.length > 0 && tech && (
             <FormControl fullWidth>
               <InputLabel id='edit-log' className='white-text'>
                 Your Logs
